@@ -35,4 +35,4 @@ yarn-error.*
 *.tsbuildinfo
 
 # Theme
-config/theme/
+src/config/theme/
