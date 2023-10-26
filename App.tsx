@@ -1,14 +1,15 @@
+global.__reanimatedWorkletInit = () => {}
+
 import { StatusBar } from 'expo-status-bar'
-import { GluestackUIProvider, Text, Box } from '@gluestack-ui/themed'
+import { GluestackUIProvider } from '@gluestack-ui/themed'
+
 import { config } from '@/config/gluestack-ui.config'
+import Router from '@/routers/Router'
 
 export default function App() {
   return (
     <GluestackUIProvider config={config}>
-      <Box width='100%' justifyContent='center' alignItems='center'>
-        <Text>Hello World!!!</Text>
-      </Box>
-
+      <Router />
       <StatusBar style='auto' />
     </GluestackUIProvider>
   )
