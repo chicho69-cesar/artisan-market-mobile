@@ -8,6 +8,16 @@ export function DrawerNavigator() {
   return (
     <Drawer.Navigator
       initialRouteName='App'
+      screenOptions={{
+        drawerStyle: {
+          backgroundColor: '#25292e',
+        },
+        drawerActiveTintColor: 'red',
+        drawerInactiveTintColor: 'white',
+        drawerLabelStyle: {
+          color: 'white'
+        }
+      }}
       drawerContent={(props) => (<DrawerContent {...props}/>)}
     >
       <Drawer.Screen 
