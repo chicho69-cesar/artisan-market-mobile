@@ -1,15 +1,36 @@
 import { create } from 'zustand'
-import { LoggedState, Role } from '../types/auth.d'
+import { User, UserLogged } from '../types/auth.d'
+import { getSession } from '../utils/session'
 
-export const useAuth = create<LoggedState>((set) => ({
-  isLoggedIn: true,
-  user: {
-    name: 'Test',
-    lastname: 'Test',
-    email: 'correo@correo.com',
-    role: Role.Seller,
-    picture: null,
-    biography: null,
-  },
-  token: '123456',
-}))
+interface StateActions {
+  authenticate: (user: User, token: string) => void
+}
+
+type State = StateActions & UserLogged
+
+export const useAuth = create<State>((set) => {
+  return {
+    isLoggedIn: false,
+    user: null,
+    token: null,
+    authenticate: (user: User, token: string) => {
+      set(() => ({
+        isLoggedIn: true,
+        user,
+        token,
+      }))
+    },
+    init: () => {
+      set((state) => {
+        getSession()
+          .then((session) => {
+            state.isLoggedIn = session ? true : false
+            state.user = session ? session.user : null
+            state.token = session ? session.token : null
+          })
+
+        return state
+      })
+    }
+  }
+})
