@@ -1,3 +1,4 @@
+import { useTheme } from '@/modules/shared/store/theme'
 import { Ionicons } from '@expo/vector-icons'
 import { Badge, BadgeText, VStack } from '@gluestack-ui/themed'
 
@@ -7,12 +8,14 @@ interface Props {
 }
 
 export default function CartIcon({ color, size }: Props) {
+  const theme = useTheme((state) => state)
+
   return (
     <VStack>
       <Badge
         h={22}
         w={22}
-        bg='red'
+        bg={theme.mainColor}
         borderRadius='$full'
         mb={-14}
         mr={-14}

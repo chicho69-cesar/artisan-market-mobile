@@ -1,6 +1,8 @@
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
+import { useTheme } from '@/modules/shared/store/theme'
+import { colors } from '@/modules/shared/theme/config'
 import CartIcon from './components/CartIcon'
 import CartStack from './stacks/CartStack'
 import ChatsStack from './stacks/ChatsStack'
@@ -11,18 +13,20 @@ import SearchStack from './stacks/SearchStack'
 const Tab = createBottomTabNavigator()
 
 export default function AppNavigator() {
+  const theme = useTheme((state) => state)
+
   return (
     <Tab.Navigator
       screenOptions={{ 
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: '#25292e',
+          backgroundColor: colors.gray,
           paddingBottom: 6,
           paddingTop: 4,
           height: 60
         },
-        tabBarActiveTintColor: 'red', // TODO: Tomarlo del state
-        tabBarInactiveTintColor: 'white',
+        tabBarActiveTintColor: theme.mainColor,
+        tabBarInactiveTintColor: colors.white,
       }}
       initialRouteName='HomeStack'
     >
