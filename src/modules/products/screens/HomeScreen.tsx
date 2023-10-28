@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
-
-import { useTheme } from '@/modules/shared/store/theme'
 import { Button } from '@gluestack-ui/themed'
+
+import { useTheme } from '@/modules/shared/store'
 
 export default function HomeScreen() {
   const [count, setCount] = useState(0)

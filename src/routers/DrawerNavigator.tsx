@@ -1,7 +1,7 @@
 import { createDrawerNavigator } from '@react-navigation/drawer'
 
-import { useTheme } from '@/modules/shared/store/theme'
-import { colors } from '@/modules/shared/theme/config'
+import { useTheme } from '@/modules/shared/store'
+import { colors } from '@/modules/shared/theme'
 import DrawerContent from '@/routers/components/DrawerContent'
 import AppNavigator from './AppNavigator'
 

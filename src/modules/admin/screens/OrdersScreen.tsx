@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Text, View } from 'react-native'
 
-import { useTheme } from '@/modules/shared/store/theme'
+import { useTheme } from '@/modules/shared/store'
 
 export default function OrdersScreen() {
   const theme = useTheme((state) => state)

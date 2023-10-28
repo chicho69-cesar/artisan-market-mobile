@@ -1,4 +1,4 @@
-import { useTheme } from '@/modules/shared/store/theme'
+import { useTheme } from '@/modules/shared/store'
 import { Ionicons } from '@expo/vector-icons'
 import { Badge, BadgeText, VStack } from '@gluestack-ui/themed'
 

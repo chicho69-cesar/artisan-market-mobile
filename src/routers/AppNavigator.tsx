@@ -1,8 +1,8 @@
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-import { useTheme } from '@/modules/shared/store/theme'
-import { colors } from '@/modules/shared/theme/config'
+import { useTheme } from '@/modules/shared/store'
+import { colors } from '@/modules/shared/theme'
 import CartIcon from './components/CartIcon'
 import CartStack from './stacks/CartStack'
 import ChatsStack from './stacks/ChatsStack'
