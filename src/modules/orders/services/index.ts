@@ -1,6 +1,7 @@
 import { api } from '@/config/api'
+import type { ProductParam } from '../types/params.d'
 
-export async function addAddress(street: string, noOut: string, noIn: string, zipCode: string, city: string, state: string, country: string, phone: string, token: string) {
+export async function addAddress (street: string, noOut: string, noIn: string, zipCode: string, city: string, state: string, country: string, phone: string, token: string) {
   try {
     const { data } = await api.post(
       '/addresses/add-address',
@@ -12,11 +13,11 @@ export async function addAddress(street: string, noOut: string, noIn: string, zi
         city,
         state,
         country,
-        phone,
+        phone
       },
       {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       }
@@ -24,13 +25,13 @@ export async function addAddress(street: string, noOut: string, noIn: string, zi
 
     console.log(data)
     return data
-  } catch (error) {
+  } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
     return null
   }
 }
 
-export async function updateAddress(addressId: number, street: string, noOut: string, noIn: string, zipCode: string, city: string, state: string, country: string, phone: string, token: string) {
+export async function updateAddress (addressId: number, street: string, noOut: string, noIn: string, zipCode: string, city: string, state: string, country: string, phone: string, token: string) {
   try {
     const { data } = await api.put(
       `/addresses/update-address/${addressId}`,
@@ -42,11 +43,11 @@ export async function updateAddress(addressId: number, street: string, noOut: st
         city,
         state,
         country,
-        phone,
+        phone
       },
       {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       }
@@ -54,23 +55,23 @@ export async function updateAddress(addressId: number, street: string, noOut: st
 
     console.log(data)
     return data
-  } catch (error) {
+  } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
     return null
   }
 }
 
-export async function createOrder(addressId: number, products: { id: number, quantity: number }[], token: string) {
+export async function createOrder (addressId: number, products: ProductParam[], token: string) {
   try {
     const { data } = await api.post(
       '/orders/create-order',
       {
         address_id: addressId,
-        products,
+        products
       },
       {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       }
@@ -78,85 +79,85 @@ export async function createOrder(addressId: number, products: { id: number, qua
 
     console.log(data)
     return data
-  } catch (error) {
+  } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
     return null
   }
 }
 
-export async function getOrderById(orderId: number, token: string) {
+export async function getOrderById (orderId: number, token: string) {
   try {
     const { data } = await api.get(
       `/orders/get-order/${orderId}`,
       {
         headers: {
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`
         }
       }
     )
 
     console.log(data)
     return data
-  } catch (error) {
+  } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
     return null
   }
 }
 
-export async function getUserOrders(token: string) {
+export async function getUserOrders (token: string) {
   try {
     const { data } = await api.get(
       '/orders/user-orders',
       {
         headers: {
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`
         }
       }
     )
 
     console.log(data)
     return data
-  } catch (error) {
+  } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
     return null
   }
 }
 
-export async function payOrder(orderId: number, token: string) {
+export async function payOrder (orderId: number, token: string) {
   try {
     const { data } = await api.patch(
       `/orders/pay-order/${orderId}`,
       {},
       {
         headers: {
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`
         }
       }
     )
 
     console.log(data)
     return data
-  } catch (error) {
+  } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
     return null
   }
 }
 
-export async function cancelOrder(orderId: number, token: string) {
+export async function cancelOrder (orderId: number, token: string) {
   try {
     const { data } = await api.patch(
       `/orders/cancel-order/${orderId}`,
       {},
       {
         headers: {
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`
         }
       }
     )
 
     console.log(data)
     return data
-  } catch (error) {
+  } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
     return null
   }

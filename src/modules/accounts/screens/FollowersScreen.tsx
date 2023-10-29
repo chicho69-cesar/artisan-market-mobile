@@ -3,7 +3,7 @@ import { Text, View } from 'react-native'
 
 import { useTheme } from '@/modules/shared/store'
 
-export default function FollowersScreen() {
+export default function FollowersScreen () {
   const theme = useTheme((state) => state)
 
   useEffect(() => {

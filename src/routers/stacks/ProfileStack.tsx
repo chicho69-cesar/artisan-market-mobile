@@ -3,7 +3,7 @@ import { EditProfileScreen, FollowersScreen, FollowingsScreen, ProfileScreen } f
 
 const Stack = createStackNavigator()
 
-export default function ProfileStack() {
+export default function ProfileStack () {
   return (
     <Stack.Navigator
       initialRouteName='Profile'

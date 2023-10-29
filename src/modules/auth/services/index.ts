@@ -1,7 +1,7 @@
 import { api } from '@/config/api'
-import { Role } from '../types/auth.d'
+import type { Role } from '../types/auth.d'
 
-export async function signUp(name: string, lastname: string, email: string, password: string, confirmPassword: string, role: Role) {
+export async function signUp (name: string, lastname: string, email: string, password: string, confirmPassword: string, role: Role) {
   try {
     const { data } = await api.post(
       '/users/sign-up',
@@ -11,7 +11,7 @@ export async function signUp(name: string, lastname: string, email: string, pass
         email,
         password,
         confirm_password: confirmPassword,
-        role,
+        role
       },
       {
         headers: {
@@ -22,19 +22,19 @@ export async function signUp(name: string, lastname: string, email: string, pass
 
     console.log(data)
     return data
-  } catch (error) {
+  } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
     return null
   }
 }
 
-export async function signIn(email: string, password: string) {
+export async function signIn (email: string, password: string) {
   try {
     const { data } = await api.post(
       '/users/sign-in',
       {
         email,
-        password,
+        password
       },
       {
         headers: {
@@ -45,27 +45,27 @@ export async function signIn(email: string, password: string) {
 
     console.log(data)
     return data
-  } catch (error) {
+  } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
     return null
   }
 }
 
-export async function signOut(token: string) {
+export async function signOut (token: string) {
   try {
     const { data } = await api.post(
       '/users/sign-out',
       {},
       {
         headers: {
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`
         }
       }
     )
 
     console.log(data)
     return data
-  } catch (error) {
+  } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
     return null
   }

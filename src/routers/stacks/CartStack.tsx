@@ -4,7 +4,7 @@ import { AddressScreen, CheckoutScreen, OrderScreen } from '@/modules/orders/scr
 
 const Stack = createStackNavigator()
 
-export default function CartStack() {
+export default function CartStack () {
   return (
     <Stack.Navigator
       initialRouteName='Cart'

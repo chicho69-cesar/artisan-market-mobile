@@ -3,7 +3,7 @@ import { Text, View } from 'react-native'
 
 import { useTheme } from '@/modules/shared/store'
 
-export default function EditProfileScreen() {
+export default function EditProfileScreen () {
   const theme = useTheme((state) => state)
 
   useEffect(() => {

@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 import { DrawerContentScrollView, DrawerItem, type DrawerContentComponentProps } from '@react-navigation/drawer'
 import { useNavigation } from '@react-navigation/native'
 import { Text } from 'react-native'
@@ -5,13 +6,13 @@ import { Text } from 'react-native'
 import { useAuth } from '@/modules/auth/store'
 import { Role } from '@/modules/auth/types/auth.d'
 
-export default function DrawerContent(props: DrawerContentComponentProps) {
+export default function DrawerContent (props: DrawerContentComponentProps) {
   const auth = useAuth((state) => state)
   const navigation = useNavigation<any>()
 
   const handleNavigate = (screen: string) => {
     navigation.navigate('HomeStack', {
-      screen,
+      screen
     })
   }
 
@@ -25,7 +26,9 @@ export default function DrawerContent(props: DrawerContentComponentProps) {
             Mi historial de pedidos
           </Text>
         )}
-        onPress={() => handleNavigate('OrdersHistory')}
+        onPress={() => {
+          handleNavigate('OrdersHistory')
+        }}
       />
 
       {(auth.isLoggedIn && auth.user?.role === Role.Seller) ? (
@@ -36,7 +39,9 @@ export default function DrawerContent(props: DrawerContentComponentProps) {
                 Dashboard
               </Text>
             )}
-            onPress={() => handleNavigate('Dashboard')}
+            onPress={() => {
+              handleNavigate('Dashboard')
+            }}
           />
 
           <DrawerItem
@@ -45,7 +50,9 @@ export default function DrawerContent(props: DrawerContentComponentProps) {
                 Mis productos
               </Text>
             )}
-            onPress={() => handleNavigate('MyProducts')}
+            onPress={() => {
+              handleNavigate('MyProducts')
+            }}
           />
 
           <DrawerItem
@@ -54,7 +61,9 @@ export default function DrawerContent(props: DrawerContentComponentProps) {
                 Pedidos
               </Text>
             )}
-            onPress={() => handleNavigate('Orders')}
+            onPress={() => {
+              handleNavigate('Orders')
+            }}
           />
         </>
       ) : null}

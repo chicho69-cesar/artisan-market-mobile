@@ -12,12 +12,12 @@ import SearchStack from './stacks/SearchStack'
 
 const Tab = createBottomTabNavigator()
 
-export default function AppNavigator() {
+export default function AppNavigator () {
   const theme = useTheme((state) => state)
 
   return (
     <Tab.Navigator
-      screenOptions={{ 
+      screenOptions={{
         headerShown: false,
         tabBarStyle: {
           backgroundColor: colors.gray,
@@ -26,7 +26,7 @@ export default function AppNavigator() {
           height: 60
         },
         tabBarActiveTintColor: theme.mainColor,
-        tabBarInactiveTintColor: colors.white,
+        tabBarInactiveTintColor: colors.white
       }}
       initialRouteName='HomeStack'
     >
@@ -51,7 +51,7 @@ export default function AppNavigator() {
           )
         }}
       />
-      
+
       <Tab.Screen
         name='CartStack'
         component={CartStack}
@@ -62,7 +62,7 @@ export default function AppNavigator() {
           )
         }}
       />
-      
+
       <Tab.Screen
         name='ChatsStack'
         component={ChatsStack}
@@ -73,7 +73,7 @@ export default function AppNavigator() {
           )
         }}
       />
-      
+
       <Tab.Screen
         name='ProfileStack'
         component={ProfileStack}

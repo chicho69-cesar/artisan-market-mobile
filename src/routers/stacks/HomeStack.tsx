@@ -5,7 +5,7 @@ import { AddReviewScreen, DetailsScreen, HomeScreen, ReviewsScreen } from '@/mod
 
 const Stack = createStackNavigator()
 
-export default function HomeStack() {
+export default function HomeStack () {
   return (
     <Stack.Navigator
       initialRouteName='Home'

@@ -7,7 +7,7 @@ import AppNavigator from './AppNavigator'
 
 const Drawer = createDrawerNavigator()
 
-export function DrawerNavigator() {
+export function DrawerNavigator () {
   const theme = useTheme((state) => state)
 
   return (
@@ -15,7 +15,7 @@ export function DrawerNavigator() {
       initialRouteName='App'
       screenOptions={{
         drawerStyle: {
-          backgroundColor: colors.gray,
+          backgroundColor: colors.gray
         },
         drawerActiveTintColor: theme.mainColor,
         drawerInactiveTintColor: colors.white,
@@ -25,7 +25,7 @@ export function DrawerNavigator() {
       }}
       drawerContent={(props) => (<DrawerContent {...props}/>)}
     >
-      <Drawer.Screen 
+      <Drawer.Screen
         name='App'
         component={AppNavigator}
         options={{ headerShown: false }}
