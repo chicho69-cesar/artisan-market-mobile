@@ -26,9 +26,16 @@
   "devDependencies": {
     "@babel/core": "7.23.0",
     "@types/react": "~18.2.28",
+    "@typescript-eslint/eslint-plugin": "6.4.0",
+    "eslint": "8.0.1",
+    "eslint-config-standard-with-typescript": "39.1.1",
+    "eslint-plugin-import": "2.25.2",
+    "eslint-plugin-n": "15.0.0 || 16.0.0 ",
+    "eslint-plugin-promise": "6.0.0",
+    "eslint-plugin-react": "7.33.2",
     "react-native-dotenv": "3.4.9",
     "ts-standard": "12.0.2",
-    "typescript": "5.2.2"
+    "typescript": "*"
   },
   "main": "./index.ts",
   "name": "artisan-market-mobile",
@@ -38,12 +45,6 @@
     "ios": "expo start --ios",
     "start": "expo start",
     "web": "expo start --web"
-  },
-  "ts-standard": {
-    "project": "./tsconfig.json"
-  },
-  "eslintConfig": {
-    "extends": "./node_modules/ts-standard/eslintrc.json"
   },
   "version": "1.0.0"
 }
