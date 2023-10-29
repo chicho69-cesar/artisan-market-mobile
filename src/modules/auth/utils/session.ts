@@ -1,16 +1,16 @@
 import * as SecureStore from 'expo-secure-store'
-import { UserLogged } from '../types/auth.d'
+import type { UserLogged } from '../types/auth.d'
 
-export async function getSession() {
+export async function getSession () {
   try {
     const session = await SecureStore.getItemAsync('session')
-    return session ? JSON.parse(session) as UserLogged : null
+    return (session != null) ? JSON.parse(session) as UserLogged : null
   } catch (error) {
     return null
   }
 }
 
-export async function setSession(session: UserLogged) {
+export async function setSession (session: UserLogged) {
   try {
     await SecureStore.setItemAsync('session', JSON.stringify(session))
     return true

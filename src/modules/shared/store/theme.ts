@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/indent */
 import { create } from 'zustand'
 import { uiColors } from '../theme/config'
 
 export const useTheme = create<{
-  mainColor: string,
+  mainColor: string
   changeMainColor: () => void
 }>((set) => {
   return {
@@ -19,6 +20,6 @@ export const useTheme = create<{
         state.changeMainColor()
         return state
       })
-    },
+    }
   }
 })

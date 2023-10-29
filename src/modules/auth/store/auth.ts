@@ -1,5 +1,6 @@
 import { create } from 'zustand'
-import { User, UserLogged } from '../types/auth.d'
+
+import type { User, UserLogged } from '../types/auth.d'
 import { getSession } from '../utils/session'
 
 interface StateActions {
@@ -17,16 +18,16 @@ export const useAuth = create<State>((set) => {
       set(() => ({
         isLoggedIn: true,
         user,
-        token,
+        token
       }))
     },
     init: () => {
       set((state) => {
         getSession()
           .then((session) => {
-            state.isLoggedIn = session ? true : false
-            state.user = session ? session.user : null
-            state.token = session ? session.token : null
+            state.isLoggedIn = !(session == null)
+            state.user = (session != null) ? session.user : null
+            state.token = (session != null) ? session.token : null
           })
 
         return state
