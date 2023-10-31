@@ -1,7 +1,7 @@
 import { api } from '@/config/api'
 import type { ProductParam } from '../types/params.d'
 
-export async function addAddress (street: string, noOut: string, noIn: string, zipCode: string, city: string, state: string, country: string, phone: string, token: string) {
+export async function addAddress(street: string, noOut: string, noIn: string, zipCode: string, city: string, state: string, country: string, phone: string, token: string) {
   try {
     const { data } = await api.post(
       '/addresses/add-address',
@@ -31,7 +31,7 @@ export async function addAddress (street: string, noOut: string, noIn: string, z
   }
 }
 
-export async function updateAddress (addressId: number, street: string, noOut: string, noIn: string, zipCode: string, city: string, state: string, country: string, phone: string, token: string) {
+export async function updateAddress(addressId: number, street: string, noOut: string, noIn: string, zipCode: string, city: string, state: string, country: string, phone: string, token: string) {
   try {
     const { data } = await api.put(
       `/addresses/update-address/${addressId}`,
@@ -61,7 +61,7 @@ export async function updateAddress (addressId: number, street: string, noOut: s
   }
 }
 
-export async function createOrder (addressId: number, products: ProductParam[], token: string) {
+export async function createOrder(addressId: number, products: ProductParam[], token: string) {
   try {
     const { data } = await api.post(
       '/orders/create-order',
@@ -85,7 +85,7 @@ export async function createOrder (addressId: number, products: ProductParam[], 
   }
 }
 
-export async function getOrderById (orderId: number, token: string) {
+export async function getOrderById(orderId: number, token: string) {
   try {
     const { data } = await api.get(
       `/orders/get-order/${orderId}`,
@@ -104,7 +104,7 @@ export async function getOrderById (orderId: number, token: string) {
   }
 }
 
-export async function getUserOrders (token: string) {
+export async function getUserOrders(token: string) {
   try {
     const { data } = await api.get(
       '/orders/user-orders',
@@ -123,7 +123,7 @@ export async function getUserOrders (token: string) {
   }
 }
 
-export async function payOrder (orderId: number, token: string) {
+export async function payOrder(orderId: number, token: string) {
   try {
     const { data } = await api.patch(
       `/orders/pay-order/${orderId}`,
@@ -143,7 +143,7 @@ export async function payOrder (orderId: number, token: string) {
   }
 }
 
-export async function cancelOrder (orderId: number, token: string) {
+export async function cancelOrder(orderId: number, token: string) {
   try {
     const { data } = await api.patch(
       `/orders/cancel-order/${orderId}`,

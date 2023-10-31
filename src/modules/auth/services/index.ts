@@ -1,7 +1,7 @@
 import { api } from '@/config/api'
 import type { Role } from '../types/auth.d'
 
-export async function signUp (name: string, lastname: string, email: string, password: string, confirmPassword: string, role: Role) {
+export async function signUp(name: string, lastname: string, email: string, password: string, confirmPassword: string, role: Role) {
   try {
     const { data } = await api.post(
       '/users/sign-up',
@@ -28,7 +28,7 @@ export async function signUp (name: string, lastname: string, email: string, pas
   }
 }
 
-export async function signIn (email: string, password: string) {
+export async function signIn(email: string, password: string) {
   try {
     const { data } = await api.post(
       '/users/sign-in',
@@ -51,7 +51,7 @@ export async function signIn (email: string, password: string) {
   }
 }
 
-export async function signOut (token: string) {
+export async function signOut(token: string) {
   try {
     const { data } = await api.post(
       '/users/sign-out',

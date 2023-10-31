@@ -1,6 +1,6 @@
 import { api } from '@/config/api'
 
-export async function getUserById (id: number, token: string) {
+export async function getUserById(id: number, token: string) {
   try {
     const { data } = await api.get(`/users/user-info/${id}`, {
       headers: {
@@ -16,7 +16,7 @@ export async function getUserById (id: number, token: string) {
   }
 }
 
-export async function editProfile (name: string, lastname: string, biography: string, token: string) {
+export async function editProfile(name: string, lastname: string, biography: string, token: string) {
   try {
     const { data } = await api.put(
       '/users/edit',
@@ -41,7 +41,7 @@ export async function editProfile (name: string, lastname: string, biography: st
   }
 }
 
-export async function followUser (userFollow: number, token: string) {
+export async function followUser(userFollow: number, token: string) {
   try {
     const { data } = await api.patch(
       '/users/follow-user',
@@ -64,7 +64,7 @@ export async function followUser (userFollow: number, token: string) {
   }
 }
 
-export async function unfollowUser (userFollow: number, token: string) {
+export async function unfollowUser(userFollow: number, token: string) {
   try {
     const { data } = await api.patch(
       '/users/unfollow-user',
@@ -87,7 +87,7 @@ export async function unfollowUser (userFollow: number, token: string) {
   }
 }
 
-export async function getFollowers (token: string) {
+export async function getFollowers(token: string) {
   try {
     const { data } = await api.get('/users/followers', {
       headers: {
@@ -103,7 +103,7 @@ export async function getFollowers (token: string) {
   }
 }
 
-export async function getFollowings (token: string) {
+export async function getFollowings(token: string) {
   try {
     const { data } = await api.get('/users/followings', {
       headers: {
@@ -119,7 +119,7 @@ export async function getFollowings (token: string) {
   }
 }
 
-export async function uploadProfilePicture (uri: string, name: string, type: string, token: string) {
+export async function uploadProfilePicture(uri: string, name: string, type: string, token: string) {
   const response = await fetch(uri)
   const blob = await response.blob()
 

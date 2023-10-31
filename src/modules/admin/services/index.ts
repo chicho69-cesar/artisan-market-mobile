@@ -1,6 +1,6 @@
 import { api } from '@/config/api'
 
-export async function addProduct (name: string, description: string, price: number, stock: number, categories: string[], token: string) {
+export async function addProduct(name: string, description: string, price: number, stock: number, categories: string[], token: string) {
   try {
     const { data } = await api.post(
       '/products/add-product',
@@ -27,7 +27,7 @@ export async function addProduct (name: string, description: string, price: numb
   }
 }
 
-export async function uploadProductImage (productId: number, uri: string, name: string, type: string, token: string) {
+export async function uploadProductImage(productId: number, uri: string, name: string, type: string, token: string) {
   const response = await fetch(uri)
   const blob = await response.blob()
 
@@ -54,7 +54,7 @@ export async function uploadProductImage (productId: number, uri: string, name: 
   }
 }
 
-export async function deleteProductImage (productId: number, token: string) {
+export async function deleteProductImage(productId: number, token: string) {
   try {
     const { data } = await api.delete(`/products/delete-image/${productId}`, {
       headers: {
@@ -70,7 +70,7 @@ export async function deleteProductImage (productId: number, token: string) {
   }
 }
 
-export async function getSellerProducts (token: string) {
+export async function getSellerProducts(token: string) {
   try {
     const { data } = await api.get('/products/seller-products', {
       headers: {
@@ -86,7 +86,7 @@ export async function getSellerProducts (token: string) {
   }
 }
 
-export async function updateProduct (productId: number, name: string, description: string, price: number, stock: number, categories: string[], token: string) {
+export async function updateProduct(productId: number, name: string, description: string, price: number, stock: number, categories: string[], token: string) {
   try {
     const { data } = await api.put(
       `/products/update-product/${productId}`,
@@ -113,7 +113,7 @@ export async function updateProduct (productId: number, name: string, descriptio
   }
 }
 
-export async function deleteProduct (productId: number, token: string) {
+export async function deleteProduct(productId: number, token: string) {
   try {
     const { data } = await api.delete(`/products/delete-product/${productId}`, {
       headers: {
@@ -129,7 +129,7 @@ export async function deleteProduct (productId: number, token: string) {
   }
 }
 
-export async function getSellerOrders (token: string) {
+export async function getSellerOrders(token: string) {
   try {
     const { data } = await api.get('/orders/seller-orders', {
       headers: {
@@ -145,7 +145,7 @@ export async function getSellerOrders (token: string) {
   }
 }
 
-export async function getDashboardStats (token: string) {
+export async function getDashboardStats(token: string) {
   try {
     const { data } = await api.get('/dashboard/stats', {
       headers: {

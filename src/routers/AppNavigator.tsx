@@ -12,7 +12,7 @@ import SearchStack from './stacks/SearchStack'
 
 const Tab = createBottomTabNavigator()
 
-export default function AppNavigator () {
+export default function AppNavigator() {
   const theme = useTheme((state) => state)
 
   return (

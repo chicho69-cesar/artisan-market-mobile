@@ -8,12 +8,14 @@ import { colors } from '@/modules/shared/theme'
 import AuthContainer from '../components/AuthContainer'
 import Header from '../components/Header'
 import SocialLogin from '../components/SocialLogin'
+import useNavigate from '@/modules/shared/hooks/use-navigate'
 
 const facebook = require('../../../../assets/facebook.png')
 const google = require('../../../../assets/google.png')
 
-export default function SignInScreen () {
+export default function SignInScreen() {
   const theme = useTheme((state) => state)
+  const { navigate } = useNavigate()
 
   const [rememberMe, setRememberMe] = useState(false)
 
@@ -54,7 +56,9 @@ export default function SignInScreen () {
           textAlign='right'
           color={theme.mainColor}
           fontWeight='$bold'
-          onPress={() => {}}
+          onPress={() => {
+            navigate('RecoverPassword')
+          }}
         >
           ¿Olvidaste tu contraseña?
         </Text>
@@ -106,7 +110,13 @@ export default function SignInScreen () {
 
         <Text w='100%' mt='$8' textAlign='center'>
           ¿Aún no tienes cuenta?{' '}
-          <Text color={theme.mainColor} fontWeight='$semibold' onPress={() => {}}>
+          <Text
+            color={theme.mainColor}
+            fontWeight='$semibold'
+            onPress={() => {
+              navigate('SignUp')
+            }}
+          >
             Regístrate
           </Text>
         </Text>

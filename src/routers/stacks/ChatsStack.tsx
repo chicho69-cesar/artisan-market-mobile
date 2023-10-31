@@ -3,7 +3,7 @@ import { ChatScreen, ChatsScreen } from '@/modules/chats/screens'
 
 const Stack = createStackNavigator()
 
-export default function ChatsStack () {
+export default function ChatsStack() {
   return (
     <Stack.Navigator
       initialRouteName='Chats'

@@ -3,7 +3,7 @@ import { RecoverPasswordScreen, SignInScreen, SignUpScreen } from '@/modules/aut
 
 const Stack = createStackNavigator()
 
-export function AuthNavigator () {
+export function AuthNavigator() {
   return (
     <Stack.Navigator
       initialRouteName='SignIn'

@@ -1,6 +1,6 @@
 import { api } from '@/config/api'
 
-export async function sendMessage (userToSend: number, message: string, token: string) {
+export async function sendMessage(userToSend: number, message: string, token: string) {
   try {
     const { data } = await api.post(
       '/users/send-message',
@@ -24,7 +24,7 @@ export async function sendMessage (userToSend: number, message: string, token: s
   }
 }
 
-export async function getConversation (userId: number, token: string) {
+export async function getConversation(userId: number, token: string) {
   try {
     const { data } = await api.get(
       `/users/conversation/${userId}`,
@@ -43,7 +43,7 @@ export async function getConversation (userId: number, token: string) {
   }
 }
 
-export async function getMyConversations (token: string) {
+export async function getMyConversations(token: string) {
   try {
     const { data } = await api.get(
       '/users/my-conversations',

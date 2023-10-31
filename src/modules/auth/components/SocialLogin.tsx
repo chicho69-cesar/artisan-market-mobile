@@ -7,7 +7,7 @@ interface Props {
   onPress: () => void
 }
 
-export default function SocialLogin ({ alt, image, name, onPress }: Props) {
+export default function SocialLogin({ alt, image, name, onPress }: Props) {
   return (
     <Pressable onPress={onPress}>
       <Image

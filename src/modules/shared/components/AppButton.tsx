@@ -7,7 +7,7 @@ interface Props {
   onPress: () => void
 }
 
-export default function AppButton ({ bgColor, color, onPress, text }: Props) {
+export default function AppButton({ bgColor, color, onPress, text }: Props) {
   return (
     <Button bgColor={bgColor}>
       <ButtonText color={color} fontWeight='$semibold' onPress={onPress}>

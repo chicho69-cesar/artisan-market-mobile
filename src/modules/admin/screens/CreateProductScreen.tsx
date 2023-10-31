@@ -3,7 +3,7 @@ import { Text, View } from 'react-native'
 
 import { useTheme } from '@/modules/shared/store'
 
-export default function CreateProductScreen () {
+export default function CreateProductScreen() {
   const theme = useTheme((state) => state)
 
   useEffect(() => {

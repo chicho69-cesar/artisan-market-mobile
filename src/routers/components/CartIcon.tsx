@@ -7,7 +7,7 @@ interface Props {
   size: number
 }
 
-export default function CartIcon ({ color, size }: Props) {
+export default function CartIcon({ color, size }: Props) {
   const theme = useTheme((state) => state)
 
   return (

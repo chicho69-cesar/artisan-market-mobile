@@ -13,7 +13,7 @@ interface Props {
   onChangeText: (text: string) => void
 }
 
-export default function AppInput ({ isInvalid, label, type, keyboardType, placeholder, errorMessage, onChangeText }: Props) {
+export default function AppInput({ isInvalid, label, type, keyboardType, placeholder, errorMessage, onChangeText }: Props) {
   const [showPassword, setShowPassword] = useState(false)
 
   return (

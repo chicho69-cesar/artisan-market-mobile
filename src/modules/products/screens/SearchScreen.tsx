@@ -3,7 +3,7 @@ import { Text, View } from 'react-native'
 
 import { useTheme } from '@/modules/shared/store'
 
-export default function SearchScreen () {
+export default function SearchScreen() {
   const theme = useTheme((state) => state)
 
   useEffect(() => {

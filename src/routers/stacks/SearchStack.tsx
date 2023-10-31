@@ -3,7 +3,7 @@ import { SearchScreen } from '@/modules/products/screens'
 
 const Stack = createStackNavigator()
 
-export default function SearchStack () {
+export default function SearchStack() {
   return (
     <Stack.Navigator
       initialRouteName='Search'

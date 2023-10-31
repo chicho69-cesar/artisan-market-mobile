@@ -7,7 +7,7 @@ import AppNavigator from './AppNavigator'
 
 const Drawer = createDrawerNavigator()
 
-export function DrawerNavigator () {
+export function DrawerNavigator() {
   const theme = useTheme((state) => state)
 
   return (

@@ -3,7 +3,7 @@ import { Text, View } from 'react-native'
 
 import { useTheme } from '@/modules/shared/store'
 
-export default function ChatsScreen () {
+export default function ChatsScreen() {
   const theme = useTheme((state) => state)
 
   useEffect(() => {

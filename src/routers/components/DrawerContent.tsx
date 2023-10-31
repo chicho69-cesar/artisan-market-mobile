@@ -6,7 +6,7 @@ import { Text } from 'react-native'
 import { useAuth } from '@/modules/auth/store'
 import { Role } from '@/modules/auth/types/auth.d'
 
-export default function DrawerContent (props: DrawerContentComponentProps) {
+export default function DrawerContent(props: DrawerContentComponentProps) {
   const auth = useAuth((state) => state)
   const navigation = useNavigation<any>()
 

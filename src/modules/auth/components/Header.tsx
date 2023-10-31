@@ -9,7 +9,7 @@ interface Props {
   text: string
 }
 
-export default function Header ({ text }: Props) {
+export default function Header({ text }: Props) {
   return (
     <View
       h='$72'

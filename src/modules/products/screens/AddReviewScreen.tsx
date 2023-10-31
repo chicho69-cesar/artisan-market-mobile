@@ -3,7 +3,7 @@ import { Text, View } from 'react-native'
 
 import { useTheme } from '@/modules/shared/store'
 
-export default function AddReviewScreen () {
+export default function AddReviewScreen() {
   const theme = useTheme((state) => state)
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import { Button } from '@gluestack-ui/themed'
 
 import { useTheme } from '@/modules/shared/store'
 
-export default function HomeScreen () {
+export default function HomeScreen() {
   const [count, setCount] = useState(0)
   const theme = useTheme((state) => state)
 

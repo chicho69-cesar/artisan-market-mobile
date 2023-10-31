@@ -1,6 +1,6 @@
 import { api } from '@/config/api'
 
-export async function getProductById (productId: number) {
+export async function getProductById(productId: number) {
   try {
     const { data } = await api.get(`/products/get-product/${productId}`)
 
@@ -12,7 +12,7 @@ export async function getProductById (productId: number) {
   }
 }
 
-export async function getProductsPaginated (page: number) {
+export async function getProductsPaginated(page: number) {
   try {
     const { data } = await api.get(`/products/get-products?page=${page}`)
 
@@ -24,7 +24,7 @@ export async function getProductsPaginated (page: number) {
   }
 }
 
-export async function searchProductsByQuery (query: string) {
+export async function searchProductsByQuery(query: string) {
   try {
     const { data } = await api.get(`/products/search-products?q=${query}`)
 
@@ -36,7 +36,7 @@ export async function searchProductsByQuery (query: string) {
   }
 }
 
-export async function addReview (productId: number, rate: number, comment: string, token: string) {
+export async function addReview(productId: number, rate: number, comment: string, token: string) {
   try {
     const { data } = await api.post(
       `/reviews/add-review/${productId}`,
@@ -60,7 +60,7 @@ export async function addReview (productId: number, rate: number, comment: strin
   }
 }
 
-export async function getReview (reviewId: number) {
+export async function getReview(reviewId: number) {
   try {
     const { data } = await api.get(`/reviews/get-review/${reviewId}`)
 
@@ -72,7 +72,7 @@ export async function getReview (reviewId: number) {
   }
 }
 
-export async function getReviewsOfProduct (productId: number) {
+export async function getReviewsOfProduct(productId: number) {
   try {
     const { data } = await api.get(`/reviews/get-reviews/${productId}`)
 
@@ -84,7 +84,7 @@ export async function getReviewsOfProduct (productId: number) {
   }
 }
 
-export async function updateReview (reviewId: number, rate: number, comment: string, token: string) {
+export async function updateReview(reviewId: number, rate: number, comment: string, token: string) {
   try {
     const { data } = await api.put(
       `/reviews/update-review/${reviewId}`,
@@ -108,7 +108,7 @@ export async function updateReview (reviewId: number, rate: number, comment: str
   }
 }
 
-export async function deleteReview (reviewId: number, token: string) {
+export async function deleteReview(reviewId: number, token: string) {
   try {
     const { data } = await api.delete(
       `/reviews/delete-review/${reviewId}`,
