@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react'
 
 import AppButton from '@/modules/shared/components/AppButton'
 import AppInput from '@/modules/shared/components/AppInput'
+import useNavigate from '@/modules/shared/hooks/use-navigate'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
 import AuthContainer from '../components/AuthContainer'
 import Header from '../components/Header'
 import SocialLogin from '../components/SocialLogin'
-import useNavigate from '@/modules/shared/hooks/use-navigate'
 
 const facebook = require('../../../../assets/facebook.png')
 const google = require('../../../../assets/google.png')
@@ -88,7 +88,7 @@ export default function SignInScreen() {
           onPress={() => {}}
         />
 
-        <Text my='$4' fontSize='$sm' color={colors.lightGray} textAlign='center'>
+        <Text my='$8' fontSize='$sm' color={colors.lightGray} textAlign='center'>
           ó
         </Text>
 

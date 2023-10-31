@@ -12,7 +12,7 @@ interface Props {
 export default function Header({ text }: Props) {
   return (
     <View
-      h='$72'
+      h='$64'
       bg={colors.semiWhite}
       pt={Constants.statusBarHeight}
       position='relative'
