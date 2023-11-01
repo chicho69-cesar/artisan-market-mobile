@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
+import ScreenHeader from './components/ScreenHeader'
 
 const Stack = createStackNavigator()
 
@@ -27,9 +28,25 @@ export function AuthNavigator() {
         }
       }}
     >
-      <Stack.Screen name='SignIn' component={SignInScreen} options={{ headerShown: false }} />
-      <Stack.Screen name='SignUp' component={SignUpScreen} options={{ headerShown: false }} />
-      <Stack.Screen name='RecoverPassword' component={RecoverPasswordScreen} />
+      <Stack.Screen
+        name='SignIn'
+        component={SignInScreen}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name='SignUp'
+        component={SignUpScreen}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name='RecoverPassword'
+        component={RecoverPasswordScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Recuperar contraseña' />
+        }}
+      />
     </Stack.Navigator>
   )
 }
