@@ -78,19 +78,19 @@ export default function SignUpScreen() {
           errorMessage='Error, this is not the same password'
         />
 
-        <RadioGroup value={role} onChange={setRole}>
-          <HStack w='100%' space='md'>
+        <RadioGroup value={role} onChange={setRole} my='$4'>
+          <HStack w='100%' space='xl' justifyContent='center'>
             <Radio value='user'>
-              <RadioIndicator mr='$2'>
-                <RadioIcon as={CircleIcon} />
+              <RadioIndicator mr='$2' borderColor={theme.mainColor}>
+                <RadioIcon as={CircleIcon} bgColor={theme.mainColor} />
               </RadioIndicator>
 
               <RadioLabel>Usuario</RadioLabel>
             </Radio>
 
             <Radio value='seller'>
-              <RadioIndicator mr='$2'>
-                <RadioIcon as={CircleIcon} />
+              <RadioIndicator mr='$2' borderColor={theme.mainColor}>
+                <RadioIcon as={CircleIcon} bgColor={theme.mainColor} />
               </RadioIndicator>
 
               <RadioLabel>Vendedor</RadioLabel>
