@@ -2,7 +2,7 @@ import { ScrollView } from '@gluestack-ui/themed'
 import { colors } from '../theme'
 
 interface Props {
-  children: JSX.Element | JSX.Element[]
+  children: JSX.Element | JSX.Element[] | React.ReactNode
 }
 
 export default function AppContainer({ children }: Props) {
