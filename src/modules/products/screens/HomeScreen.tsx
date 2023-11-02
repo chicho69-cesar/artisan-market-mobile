@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react'
-import { Text, View } from 'react-native'
-import { Button } from '@gluestack-ui/themed'
+import { useEffect } from 'react'
 
+import AppContainer from '@/modules/shared/components/AppContainer'
+import AppHeader from '@/modules/shared/components/AppHeader'
 import { useTheme } from '@/modules/shared/store'
 
 export default function HomeScreen() {
-  const [count, setCount] = useState(0)
   const theme = useTheme((state) => state)
 
   useEffect(() => {
@@ -13,14 +12,11 @@ export default function HomeScreen() {
   }, [])
 
   return (
-    <View>
-      <Text>HomeScreen</Text>
-
-      <Button onPress={() => {
-        setCount((prevCount) => prevCount + 1)
-      }}>
-        <Text>Hola {count}</Text>
-      </Button>
-    </View>
+    <AppContainer>
+      <AppHeader
+        title='ArtisanMarket'
+        description='Todos los productos'
+      />
+    </AppContainer>
   )
 }
