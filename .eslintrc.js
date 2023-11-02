@@ -23,6 +23,7 @@ module.exports = {
     'react/prop-types': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
-    '@typescript-eslint/space-before-function-paren': 'off'
+    '@typescript-eslint/space-before-function-paren': 'off',
+    'multiline-ternary': 'off'
   }
 }

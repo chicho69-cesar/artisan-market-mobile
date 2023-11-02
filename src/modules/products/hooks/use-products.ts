@@ -11,7 +11,7 @@ export function useProducts() {
       {
         id: 1,
         name: 'Playera artesanal con bordado personalizado',
-        description: 'Playera muy pero muy pero muy bonita',
+        description: 'Playera muy pero muy pero muy bonita Playera muy pero muy pero muy bonita Playera muy pero muy pero muy bonita Playera muy pero muy pero muy bonita Playera muy pero muy pero muy bonita Playera muy pero muy pero muy bonita Playera muy pero muy pero muy bonita',
         categories: [
           {
             id: 1,

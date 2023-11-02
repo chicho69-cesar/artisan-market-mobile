@@ -14,10 +14,6 @@ export default function HomeScreen() {
     theme.changeMainColor()
   }, [])
 
-  useEffect(() => {
-    console.log(products)
-  }, [products])
-
   return (
     <AppContainer>
       <AppHeader

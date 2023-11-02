@@ -2,6 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import { CreateProductScreen, DashboardScreen, EditProductScreen, MyProductsScreen, OrdersScreen } from '@/modules/admin/screens'
 import { OrdersHistoryScreen } from '@/modules/orders/screens'
+import ShareProduct from '@/modules/products/components/ShareProduct'
 import { AddReviewScreen, DetailsScreen, HomeScreen, ReviewsScreen } from '@/modules/products/screens'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
@@ -43,6 +44,10 @@ export default function HomeStack() {
       <Stack.Screen
         name='Details'
         component={DetailsScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='ArtisanMarket' />,
+          headerRight: () => (<ShareProduct />)
+        }}
       />
 
       <Stack.Screen
