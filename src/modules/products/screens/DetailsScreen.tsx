@@ -1,4 +1,5 @@
-import { Box, HStack, Pressable, Text, VStack, View } from '@gluestack-ui/themed'
+import { MaterialIcons } from '@expo/vector-icons'
+import { Box, HStack, Image, Pressable, Text, VStack, View } from '@gluestack-ui/themed'
 import { useEffect, useState } from 'react'
 
 import ActionButton from '@/modules/shared/components/ActionButton'
@@ -6,13 +7,15 @@ import AppContainer from '@/modules/shared/components/AppContainer'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
 import { currencyFormatter } from '@/modules/shared/utils/currency-formatter'
-import { MaterialIcons } from '@expo/vector-icons'
+import { dateFormatter } from '@/modules/shared/utils/date-formatter'
 import ImagesCarousel from '../components/ImagesCarousel'
+import { useReviews } from '../hooks/use-reviews'
 import { useActiveProduct } from '../store/active-product'
 
 export default function DetailsScreen() {
   const theme = useTheme((state) => state)
   const { product } = useActiveProduct((state) => state)
+  const { reviews } = useReviews(product?.id ?? 0)
 
   const [isFavorite, setIsFavorite] = useState(false)
   const [showDescription, setShowDescription] = useState(true)
@@ -143,9 +146,14 @@ export default function DetailsScreen() {
             {product?.description}
           </Text>
 
-          <HStack flexWrap='nowrap' mt='$4' space='md'>
+          <HStack flexWrap='nowrap' mt='$4' space='md' justifyContent='space-between'>
             <ActionButton bgColor={theme.mainColor} onPress={() => {}}>
-              <MaterialIcons name='add-shopping-cart' size={18} color={colors.white} />
+              <MaterialIcons
+                name='add-shopping-cart'
+                size={18}
+                color={colors.white}
+                style={{ marginRight: 10 }}
+              />
 
               <Text color={colors.white}>
                 Agregar al carrito
@@ -153,7 +161,12 @@ export default function DetailsScreen() {
             </ActionButton>
 
             <ActionButton bgColor={colors.gray} onPress={() => {}}>
-              <MaterialIcons name='attach-money' size={18} color={colors.white} />
+              <MaterialIcons
+                name='attach-money'
+                size={18}
+                color={colors.white}
+                style={{ marginRight: 10 }}
+              />
 
               <Text color={colors.white}>
                 Comprar ahora
@@ -161,7 +174,37 @@ export default function DetailsScreen() {
             </ActionButton>
           </HStack>
         </>
-      ) : null}
+      ) : (
+        <>
+          {reviews?.map((review) => (
+            <VStack key={review.id}>
+              <HStack>
+                <Image
+                  source={review.user.picture ?? ''}
+                  alt={review.user.name ?? ''}
+                  w={50}
+                  h={50}
+                  rounded='$full'
+                />
+
+                <VStack>
+                  <Text>
+                    {review.user.name} {review.user.lastname}
+                  </Text>
+                </VStack>
+
+                <Text>
+                  {dateFormatter.format(new Date(review.created_at ?? '2000-01-01T01:01:01.000000Z'))}
+                </Text>
+              </HStack>
+
+              <Text>
+                {review.comment}
+              </Text>
+            </VStack>
+          ))}
+        </>
+      )}
     </AppContainer>
   )
 }
