@@ -1,14 +1,16 @@
 import { MaterialIcons } from '@expo/vector-icons'
-import { Box, HStack, Image, Pressable, Text, VStack, View } from '@gluestack-ui/themed'
+import { HStack, Pressable, Text, VStack, View } from '@gluestack-ui/themed'
 import { useEffect, useState } from 'react'
 
 import ActionButton from '@/modules/shared/components/ActionButton'
 import AppContainer from '@/modules/shared/components/AppContainer'
+import TabBarItem from '@/modules/shared/components/TabBarItem'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
 import { currencyFormatter } from '@/modules/shared/utils/currency-formatter'
-import { dateFormatter } from '@/modules/shared/utils/date-formatter'
+import Categories from '../components/Categories'
 import ImagesCarousel from '../components/ImagesCarousel'
+import Reviews from '../components/Reviews'
 import { useReviews } from '../hooks/use-reviews'
 import { useActiveProduct } from '../store/active-product'
 
@@ -88,54 +90,24 @@ export default function DetailsScreen() {
         </HStack>
       </HStack>
 
-      <HStack flexWrap='wrap' mt='$4' space='sm' justifyContent='flex-start'>
-        {product?.categories.map((category) => (
-          <Box
-            key={category.id}
-            bg={theme.mainColor}
-            py='$1'
-            px='$3'
-            rounded='$md'
-          >
-            <Text color={colors.white}>
-              {category.name}
-            </Text>
-          </Box>
-        ))}
-      </HStack>
+      <Categories categories={product?.categories ?? []} />
 
       <HStack mt='$4' space='md' justifyContent='flex-start'>
-        <Pressable
-          p='$2'
-          borderBottomWidth='$2'
-          borderBottomColor={showDescription ? theme.mainColor : 'white'}
+        <TabBarItem
+          active={showDescription}
+          text='Descripción'
           onPress={() => {
             setShowDescription(true)
           }}
-        >
-          <Text
-            color={showDescription ? theme.mainColor : colors.gray}
-            fontWeight='$semibold'
-          >
-            Descripción
-          </Text>
-        </Pressable>
+        />
 
-        <Pressable
-          p='$2'
-          borderBottomWidth='$2'
-          borderBottomColor={showDescription ? 'white' : theme.mainColor}
+        <TabBarItem
+          active={!showDescription}
+          text='Reviews'
           onPress={() => {
             setShowDescription(false)
           }}
-        >
-          <Text
-            color={showDescription ? colors.gray : theme.mainColor}
-            fontWeight='$semibold'
-          >
-            Reviews
-          </Text>
-        </Pressable>
+        />
       </HStack>
 
       <View mt='$2' />
@@ -146,13 +118,13 @@ export default function DetailsScreen() {
             {product?.description}
           </Text>
 
-          <HStack flexWrap='nowrap' mt='$4' space='md' justifyContent='space-between'>
+          <HStack flexWrap='nowrap' mt='$4' space='xs' justifyContent='space-between'>
             <ActionButton bgColor={theme.mainColor} onPress={() => {}}>
               <MaterialIcons
                 name='add-shopping-cart'
                 size={18}
                 color={colors.white}
-                style={{ marginRight: 10 }}
+                style={{ marginRight: 2 }}
               />
 
               <Text color={colors.white}>
@@ -165,7 +137,7 @@ export default function DetailsScreen() {
                 name='attach-money'
                 size={18}
                 color={colors.white}
-                style={{ marginRight: 10 }}
+                style={{ marginRight: 2 }}
               />
 
               <Text color={colors.white}>
@@ -175,35 +147,7 @@ export default function DetailsScreen() {
           </HStack>
         </>
       ) : (
-        <>
-          {reviews?.map((review) => (
-            <VStack key={review.id}>
-              <HStack>
-                <Image
-                  source={review.user.picture ?? ''}
-                  alt={review.user.name ?? ''}
-                  w={50}
-                  h={50}
-                  rounded='$full'
-                />
-
-                <VStack>
-                  <Text>
-                    {review.user.name} {review.user.lastname}
-                  </Text>
-                </VStack>
-
-                <Text>
-                  {dateFormatter.format(new Date(review.created_at ?? '2000-01-01T01:01:01.000000Z'))}
-                </Text>
-              </HStack>
-
-              <Text>
-                {review.comment}
-              </Text>
-            </VStack>
-          ))}
-        </>
+        <Reviews reviews={reviews ?? []} />
       )}
     </AppContainer>
   )

@@ -35,6 +35,7 @@ export default function ImagesCarousel({ images = [] }: Props) {
           alt={`Image of product with id ${item.product_id}`}
           w='$48'
           h='100%'
+          rounded='$md'
         />
       )}
     />
