@@ -2,12 +2,14 @@ import type { Review } from '@/modules/shared/interfaces/review'
 import { useEffect, useState } from 'react'
 
 export function useReviews(productId: number) {
+  const [isLoading, setIsLoading] = useState(false)
   const [reviews, setReviews] = useState<Review[]>()
 
   useEffect(() => {
     if (productId === 0) return
 
-    console.log(productId)
+    // TODO: Make call to the api
+    setIsLoading(true)
     setReviews([
       {
         id: 1,
@@ -61,9 +63,11 @@ export function useReviews(productId: number) {
         created_at: '2023-11-02T17:28:21.000000Z'
       }
     ])
+    setIsLoading(false)
   }, [])
 
   return {
+    isLoading,
     reviews
   }
 }
