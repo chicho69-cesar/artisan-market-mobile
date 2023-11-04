@@ -1,16 +1,45 @@
 import { createStackNavigator } from '@react-navigation/stack'
+
 import { ChatScreen, ChatsScreen } from '@/modules/chats/screens'
+import { useTheme } from '@/modules/shared/store'
+import { colors } from '@/modules/shared/theme'
+import ScreenHeader from '../components/ScreenHeader'
 
 const Stack = createStackNavigator()
 
 export default function ChatsStack() {
+  const theme = useTheme((state) => state)
+
   return (
     <Stack.Navigator
       initialRouteName='Chats'
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: theme.mainColor,
+          elevation: 5,
+          borderBottomLeftRadius: 15,
+          borderBottomRightRadius: 15,
+          height: 80
+        },
+        headerTintColor: colors.white,
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          color: colors.white
+        }
+      }}
     >
-      <Stack.Screen name='Chats' component={ChatsScreen} />
-      <Stack.Screen name='Chat' component={ChatScreen} />
+      <Stack.Screen
+        name='Chats'
+        component={ChatsScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Chats' />
+        }}
+      />
+
+      <Stack.Screen
+        name='Chat'
+        component={ChatScreen}
+      />
     </Stack.Navigator>
   )
 }

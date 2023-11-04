@@ -1,6 +1,7 @@
 import { FontAwesome } from '@expo/vector-icons'
-import { HStack, Image, Text, VStack } from '@gluestack-ui/themed'
+import { HStack, Text, VStack } from '@gluestack-ui/themed'
 
+import Avatar from '@/modules/shared/components/Avatar'
 import type { Review as ReviewType } from '@/modules/shared/interfaces/review'
 import { colors } from '@/modules/shared/theme'
 import { dateFormatter } from '@/modules/shared/utils/date-formatter'
@@ -14,12 +15,9 @@ export default function Review({ review }: Props) {
     <VStack my='$3' space='sm'>
       <HStack space='md' justifyContent='space-between' alignItems='center'>
         <HStack space='sm' justifyContent='flex-start' alignItems='center'>
-          <Image
-            source={review.user.picture ?? ''}
+          <Avatar
+            source={review.user.picture ?? ''} /* TODO: set a default image */
             alt={review.user.name ?? ''}
-            w={50}
-            h={50}
-            rounded='$full'
           />
 
           <VStack>
