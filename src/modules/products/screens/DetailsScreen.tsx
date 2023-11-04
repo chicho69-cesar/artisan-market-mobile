@@ -28,10 +28,6 @@ export default function DetailsScreen() {
     theme.changeMainColor()
   }, [])
 
-  useEffect(() => {
-    console.log(product)
-  }, [product])
-
   return (
     <AppContainer>
       <ImagesCarousel images={product?.images} />
@@ -154,7 +150,7 @@ export default function DetailsScreen() {
           </HStack>
         </>
       ) : (
-        <Reviews reviews={reviews ?? []} />
+        <Reviews reviews={reviews ?? []} chunkReviews />
       )}
     </AppContainer>
   )

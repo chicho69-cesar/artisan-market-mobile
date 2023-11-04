@@ -53,6 +53,9 @@ export default function HomeStack() {
       <Stack.Screen
         name='Reviews'
         component={ReviewsScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Reviews' />
+        }}
       />
 
       <Stack.Screen
