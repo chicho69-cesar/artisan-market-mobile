@@ -1,5 +1,6 @@
 import HeaderProfileActions from '@/modules/accounts/components/HeaderProfileActions'
 import { EditProfileScreen, FollowersScreen, FollowingsScreen, ProfileScreen } from '@/modules/accounts/screens'
+import UserScreen from '@/modules/accounts/screens/UserScreen'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -36,6 +37,14 @@ export default function ProfileStack() {
           headerTitle: (props) => <ScreenHeader title='Ve tu perfil' />,
           headerLeft: () => <OpenDrawer />,
           headerRight: () => <HeaderProfileActions />
+        }}
+      />
+
+      <Stack.Screen
+        name='UserProfile'
+        component={UserScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Perfil de usuario' />
         }}
       />
 
