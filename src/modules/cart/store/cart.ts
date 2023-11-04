@@ -7,6 +7,7 @@ interface StateActions {
   removeProductFromCart: (product: Product) => void
   increaseQuantity: (productId: number) => void
   decreaseQuantity: (productId: number) => void
+  resetCart: () => void
 }
 
 type State = StateActions & {
@@ -105,5 +106,11 @@ export const useCart = create<State>((set) => ({
         cart: [...newCart]
       }
     })
+  },
+  resetCart: () => {
+    set((state) => ({
+      ...state,
+      cart: []
+    }))
   }
 }))

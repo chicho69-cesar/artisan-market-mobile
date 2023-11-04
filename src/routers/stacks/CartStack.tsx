@@ -40,6 +40,10 @@ export default function CartStack() {
       <Stack.Screen
         name='Address'
         component={AddressScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Dirección de entrega' />,
+          headerLeft: () => null
+        }}
       />
 
       <Stack.Screen

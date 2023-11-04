@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import AppContainer from '@/modules/shared/components/AppContainer'
 import AppHeader from '@/modules/shared/components/AppHeader'
+import useNavigate from '@/modules/shared/hooks/use-navigate'
 import { useTheme } from '@/modules/shared/store'
 import CartResume from '../components/CartResume'
 import ProductCart from '../components/ProductCart'
@@ -11,6 +12,7 @@ import type { CartOrderData } from '../types/cart.d'
 export default function CartScreen() {
   const theme = useTheme((state) => state)
   const cart = useCart((state) => state)
+  const { navigate } = useNavigate()
   const [orderData, setOrderData] = useState<CartOrderData>({
     noOfProducts: 0,
     subTotal: 0,
@@ -71,7 +73,9 @@ export default function CartScreen() {
         subTotal={orderData.subTotal}
         tax={orderData.tax}
         total={orderData.total}
-        onPress={() => {}}
+        onPress={() => {
+          navigate('Address')
+        }}
       />
     </AppContainer>
   )
