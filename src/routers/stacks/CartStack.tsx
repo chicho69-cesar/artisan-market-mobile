@@ -49,6 +49,10 @@ export default function CartStack() {
       <Stack.Screen
         name='Checkout'
         component={CheckoutScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Confirmar pedido' />,
+          headerLeft: () => null
+        }}
       />
 
       <Stack.Screen
