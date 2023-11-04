@@ -58,6 +58,9 @@ export default function HomeStack() {
       <Stack.Screen
         name='AddReview'
         component={AddReviewScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Agregar review' />
+        }}
       />
 
       <Stack.Screen
