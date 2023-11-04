@@ -1,12 +1,9 @@
-import { HStack, Heading, Text, VStack, View } from '@gluestack-ui/themed'
 import { useEffect, useState } from 'react'
 
-import AppButton from '@/modules/shared/components/AppButton'
 import AppContainer from '@/modules/shared/components/AppContainer'
 import AppHeader from '@/modules/shared/components/AppHeader'
 import { useTheme } from '@/modules/shared/store'
-import { colors } from '@/modules/shared/theme'
-import { currencyFormatter } from '@/modules/shared/utils/currency-formatter'
+import CartResume from '../components/CartResume'
 import ProductCart from '../components/ProductCart'
 import { useCart } from '../store/cart'
 import type { CartOrderData } from '../types/cart.d'
@@ -69,94 +66,13 @@ export default function CartScreen() {
         />
       ))}
 
-      <VStack
-        w='100%'
-        space='xs'
-        mb='$4'
-        rounded='$md'
-        borderWidth='$1'
-        borderColor={colors.lightGray}
-      >
-        <Heading
-          p='$3'
-          borderBottomWidth='$1'
-          borderBottomColor={colors.lightGray}
-          color={colors.gray}
-          fontSize='$2xl'
-        >
-          Orden
-        </Heading>
-
-        <HStack
-          px='$3'
-          justifyContent='space-between'
-          alignItems='center'
-          space='sm'
-        >
-          <Text color={colors.gray} fontSize='$lg' fontWeight='$normal'>
-            No. de productos
-          </Text>
-
-          <Text color={colors.gray} fontSize='$lg' fontWeight='$medium'>
-            {orderData.noOfProducts}
-          </Text>
-        </HStack>
-
-        <HStack
-          px='$3'
-          justifyContent='space-between'
-          alignItems='center'
-          space='sm'
-        >
-          <Text color={colors.gray} fontSize='$lg' fontWeight='$normal'>
-            Sub Total
-          </Text>
-
-          <Text color={colors.gray} fontSize='$lg' fontWeight='$medium'>
-            {currencyFormatter.format(orderData.subTotal)}
-          </Text>
-        </HStack>
-
-        <HStack
-          px='$3'
-          justifyContent='space-between'
-          alignItems='center'
-          space='sm'
-        >
-          <Text color={colors.gray} fontSize='$lg' fontWeight='$normal'>
-            Impuestos (16%)
-          </Text>
-
-          <Text color={colors.gray} fontSize='$lg' fontWeight='$medium'>
-            {currencyFormatter.format(orderData.tax)}
-          </Text>
-        </HStack>
-
-        <HStack
-          px='$3'
-          mt='$2'
-          justifyContent='space-between'
-          alignItems='center'
-          space='sm'
-        >
-          <Text color={colors.gray} fontSize='$xl' fontWeight='$medium'>
-            Total
-          </Text>
-
-          <Text color={colors.gray} fontSize='$xl' fontWeight='$medium'>
-            {currencyFormatter.format(orderData.total)}
-          </Text>
-        </HStack>
-
-        <View w='100%' p='$3'>
-          <AppButton
-            text='Continuar'
-            bgColor={theme.mainColor}
-            color={colors.white}
-            onPress={() => {}}
-          />
-        </View>
-      </VStack>
+      <CartResume
+        noOfProducts={orderData.noOfProducts}
+        subTotal={orderData.subTotal}
+        tax={orderData.tax}
+        total={orderData.total}
+        onPress={() => {}}
+      />
     </AppContainer>
   )
 }
