@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 
-import { Role, type User, type UserLogged } from '../types/auth.d'
+import type { User } from '@/modules/shared/interfaces/user'
+import type { UserLogged } from '../types/auth.d'
 import { getSession } from '../utils/session'
 
 interface StateActions {
@@ -13,12 +14,13 @@ export const useAuth = create<State>((set) => {
   return {
     isLoggedIn: true,
     user: {
+      id: 1,
       name: 'Cesar',
       lastname: 'Villalobos Olmos',
       email: 'cesarvillalobosolmos.01@gmail.com',
       picture: 'https://i.pinimg.com/564x/2c/4c/67/2c4c67f144c8ed1600be38d06d8d1765.jpg',
       biography: 'Hola Mundo, me encanta programar y vender cosas :)',
-      role: Role.Seller
+      role_id: 1
     },
     token: '12345',
     authenticate: (user: User, token: string) => {

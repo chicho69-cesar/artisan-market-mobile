@@ -50,3 +50,9 @@ export interface Message {
   updated_at?: string
   created_at?: string
 }
+
+export enum Roles {
+  seller = 1,
+  user = 2,
+  admin = 3
+}

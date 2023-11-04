@@ -1,3 +1,4 @@
+import { MaterialIcons } from '@expo/vector-icons'
 import { useRoute } from '@react-navigation/native'
 import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
@@ -5,7 +6,6 @@ import { GiftedChat, Send, type IMessage } from 'react-native-gifted-chat'
 
 import type { User } from '@/modules/shared/interfaces/user'
 import { useTheme } from '@/modules/shared/store'
-import { MaterialIcons } from '@expo/vector-icons'
 
 export default function ChatScreen() {
   const { params } = useRoute()

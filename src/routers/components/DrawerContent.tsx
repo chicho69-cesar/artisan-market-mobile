@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { Text } from 'react-native'
 
 import { useAuth } from '@/modules/auth/store'
-import { Role } from '@/modules/auth/types/auth.d'
+import { Roles } from '@/modules/shared/interfaces/user'
 
 export default function DrawerContent(props: DrawerContentComponentProps) {
   const auth = useAuth((state) => state)
@@ -31,7 +31,7 @@ export default function DrawerContent(props: DrawerContentComponentProps) {
         }}
       />
 
-      {(auth.isLoggedIn && auth.user?.role === Role.Seller) ? (
+      {(auth.isLoggedIn && auth.user?.role_id === Roles.seller) ? (
         <>
           <DrawerItem
             label={() => (
