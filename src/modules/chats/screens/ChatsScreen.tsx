@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import AppContainer from '@/modules/shared/components/AppContainer'
 import AppHeader from '@/modules/shared/components/AppHeader'
 import Avatar from '@/modules/shared/components/Avatar'
+import useNavigate from '@/modules/shared/hooks/use-navigate'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
 import { useChats } from '../hooks/use-chats'
@@ -11,14 +12,11 @@ import { useChats } from '../hooks/use-chats'
 export default function ChatsScreen() {
   const theme = useTheme((state) => state)
   const { chats } = useChats()
+  const { navigateWithParams } = useNavigate()
 
   useEffect(() => {
     theme.changeMainColor()
   }, [])
-
-  useEffect(() => {
-    console.log(chats)
-  }, [chats])
 
   return (
     <AppContainer>
@@ -34,7 +32,9 @@ export default function ChatsScreen() {
           py='$2'
           borderBottomWidth='$1'
           borderBottomColor={colors.lightGray}
-          onPress={() => {}}
+          onPress={() => {
+            navigateWithParams('Chat', { chat })
+          }}
         >
           <HStack space='sm' alignItems='center'>
             <Avatar
