@@ -6,6 +6,7 @@ import { getSession } from '../utils/session'
 
 interface StateActions {
   authenticate: (user: User, token: string) => void
+  logout: () => void
 }
 
 type State = StateActions & UserLogged
@@ -24,10 +25,19 @@ export const useAuth = create<State>((set) => {
     },
     token: '12345',
     authenticate: (user: User, token: string) => {
-      set(() => ({
+      set((state) => ({
+        ...state,
         isLoggedIn: true,
         user,
         token
+      }))
+    },
+    logout: () => {
+      set((state) => ({
+        ...state,
+        isLoggedIn: false,
+        user: null,
+        token: null
       }))
     },
     init: () => {

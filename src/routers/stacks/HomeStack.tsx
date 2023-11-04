@@ -46,7 +46,7 @@ export default function HomeStack() {
         component={DetailsScreen}
         options={{
           headerTitle: (props) => <ScreenHeader title='ArtisanMarket' />,
-          headerRight: () => (<ShareProduct />)
+          headerRight: () => <ShareProduct />
         }}
       />
 
