@@ -33,7 +33,7 @@ export default function CheckoutScreen() {
         user={user!}
         address={address!}
         orderData={orderData}
-        status={OrderStatus.unconfirmed}
+        status={OrderStatus.pending}
       />
 
       <Products products={cart.map((cartElement) => cartElement.product)} />

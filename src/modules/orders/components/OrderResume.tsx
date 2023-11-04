@@ -5,17 +5,22 @@ import type { Address } from '@/modules/shared/interfaces/address'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
 import { currencyFormatter } from '@/modules/shared/utils/currency-formatter'
-import { HStack, Heading, Text, VStack, View } from '@gluestack-ui/themed'
-import type { OrderStatus } from '../types/order.d'
+import { HStack, Heading, Image, Pressable, Text, VStack, View } from '@gluestack-ui/themed'
+import { OrderStatus } from '../types/order.d'
+
+const paypalImage = require('../../../../assets/paypal.png')
 
 interface Props {
   user: User // TODO: Change for user interface
   address: Address
   orderData: CartOrderData
   status: OrderStatus
+  confirmOrder?: () => void
+  payOrder?: () => void
+  cancelOrder?: () => void
 }
 
-export default function OrderResume({ user, address, orderData, status }: Props) {
+export default function OrderResume({ user, address, orderData, status, confirmOrder, payOrder, cancelOrder }: Props) {
   const theme = useTheme((state) => state)
 
   return (
@@ -129,12 +134,83 @@ export default function OrderResume({ user, address, orderData, status }: Props)
       </HStack>
 
       <View w='100%' p='$3'>
-        <AppButton
-          text='Confirmar pedido'
-          bgColor={theme.mainColor}
-          color={colors.white}
-          onPress={() => {}}
-        />
+        {status === OrderStatus.unconfirmed ? (
+          <AppButton
+            text='Confirmar pedido'
+            bgColor={theme.mainColor}
+            color={colors.white}
+            onPress={() => {
+              confirmOrder?.()
+            }}
+          />
+        ) : status === OrderStatus.pending ? (
+          <HStack justifyContent='space-between' alignItems='center' space='sm'>
+            <Pressable
+              w='48%'
+              bg='#ffd140'
+              p='$2'
+              rounded='$md'
+              onPress={() => {
+                payOrder?.()
+              }}
+            >
+              <Image
+                source={paypalImage}
+                alt='Paypal'
+                h='$8'
+                w='100%'
+              />
+            </Pressable>
+
+            <Pressable
+              w='48%'
+              bg={colors.red}
+              p='$3'
+              rounded='$md'
+              onPress={() => {
+                cancelOrder?.()
+              }}
+            >
+              <Text fontSize='$xl' textAlign='center' fontWeight='$bold' color={colors.white}>
+                Cancelar
+              </Text>
+            </Pressable>
+          </HStack>
+        ) : status === OrderStatus.paid ? (
+          <View
+            w='100%'
+            borderWidth='$1'
+            borderColor={colors.green}
+            rounded='$md'
+            p='$2'
+          >
+            <Text
+              color={colors.green}
+              fontWeight='$semibold'
+              fontSize='$lg'
+              textAlign='center'
+            >
+              Pagada
+            </Text>
+          </View>
+        ) : (
+          <View
+            w='100%'
+            borderWidth='$1'
+            borderColor={colors.red}
+            rounded='$md'
+            p='$2'
+          >
+            <Text
+              color={colors.red}
+              fontWeight='$semibold'
+              fontSize='$lg'
+              textAlign='center'
+            >
+              Cancelada
+            </Text>
+          </View>
+        )}
       </View>
     </VStack>
   )
