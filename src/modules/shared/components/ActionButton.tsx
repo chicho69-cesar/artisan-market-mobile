@@ -16,7 +16,7 @@ export default function ActionButton({ bgColor, color, children, onPress }: Prop
   color = color ?? colors.white
 
   return (
-    <Button bgColor={bgColor}>
+    <Button bgColor={bgColor} onPress={onPress}>
       {children}
     </Button>
   )

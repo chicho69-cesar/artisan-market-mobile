@@ -1,3 +1,4 @@
+import { useCart } from '@/modules/cart/store/cart'
 import { useTheme } from '@/modules/shared/store'
 import { Ionicons } from '@expo/vector-icons'
 import { Badge, BadgeText, VStack } from '@gluestack-ui/themed'
@@ -9,6 +10,7 @@ interface Props {
 
 export default function CartIcon({ color, size }: Props) {
   const theme = useTheme((state) => state)
+  const cart = useCart((state) => state.cart)
 
   return (
     <VStack>
@@ -24,7 +26,7 @@ export default function CartIcon({ color, size }: Props) {
         alignSelf='flex-end'
       >
         <BadgeText color='white' fontSize='$xs' fontWeight='$semibold'>
-          3 {/* TODO: Tomarlo del state */}
+          {cart.length}
         </BadgeText>
       </Badge>
       <Ionicons name='cart' color={color} size={size} />

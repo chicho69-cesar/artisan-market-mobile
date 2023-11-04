@@ -16,8 +16,8 @@ export default function AppButton({ bgColor, color, onPress, text }: Props) {
   color = color ?? colors.white
 
   return (
-    <Button bgColor={bgColor}>
-      <ButtonText color={color} fontWeight='$semibold' onPress={onPress}>
+    <Button bgColor={bgColor} onPress={onPress}>
+      <ButtonText color={color} fontWeight='$semibold'>
         {text}
       </ButtonText>
     </Button>

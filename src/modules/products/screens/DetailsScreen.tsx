@@ -2,6 +2,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { HStack, Pressable, Text, VStack, View } from '@gluestack-ui/themed'
 import { useEffect, useState } from 'react'
 
+import { useCart } from '@/modules/cart/store/cart'
 import ActionButton from '@/modules/shared/components/ActionButton'
 import AppContainer from '@/modules/shared/components/AppContainer'
 import TabBarItem from '@/modules/shared/components/TabBarItem'
@@ -16,6 +17,7 @@ import { useActiveProduct } from '../store/active-product'
 
 export default function DetailsScreen() {
   const theme = useTheme((state) => state)
+  const cart = useCart((state) => state)
   const { product } = useActiveProduct((state) => state)
   const { reviews } = useReviews(product?.id ?? 0)
 
@@ -119,7 +121,12 @@ export default function DetailsScreen() {
           </Text>
 
           <HStack flexWrap='nowrap' mt='$4' space='xs' justifyContent='space-between'>
-            <ActionButton bgColor={theme.mainColor} onPress={() => {}}>
+            <ActionButton
+              bgColor={theme.mainColor}
+              onPress={() => {
+                cart.addProductToCart(product!)
+              }}
+            >
               <MaterialIcons
                 name='add-shopping-cart'
                 size={18}

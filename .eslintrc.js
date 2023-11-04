@@ -24,6 +24,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/space-before-function-paren': 'off',
-    'multiline-ternary': 'off'
+    'multiline-ternary': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off'
   }
 }
