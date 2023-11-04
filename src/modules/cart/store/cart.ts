@@ -1,5 +1,6 @@
-import type { Product } from '@/modules/shared/interfaces/product'
 import { create } from 'zustand'
+
+import type { Product } from '@/modules/shared/interfaces/product'
 import type { Cart } from '../types/cart.d'
 
 interface StateActions {

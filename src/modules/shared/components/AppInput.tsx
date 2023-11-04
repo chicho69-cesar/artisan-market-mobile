@@ -7,19 +7,22 @@ interface Props {
   isInvalid: boolean
   label: string
   type: 'text' | 'password' | undefined
-  keyboardType?: string
   placeholder: string
+  isGrouped?: boolean
+  keyboardType?: string
   errorMessage?: string
   onChangeText: (text: string) => void
 }
 
-export default function AppInput({ isInvalid, label, type, keyboardType, placeholder, errorMessage, onChangeText }: Props) {
+export default function AppInput({ isInvalid, label, type, keyboardType, placeholder, isGrouped = false, errorMessage, onChangeText }: Props) {
   const [showPassword, setShowPassword] = useState(false)
 
+  const width = isGrouped ? '48%' : '100%'
+
   return (
-    <FormControl isInvalid={isInvalid} mb='$4'>
+    <FormControl isInvalid={isInvalid} mb='$4' w={width}>
       <FormControlLabel mb='$0'>
-        <FormControlLabelText size='xs' color={colors.gray}>
+        <FormControlLabelText size='sm' color={colors.gray} fontWeight='$light'>
           {label}
         </FormControlLabelText>
       </FormControlLabel>
