@@ -43,8 +43,6 @@ export default function UserScreen() {
 
   useEffect(() => {
     const user = (params! as any).user as User
-    console.log(params)
-    console.log(user)
 
     setUser(user)
     setIsOwner(user.id === auth.user?.id)

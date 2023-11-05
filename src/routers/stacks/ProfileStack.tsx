@@ -51,16 +51,25 @@ export default function ProfileStack() {
       <Stack.Screen
         name='EditProfile'
         component={EditProfileScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Edita tu perfil de usuario' />
+        }}
       />
 
       <Stack.Screen
         name='Followers'
         component={FollowersScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Seguidores' />
+        }}
       />
 
       <Stack.Screen
         name='Following'
         component={FollowingsScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Siguiendo' />
+        }}
       />
     </Stack.Navigator>
   )
