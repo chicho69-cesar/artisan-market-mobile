@@ -1,3 +1,6 @@
+import { MaterialIcons } from '@expo/vector-icons'
+import { FlatList, HStack, Image, Pressable, Text, VStack, View } from '@gluestack-ui/themed'
+import * as ImagePicker from 'expo-image-picker'
 import { useEffect, useState } from 'react'
 
 import Categories from '@/modules/products/components/Categories'
@@ -8,11 +11,13 @@ import AppInput from '@/modules/shared/components/AppInput'
 import AppTextArea from '@/modules/shared/components/AppTextArea'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
-import { HStack } from '@gluestack-ui/themed'
 
 export default function CreateProductScreen() {
   const theme = useTheme((state) => state)
   const [categories, setCategories] = useState<string[]>([])
+
+  const [images, setImages] = useState<string[]>([])
+  const [imageFileNames, setImageFileNames] = useState<string[]>([])
 
   useEffect(() => {
     theme.changeMainColor()
@@ -23,6 +28,25 @@ export default function CreateProductScreen() {
 
     if (textToCheck.includes(',')) {
       setCategories(textToCheck.split(','))
+    }
+  }
+
+  const pickImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      quality: 1
+    })
+
+    if (!result.canceled) {
+      const newImage = result.assets[0].uri
+      const newImageFileName = result.assets[0].fileName
+
+      setImages([...images, newImage])
+
+      if (newImageFileName != null && newImageFileName !== undefined) {
+        setImageFileNames([...imageFileNames, newImageFileName])
+      }
     }
   }
 
@@ -92,7 +116,80 @@ export default function CreateProductScreen() {
         mt='$0'
       />
 
-      {/* TODO: make image selector */}
+      <Pressable
+        bg={theme.mainColor}
+        p='$2'
+        my='$4'
+        rounded='$md'
+        onPress={() => {
+          pickImage()
+        }}
+      >
+        <HStack alignItems='center' justifyContent='center'>
+          <MaterialIcons
+            name='image'
+            size={24}
+            color={colors.white}
+            style={{ marginRight: 5 }}
+          />
+
+          <Text color={colors.white} fontSize='$md'>
+            Seleccionar imagen
+          </Text>
+        </HStack>
+      </Pressable>
+
+      {/* TODO: make an space for no images */}
+
+      <FlatList
+        mb='$4'
+        data={images}
+        keyExtractor={(item, index) => index.toString()}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        renderItem={({ item, index }) => (
+          <VStack
+            key={index}
+            mr='$2'
+            w='$24'
+            space='xs'
+            alignItems='center'
+          >
+            <Image
+              source={{ uri: (item as string) }} // TODO: set a default image
+              alt={item as string}
+              w='$24'
+              h='$32'
+              rounded='$md'
+              objectFit='cover'
+            />
+
+            <Pressable
+              py='$1'
+              px='$4'
+              rounded='$lg'
+              alignItems='center'
+              bg={theme.mainColor}
+              onPress={() => {
+                const updatedImages = [...images]
+                updatedImages.splice(index, 1)
+
+                const updatedFileNames = [...imageFileNames]
+                updatedFileNames.splice(index, 1)
+
+                setImages(updatedImages)
+                setImageFileNames(updatedFileNames)
+              }}
+            >
+              <MaterialIcons
+                name='delete'
+                size={18}
+                color={colors.white}
+              />
+            </Pressable>
+          </VStack>
+        )}
+      />
 
       <AppButton
         text='Agregar producto'
@@ -100,6 +197,8 @@ export default function CreateProductScreen() {
         color={colors.white}
         onPress={() => {}}
       />
+
+      <View mb='$4' />
     </AppContainer>
   )
 }
