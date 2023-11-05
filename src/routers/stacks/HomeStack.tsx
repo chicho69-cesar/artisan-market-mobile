@@ -74,11 +74,17 @@ export default function HomeStack() {
       <Stack.Screen
         name='Dashboard'
         component={DashboardScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Dashboard' />
+        }}
       />
 
       <Stack.Screen
         name='MyProducts'
         component={MyProductsScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Mis productos' />
+        }}
       />
 
       <Stack.Screen

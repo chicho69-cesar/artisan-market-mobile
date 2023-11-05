@@ -5,13 +5,15 @@ import { Box, HStack, Text } from '@gluestack-ui/themed'
 
 interface Props {
   categories: Category[]
+  mt?: string
+  w?: string
 }
 
-export default function Categories({ categories }: Props) {
+export default function Categories({ categories, mt = '$4', w = '100%' }: Props) {
   const theme = useTheme((state) => state)
 
   return (
-    <HStack flexWrap='wrap' mt='$4' space='sm' justifyContent='flex-start'>
+    <HStack flexWrap='wrap' w={w as any} mt={mt as any} space='sm' justifyContent='flex-start'>
       {categories.map((category) => (
         <Box
           key={category.id}
