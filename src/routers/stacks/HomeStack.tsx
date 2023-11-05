@@ -90,6 +90,9 @@ export default function HomeStack() {
       <Stack.Screen
         name='CreateProduct'
         component={CreateProductScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Agregar producto' />
+        }}
       />
 
       <Stack.Screen
