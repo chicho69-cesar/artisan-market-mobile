@@ -1,7 +1,8 @@
 import { FontAwesome } from '@expo/vector-icons'
-import { HStack, Text, VStack } from '@gluestack-ui/themed'
+import { HStack, Pressable, Text, VStack } from '@gluestack-ui/themed'
 
 import Avatar from '@/modules/shared/components/Avatar'
+import useNavigate from '@/modules/shared/hooks/use-navigate'
 import type { Review as ReviewType } from '@/modules/shared/interfaces/review'
 import { colors } from '@/modules/shared/theme'
 import { dateFormatter } from '@/modules/shared/utils/date-formatter'
@@ -11,14 +12,24 @@ interface Props {
 }
 
 export default function Review({ review }: Props) {
+  const { navigateBetweenRoutes } = useNavigate()
+
   return (
     <VStack my='$3' space='sm'>
       <HStack space='md' justifyContent='space-between' alignItems='center'>
         <HStack space='sm' justifyContent='flex-start' alignItems='center'>
-          <Avatar
-            source={review.user.picture ?? ''} /* TODO: set a default image */
-            alt={review.user.name ?? ''}
-          />
+          <Pressable
+            onPress={() => {
+              if ((review.user) != null) {
+                navigateBetweenRoutes('ProfileStack', 'UserProfile', { user: review.user })
+              }
+            }}
+          >
+            <Avatar
+              source={review.user.picture ?? ''} /* TODO: set a default image */
+              alt={review.user.name ?? ''}
+            />
+          </Pressable>
 
           <VStack>
             <Text color={colors.gray} fontWeight='$medium'>

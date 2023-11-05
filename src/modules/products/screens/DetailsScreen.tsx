@@ -6,6 +6,7 @@ import { useCart } from '@/modules/cart/store/cart'
 import ActionButton from '@/modules/shared/components/ActionButton'
 import AppContainer from '@/modules/shared/components/AppContainer'
 import TabBarItem from '@/modules/shared/components/TabBarItem'
+import useNavigate from '@/modules/shared/hooks/use-navigate'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
 import { currencyFormatter } from '@/modules/shared/utils/currency-formatter'
@@ -20,6 +21,7 @@ export default function DetailsScreen() {
   const cart = useCart((state) => state)
   const { product } = useActiveProduct((state) => state)
   const { reviews } = useReviews(product?.id ?? 0)
+  const { navigateBetweenRoutes } = useNavigate()
 
   const [isFavorite, setIsFavorite] = useState(false)
   const [showDescription, setShowDescription] = useState(true)
@@ -38,12 +40,23 @@ export default function DetailsScreen() {
             {product?.name}
           </Text>
 
-          <Text fontSize='$sm' color={colors.gray}>
-            De{' '}
-            <Text color={theme.mainColor} fontWeight='$semibold'>
-              {product?.seller.name} {product?.seller.lastname}
+          <HStack>
+            <Text fontSize='$sm' color={colors.gray}>
+              De{' '}
             </Text>
-          </Text>
+
+            <Pressable
+              onPress={() => {
+                if ((product?.seller) != null) {
+                  navigateBetweenRoutes('ProfileStack', 'UserProfile', { user: product?.seller })
+                }
+              }}
+            >
+              <Text color={theme.mainColor} fontWeight='$semibold'>
+                {product?.seller.name} {product?.seller.lastname}
+              </Text>
+            </Pressable>
+          </HStack>
         </VStack>
 
         <Pressable w='28%'>

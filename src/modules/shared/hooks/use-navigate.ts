@@ -11,9 +11,10 @@ export default function useNavigate() {
     navigation.navigate(screen, params)
   }
 
-  const navigateBetweenRoutes = (navigator: string, route: string) => {
+  const navigateBetweenRoutes = (navigator: string, route: string, params: any) => {
     navigation.navigate(navigator, {
-      route
+      screen: route,
+      params
     })
   }
 
