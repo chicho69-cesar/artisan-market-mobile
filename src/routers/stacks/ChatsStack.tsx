@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { ChatScreen, ChatsScreen } from '@/modules/chats/screens'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
+import GoChats from '../components/GoChats'
 import ScreenHeader from '../components/ScreenHeader'
 
 const Stack = createStackNavigator()
@@ -32,13 +33,18 @@ export default function ChatsStack() {
         name='Chats'
         component={ChatsScreen}
         options={{
-          headerTitle: (props) => <ScreenHeader title='Chats' />
+          headerTitle: (props) => <ScreenHeader title='Chats' />,
+          headerLeft: () => null
         }}
       />
 
       <Stack.Screen
         name='Chat'
         component={ChatScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Chatea' />,
+          headerLeft: () => <GoChats />
+        }}
       />
     </Stack.Navigator>
   )

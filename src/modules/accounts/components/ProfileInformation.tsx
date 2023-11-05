@@ -24,7 +24,7 @@ interface Props {
 
 export default function ProfileInformation({ user, socials, isOwner = true, profileAction, goFollowers, goFollowings }: Props) {
   const theme = useTheme((state) => state)
-  const { navigateWithParams } = useNavigate()
+  const { navigateBetweenRoutes } = useNavigate()
 
   return (
     <>
@@ -167,7 +167,7 @@ export default function ProfileInformation({ user, socials, isOwner = true, prof
           rounded='$full'
           bg={theme.mainColor}
           onPress={() => {
-            navigateWithParams('Chat', { chat: user })
+            navigateBetweenRoutes('ChatsStack', 'Chat', { chat: user })
           }}
         >
           <HStack justifyContent='center' alignItems='center'>
