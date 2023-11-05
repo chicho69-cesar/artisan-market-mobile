@@ -27,6 +27,7 @@ export default function Product({ product, onPress }: Props) {
             alt={product.name}
             w='90%'
             h='$80'
+            rounded='$md'
             objectFit='cover'
           />
         </Center>

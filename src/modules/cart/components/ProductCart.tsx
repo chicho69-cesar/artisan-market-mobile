@@ -32,6 +32,7 @@ export default function ProductCart({ product, quantity, decreaseQuantity, incre
           alt={product.name}
           w='90%'
           h='$80'
+          rounded='$md'
           objectFit='cover'
         />
       </Center>

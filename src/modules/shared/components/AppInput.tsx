@@ -8,13 +8,14 @@ interface Props {
   label: string
   type: 'text' | 'password' | undefined
   placeholder: string
+  defaultValue?: string
   isGrouped?: boolean
   keyboardType?: string
   errorMessage?: string
   onChangeText: (text: string) => void
 }
 
-export default function AppInput({ isInvalid, label, type, keyboardType, placeholder, isGrouped = false, errorMessage, onChangeText }: Props) {
+export default function AppInput({ isInvalid, label, type, keyboardType, placeholder, defaultValue = '', isGrouped = false, errorMessage, onChangeText }: Props) {
   const [showPassword, setShowPassword] = useState(false)
 
   const width = isGrouped ? '48%' : '100%'
@@ -33,6 +34,7 @@ export default function AppInput({ isInvalid, label, type, keyboardType, placeho
           keyboardType={keyboardType as any}
           placeholder={placeholder}
           size='lg'
+          defaultValue={defaultValue}
           color={colors.gray}
           borderColor={colors.lightGray}
           onChangeText={onChangeText}

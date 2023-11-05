@@ -6,11 +6,12 @@ interface Props {
   isInvalid: boolean
   label: string
   placeholder: string
+  defaultValue?: string
   errorMessage?: string
   onChangeText: (text: string) => void
 }
 
-export default function AppTextArea({ isInvalid, label, placeholder, errorMessage, onChangeText }: Props) {
+export default function AppTextArea({ isInvalid, label, placeholder, defaultValue = '', errorMessage, onChangeText }: Props) {
   return (
     <FormControl isInvalid={isInvalid} mb='$4' w='100%'>
       <FormControlLabel mb='$0'>
@@ -23,6 +24,7 @@ export default function AppTextArea({ isInvalid, label, placeholder, errorMessag
         <TextareaInput
           w='100%'
           placeholder={placeholder}
+          defaultValue={defaultValue}
           color={colors.gray}
           borderColor={colors.lightGray}
           onChangeText={onChangeText}

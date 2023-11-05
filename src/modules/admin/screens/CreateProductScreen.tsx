@@ -1,5 +1,4 @@
-import { MaterialIcons } from '@expo/vector-icons'
-import { FlatList, HStack, Image, Pressable, Text, VStack, View } from '@gluestack-ui/themed'
+import { HStack, View } from '@gluestack-ui/themed'
 import * as ImagePicker from 'expo-image-picker'
 import { useEffect, useState } from 'react'
 
@@ -11,6 +10,8 @@ import AppInput from '@/modules/shared/components/AppInput'
 import AppTextArea from '@/modules/shared/components/AppTextArea'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
+import ImagePickerComponent from '../components/ImagePicker'
+import ProductImages from '../components/ProductImages'
 
 export default function CreateProductScreen() {
   const theme = useTheme((state) => state)
@@ -28,6 +29,8 @@ export default function CreateProductScreen() {
 
     if (textToCheck.includes(',')) {
       setCategories(textToCheck.split(','))
+    } else {
+      setCategories([textToCheck])
     }
   }
 
@@ -116,79 +119,24 @@ export default function CreateProductScreen() {
         mt='$0'
       />
 
-      <Pressable
-        bg={theme.mainColor}
-        p='$2'
-        my='$4'
-        rounded='$md'
-        onPress={() => {
+      <ImagePickerComponent
+        pickImage={() => {
           pickImage()
         }}
-      >
-        <HStack alignItems='center' justifyContent='center'>
-          <MaterialIcons
-            name='image'
-            size={24}
-            color={colors.white}
-            style={{ marginRight: 5 }}
-          />
+      />
 
-          <Text color={colors.white} fontSize='$md'>
-            Seleccionar imagen
-          </Text>
-        </HStack>
-      </Pressable>
+      <ProductImages
+        images={images}
+        onRemoveImage={(index: number) => {
+          const updatedImages = [...images]
+          updatedImages.splice(index, 1)
 
-      {/* TODO: make an space for no images */}
+          const updatedFileNames = [...imageFileNames]
+          updatedFileNames.splice(index, 1)
 
-      <FlatList
-        mb='$4'
-        data={images}
-        keyExtractor={(item, index) => index.toString()}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item, index }) => (
-          <VStack
-            key={index}
-            mr='$2'
-            w='$24'
-            space='xs'
-            alignItems='center'
-          >
-            <Image
-              source={{ uri: (item as string) }} // TODO: set a default image
-              alt={item as string}
-              w='$24'
-              h='$32'
-              rounded='$md'
-              objectFit='cover'
-            />
-
-            <Pressable
-              py='$1'
-              px='$4'
-              rounded='$lg'
-              alignItems='center'
-              bg={theme.mainColor}
-              onPress={() => {
-                const updatedImages = [...images]
-                updatedImages.splice(index, 1)
-
-                const updatedFileNames = [...imageFileNames]
-                updatedFileNames.splice(index, 1)
-
-                setImages(updatedImages)
-                setImageFileNames(updatedFileNames)
-              }}
-            >
-              <MaterialIcons
-                name='delete'
-                size={18}
-                color={colors.white}
-              />
-            </Pressable>
-          </VStack>
-        )}
+          setImages(updatedImages)
+          setImageFileNames(updatedFileNames)
+        }}
       />
 
       <AppButton

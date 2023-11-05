@@ -98,6 +98,9 @@ export default function HomeStack() {
       <Stack.Screen
         name='EditProduct'
         component={EditProductScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Editar producto' />
+        }}
       />
 
       <Stack.Screen
