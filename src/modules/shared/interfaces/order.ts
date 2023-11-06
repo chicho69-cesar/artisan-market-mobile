@@ -3,31 +3,34 @@ import type { Product } from './product'
 import type { User } from './user'
 
 export interface Order {
-  id: number
-  user_id: number
-  date: string
   address_id: number
+  address: Address
+  created_at?: string
+  date: string
+  id: number
+  order_products: OrderProduct[]
+  products: Product[]
   status: string
   subtotal: number
   tax: number
   total: number
   updated_at?: string
-  created_at?: string
-  order_products: OrderProduct[]
-  products: Product[]
-  address: Address
+  user_id: number
   user: User
 }
 
 export interface OrderGrouped {
+  address_id: number
   address: Address
+  order_date: string
   order_id: number
   order_status: string
-  order_date: string
+  products: ProductElement[]
   subtotal: number
   tax: number
   total: number
-  products: ProductElement[]
+  user_id: number
+  user: User
 }
 
 export interface ProductElement {

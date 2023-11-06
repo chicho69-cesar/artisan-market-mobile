@@ -1,7 +1,7 @@
-import type { User } from '@/modules/auth/types/auth'
 import type { CartOrderData } from '@/modules/cart/types/cart'
 import AppButton from '@/modules/shared/components/AppButton'
 import type { Address } from '@/modules/shared/interfaces/address'
+import type { User } from '@/modules/shared/interfaces/user'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
 import { currencyFormatter } from '@/modules/shared/utils/currency-formatter'

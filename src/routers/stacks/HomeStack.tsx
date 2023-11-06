@@ -69,6 +69,9 @@ export default function HomeStack() {
       <Stack.Screen
         name='OrdersHistory'
         component={OrdersHistoryScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Historial de mis compras' />
+        }}
       />
 
       <Stack.Screen
@@ -106,6 +109,9 @@ export default function HomeStack() {
       <Stack.Screen
         name='Orders'
         component={OrdersScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Pedidos' />
+        }}
       />
     </Stack.Navigator>
   )
