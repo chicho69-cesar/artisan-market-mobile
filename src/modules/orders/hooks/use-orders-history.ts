@@ -31,7 +31,7 @@ export function useOrdersHistory() {
         tax: 415,
         total: 2515,
         user: {
-          id: 2,
+          id: 1,
           email: 'liz@gmail.com',
           lastname: 'Sandoval Vallejo',
           name: 'Liz',

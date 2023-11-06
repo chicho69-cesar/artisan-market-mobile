@@ -1,3 +1,4 @@
+import { useAuth } from '@/modules/auth/store'
 import type { CartOrderData } from '@/modules/cart/types/cart'
 import AppButton from '@/modules/shared/components/AppButton'
 import type { Address } from '@/modules/shared/interfaces/address'
@@ -22,6 +23,7 @@ interface Props {
 
 export default function OrderResume({ user, address, orderData, status, confirmOrder, payOrder, cancelOrder }: Props) {
   const theme = useTheme((state) => state)
+  const auth = useAuth((state) => state)
 
   return (
     <VStack
@@ -144,38 +146,59 @@ export default function OrderResume({ user, address, orderData, status, confirmO
             }}
           />
         ) : status === OrderStatus.pending ? (
-          <HStack justifyContent='space-between' alignItems='center' space='sm'>
-            <Pressable
-              w='48%'
-              bg='#ffd140'
-              p='$2'
-              rounded='$md'
-              onPress={() => {
-                payOrder?.()
-              }}
-            >
-              <Image
-                source={paypalImage}
-                alt='Paypal'
-                h='$8'
-                w='100%'
-              />
-            </Pressable>
+          <>
+            {auth.user?.id === user.id ? (
+              <HStack justifyContent='space-between' alignItems='center' space='sm'>
+                <Pressable
+                  w='48%'
+                  bg='#ffd140'
+                  p='$2'
+                  rounded='$md'
+                  onPress={() => {
+                    payOrder?.()
+                  }}
+                >
+                  <Image
+                    source={paypalImage}
+                    alt='Paypal'
+                    h='$8'
+                    w='100%'
+                  />
+                </Pressable>
 
-            <Pressable
-              w='48%'
-              bg={colors.red}
-              p='$3'
-              rounded='$md'
-              onPress={() => {
-                cancelOrder?.()
-              }}
-            >
-              <Text fontSize='$xl' textAlign='center' fontWeight='$bold' color={colors.white}>
-                Cancelar
-              </Text>
-            </Pressable>
-          </HStack>
+                <Pressable
+                  w='48%'
+                  bg={colors.red}
+                  p='$3'
+                  rounded='$md'
+                  onPress={() => {
+                    cancelOrder?.()
+                  }}
+                >
+                  <Text fontSize='$xl' textAlign='center' fontWeight='$bold' color={colors.white}>
+                    Cancelar
+                  </Text>
+                </Pressable>
+              </HStack>
+            ) : (
+              <View
+                w='100%'
+                borderWidth='$1'
+                borderColor={colors.lightGray}
+                rounded='$md'
+                p='$2'
+              >
+                <Text
+                  color={colors.lightGray}
+                  fontWeight='$semibold'
+                  fontSize='$lg'
+                  textAlign='center'
+                >
+                  Pendiente
+                </Text>
+              </View>
+            )}
+          </>
         ) : status === OrderStatus.paid ? (
           <View
             w='100%'
