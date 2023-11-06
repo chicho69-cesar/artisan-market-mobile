@@ -7,7 +7,6 @@ import useNavigate from '@/modules/shared/hooks/use-navigate'
 import type { Social } from '@/modules/shared/interfaces/social'
 import type { User } from '@/modules/shared/interfaces/user'
 import { useTheme } from '@/modules/shared/store'
-import { useReviews } from '../../products/hooks/use-reviews'
 import ProfileInformation from '../components/ProfileInformation'
 
 export default function UserScreen() {
@@ -59,10 +58,10 @@ export default function UserScreen() {
             // TODO: follow user
           }}
           goFollowers={() => {
-            navigateWithParams('Followers', { useReviews })
+            navigateWithParams('Followers', { user })
           }}
           goFollowings={() => {
-            navigateWithParams('Following', { useReviews })
+            navigateWithParams('Following', { user })
           }}
         />
       )}
