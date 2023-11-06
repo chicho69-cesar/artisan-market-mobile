@@ -1,12 +1,11 @@
 import { HStack } from '@gluestack-ui/themed'
 import { useEffect } from 'react'
 
-import AppContainer from '@/modules/shared/components/AppContainer'
-import AppHeader from '@/modules/shared/components/AppHeader'
+import { AppContainer, AppHeader } from '@/modules/shared/components'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
-import DashboardCard from '../components/DashboardCard'
-import { useDashboardStats } from '../hooks/use-dashboard-stats'
+import { DashboardCard } from '../components'
+import { useDashboardStats } from '../hooks'
 
 export default function DashboardScreen() {
   const theme = useTheme((state) => state)

@@ -1,4 +1,4 @@
-import type { Address } from '@/modules/shared/interfaces/address'
+import type { Address } from '@/modules/shared/interfaces'
 import { create } from 'zustand'
 
 interface StateActions {

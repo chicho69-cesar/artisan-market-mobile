@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { Text } from 'react-native'
 
 import { useAuth } from '@/modules/auth/store'
-import { Roles } from '@/modules/shared/interfaces/user'
+import { Roles } from '@/modules/shared/interfaces'
 
 export default function DrawerContent(props: DrawerContentComponentProps) {
   const auth = useAuth((state) => state)

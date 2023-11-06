@@ -1,9 +1,9 @@
 import { FontAwesome } from '@expo/vector-icons'
 import { HStack, Pressable, Text, VStack } from '@gluestack-ui/themed'
 
-import Avatar from '@/modules/shared/components/Avatar'
-import useNavigate from '@/modules/shared/hooks/use-navigate'
-import type { Review as ReviewType } from '@/modules/shared/interfaces/review'
+import { Avatar } from '@/modules/shared/components'
+import { useNavigate } from '@/modules/shared/hooks'
+import type { Review as ReviewType } from '@/modules/shared/interfaces'
 import { colors } from '@/modules/shared/theme'
 import { dateFormatter } from '@/modules/shared/utils/date-formatter'
 

@@ -1,6 +1,6 @@
 import { HStack, Pressable, Text, VStack, View } from '@gluestack-ui/themed'
 
-import type { User } from '@/modules/shared/interfaces/user'
+import type { User } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
 import { currencyFormatter } from '@/modules/shared/utils/currency-formatter'

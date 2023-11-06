@@ -1,6 +1,4 @@
-import type { Address } from './address'
-import type { Product } from './product'
-import type { User } from './user'
+import type { Address, Product, User } from '.'
 
 export interface Order {
   address_id: number

@@ -1,9 +1,8 @@
 import { useEffect } from 'react'
 
-import Order from '@/modules/orders/components/Order'
-import AppContainer from '@/modules/shared/components/AppContainer'
-import AppHeader from '@/modules/shared/components/AppHeader'
-import useNavigate from '@/modules/shared/hooks/use-navigate'
+import { Order } from '@/modules/orders/components'
+import { AppContainer, AppHeader } from '@/modules/shared/components'
+import { useNavigate } from '@/modules/shared/hooks/use-navigate'
 import { useTheme } from '@/modules/shared/store'
 import { useSellerOrders } from '../hooks/use-seller-orders'
 

@@ -1,14 +1,11 @@
 import { CheckIcon, Checkbox, CheckboxIcon, CheckboxIndicator, CheckboxLabel, HStack, ScrollView, Text } from '@gluestack-ui/themed'
 import { useEffect, useState } from 'react'
 
-import AppButton from '@/modules/shared/components/AppButton'
-import AppInput from '@/modules/shared/components/AppInput'
-import useNavigate from '@/modules/shared/hooks/use-navigate'
+import { AppButton, AppInput } from '@/modules/shared/components'
+import { useNavigate } from '@/modules/shared/hooks'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
-import AuthContainer from '../components/AuthContainer'
-import Header from '../components/Header'
-import SocialLogin from '../components/SocialLogin'
+import { AuthContainer, Header, SocialLogin } from '../components'
 
 const facebook = require('../../../../assets/facebook.png')
 const google = require('../../../../assets/google.png')

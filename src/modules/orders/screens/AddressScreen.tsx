@@ -1,14 +1,11 @@
 import { HStack } from '@gluestack-ui/themed'
 import { useEffect, useState } from 'react'
 
-import AppButton from '@/modules/shared/components/AppButton'
-import AppContainer from '@/modules/shared/components/AppContainer'
-import AppHeader from '@/modules/shared/components/AppHeader'
-import AppInput from '@/modules/shared/components/AppInput'
-import useNavigate from '@/modules/shared/hooks/use-navigate'
+import { AppButton, AppContainer, AppHeader, AppInput } from '@/modules/shared/components'
+import { useNavigate } from '@/modules/shared/hooks'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
-import { useAddress } from '../store/address'
+import { useAddress } from '../store'
 
 export default function AddressScreen() {
   const theme = useTheme((state) => state)

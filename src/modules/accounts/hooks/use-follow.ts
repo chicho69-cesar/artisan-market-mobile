@@ -1,4 +1,4 @@
-import type { User } from '@/modules/shared/interfaces/user'
+import type { User } from '@/modules/shared/interfaces'
 import { useState } from 'react'
 
 export function useFollow(following: boolean) {

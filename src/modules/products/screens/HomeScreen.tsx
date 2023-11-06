@@ -1,10 +1,9 @@
 import { useEffect } from 'react'
 
-import AppContainer from '@/modules/shared/components/AppContainer'
-import AppHeader from '@/modules/shared/components/AppHeader'
+import { AppContainer, AppHeader } from '@/modules/shared/components'
 import { useTheme } from '@/modules/shared/store'
-import Products from '../components/Products'
-import { useProducts } from '../hooks/use-products'
+import { Products } from '../components'
+import { useProducts } from '../hooks'
 
 export default function HomeScreen() {
   const theme = useTheme((state) => state)

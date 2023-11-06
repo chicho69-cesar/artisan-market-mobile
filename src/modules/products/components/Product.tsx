@@ -1,6 +1,6 @@
 import { Center, HStack, Image, Pressable, Text, VStack } from '@gluestack-ui/themed'
 
-import type { Product as ProductType } from '@/modules/shared/interfaces/product'
+import type { Product as ProductType } from '@/modules/shared/interfaces'
 import { colors } from '@/modules/shared/theme'
 import { currencyFormatter } from '@/modules/shared/utils/currency-formatter'
 

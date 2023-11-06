@@ -1,7 +1,8 @@
-import type { Category } from '@/modules/shared/interfaces/product'
+import { Box, HStack, Text } from '@gluestack-ui/themed'
+
+import type { Category } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
-import { Box, HStack, Text } from '@gluestack-ui/themed'
 
 interface Props {
   categories: Category[]

@@ -1,13 +1,10 @@
-import { useEffect, useState } from 'react'
-
-import AppButton from '@/modules/shared/components/AppButton'
-import AppContainer from '@/modules/shared/components/AppContainer'
-import AppHeader from '@/modules/shared/components/AppHeader'
-import AppTextArea from '@/modules/shared/components/AppTextArea'
-import { useTheme } from '@/modules/shared/store'
-import { colors } from '@/modules/shared/theme'
 import { FontAwesome } from '@expo/vector-icons'
 import { HStack, Pressable } from '@gluestack-ui/themed'
+import { useEffect, useState } from 'react'
+
+import { AppButton, AppContainer, AppHeader, AppTextArea } from '@/modules/shared/components'
+import { useTheme } from '@/modules/shared/store'
+import { colors } from '@/modules/shared/theme'
 
 export default function AddReviewScreen() {
   const theme = useTheme((state) => state)

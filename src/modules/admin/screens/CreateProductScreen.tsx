@@ -2,16 +2,11 @@ import { HStack, View } from '@gluestack-ui/themed'
 import * as ImagePicker from 'expo-image-picker'
 import { useEffect, useState } from 'react'
 
-import Categories from '@/modules/products/components/Categories'
-import AppButton from '@/modules/shared/components/AppButton'
-import AppContainer from '@/modules/shared/components/AppContainer'
-import AppHeader from '@/modules/shared/components/AppHeader'
-import AppInput from '@/modules/shared/components/AppInput'
-import AppTextArea from '@/modules/shared/components/AppTextArea'
+import { Categories } from '@/modules/products/components'
+import { AppButton, AppContainer, AppHeader, AppInput, AppTextArea } from '@/modules/shared/components'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
-import ImagePickerComponent from '../components/ImagePicker'
-import ProductImages from '../components/ProductImages'
+import { ImagePicker as ImagePickerComponent, ProductImages } from '../components'
 
 export default function CreateProductScreen() {
   const theme = useTheme((state) => state)

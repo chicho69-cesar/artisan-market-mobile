@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useCart } from '../store/cart'
+import { useCart } from '../store'
 import type { CartOrderData } from '../types/cart'
 
 export function useCartData() {

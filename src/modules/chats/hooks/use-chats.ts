@@ -1,6 +1,6 @@
 // import { useAuth } from '../../auth/store/auth'
 
-import type { User } from '@/modules/shared/interfaces/user'
+import type { User } from '@/modules/shared/interfaces'
 import { useEffect, useState } from 'react'
 
 export function useChats() {

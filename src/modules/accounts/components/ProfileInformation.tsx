@@ -1,11 +1,10 @@
 import { HStack, Heading, Image, Pressable, Text, VStack, View } from '@gluestack-ui/themed'
+import { Ionicons } from '@expo/vector-icons'
 
-import useNavigate from '@/modules/shared/hooks/use-navigate'
-import type { Socials } from '@/modules/shared/interfaces/social'
-import { Roles, type User } from '@/modules/shared/interfaces/user'
+import { useNavigate } from '@/modules/shared/hooks'
+import { Roles, type User, type Socials } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
-import { Ionicons } from '@expo/vector-icons'
 import SocialNetwork from './SocialNetwork'
 
 const facebook = require('../../../../assets/socials/facebook.png')

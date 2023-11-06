@@ -1,4 +1,4 @@
-import type { Order } from '@/modules/shared/interfaces/order'
+import type { Order } from '@/modules/shared/interfaces'
 import { useEffect, useState } from 'react'
 
 export function useOrdersHistory() {

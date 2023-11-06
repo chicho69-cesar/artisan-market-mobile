@@ -1,4 +1,4 @@
-import type { Review } from '@/modules/shared/interfaces/review'
+import type { Review } from '@/modules/shared/interfaces'
 import { useEffect, useState } from 'react'
 
 export function useReviews(productId: number) {

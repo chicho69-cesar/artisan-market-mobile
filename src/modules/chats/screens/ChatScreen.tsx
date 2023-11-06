@@ -4,7 +4,7 @@ import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { GiftedChat, Send, type IMessage } from 'react-native-gifted-chat'
 
-import type { User } from '@/modules/shared/interfaces/user'
+import type { User } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
 
 export default function ChatScreen() {

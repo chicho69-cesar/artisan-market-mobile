@@ -1,13 +1,11 @@
 import { useEffect } from 'react'
 
-import AppContainer from '@/modules/shared/components/AppContainer'
-import AppHeader from '@/modules/shared/components/AppHeader'
-import useNavigate from '@/modules/shared/hooks/use-navigate'
+import { AppContainer, AppHeader } from '@/modules/shared/components'
+import { useNavigate } from '@/modules/shared/hooks'
 import { useTheme } from '@/modules/shared/store'
-import CartResume from '../components/CartResume'
-import ProductCart from '../components/ProductCart'
-import { useCartData } from '../hooks/use-cart-data'
-import { useCart } from '../store/cart'
+import { CartResume, ProductCart } from '../components'
+import { useCartData } from '../hooks'
+import { useCart } from '../store'
 
 export default function CartScreen() {
   const theme = useTheme((state) => state)

@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 
-export default function useNavigate() {
+export function useNavigate() {
   const navigation = useNavigation<any>()
 
   const navigate = (screen: string) => {

@@ -1,14 +1,12 @@
 import { useEffect } from 'react'
 
-import AppButton from '@/modules/shared/components/AppButton'
-import AppContainer from '@/modules/shared/components/AppContainer'
-import AppHeader from '@/modules/shared/components/AppHeader'
-import useNavigate from '@/modules/shared/hooks/use-navigate'
+import { AppButton, AppContainer, AppHeader } from '@/modules/shared/components'
+import { useNavigate } from '@/modules/shared/hooks'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
-import Reviews from '../components/Reviews'
-import { useReviews } from '../hooks/use-reviews'
-import { useActiveProduct } from '../store/active-product'
+import { Reviews } from '../components'
+import { useReviews } from '../hooks'
+import { useActiveProduct } from '../store'
 
 export default function ReviewsScreen() {
   const theme = useTheme((state) => state)

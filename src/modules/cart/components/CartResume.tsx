@@ -1,8 +1,9 @@
-import AppButton from '@/modules/shared/components/AppButton'
+import { HStack, Heading, Text, VStack, View } from '@gluestack-ui/themed'
+
+import { AppButton } from '@/modules/shared/components'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
 import { currencyFormatter } from '@/modules/shared/utils/currency-formatter'
-import { HStack, Heading, Text, VStack, View } from '@gluestack-ui/themed'
 
 interface Props {
   noOfProducts: number

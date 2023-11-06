@@ -1,9 +1,10 @@
-import type { Product } from '@/modules/shared/interfaces/product'
+import { MaterialIcons } from '@expo/vector-icons'
+import { Center, HStack, Image, Pressable, Text, VStack } from '@gluestack-ui/themed'
+
+import type { Product } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
 import { currencyFormatter } from '@/modules/shared/utils/currency-formatter'
-import { MaterialIcons } from '@expo/vector-icons'
-import { Center, HStack, Image, Pressable, Text, VStack } from '@gluestack-ui/themed'
 
 interface Props {
   product: Product

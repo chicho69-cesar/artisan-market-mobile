@@ -1,7 +1,7 @@
-import useNavigate from '@/modules/shared/hooks/use-navigate'
-import type { Product as ProductType } from '@/modules/shared/interfaces/product'
-import { useActiveProduct } from '../store/active-product'
-import Product from './Product'
+import { useNavigate } from '@/modules/shared/hooks'
+import type { Product as ProductType } from '@/modules/shared/interfaces'
+import { Product } from '.'
+import { useActiveProduct } from '../store'
 
 interface Props {
   products: ProductType[]

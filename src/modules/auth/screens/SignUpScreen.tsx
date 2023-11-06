@@ -1,13 +1,11 @@
 import { CircleIcon, HStack, Radio, RadioGroup, RadioIcon, RadioIndicator, RadioLabel, ScrollView, Text } from '@gluestack-ui/themed'
 import { useEffect, useState } from 'react'
 
-import AppButton from '@/modules/shared/components/AppButton'
-import AppInput from '@/modules/shared/components/AppInput'
-import useNavigate from '@/modules/shared/hooks/use-navigate'
+import { AppButton, AppInput } from '@/modules/shared/components'
+import { useNavigate } from '@/modules/shared/hooks'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
-import AuthContainer from '../components/AuthContainer'
-import Header from '../components/Header'
+import { AuthContainer, Header } from '../components'
 
 export default function SignUpScreen() {
   const theme = useTheme((state) => state)

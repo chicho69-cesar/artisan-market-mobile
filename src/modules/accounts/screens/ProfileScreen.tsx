@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 
 import { useAuth } from '@/modules/auth/store'
-import AppContainer from '@/modules/shared/components/AppContainer'
-import useNavigate from '@/modules/shared/hooks/use-navigate'
-import type { Social } from '@/modules/shared/interfaces/social'
+import { AppContainer } from '@/modules/shared/components'
+import { useNavigate } from '@/modules/shared/hooks'
+import type { Social } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
-import ProfileInformation from '../components/ProfileInformation'
+import { ProfileInformation } from '../components'
 
 export default function ProfileScreen() {
   const theme = useTheme((state) => state)

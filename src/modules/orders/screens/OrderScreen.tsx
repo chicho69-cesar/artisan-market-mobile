@@ -1,12 +1,11 @@
 import { useRoute } from '@react-navigation/native'
 import { useEffect, useState } from 'react'
 
-import Products from '@/modules/products/components/Products'
-import AppContainer from '@/modules/shared/components/AppContainer'
-import AppHeader from '@/modules/shared/components/AppHeader'
-import type { Order } from '@/modules/shared/interfaces/order'
+import { Products } from '@/modules/products/components'
+import { AppContainer, AppHeader } from '@/modules/shared/components'
+import type { Order } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
-import OrderResume from '../components/OrderResume'
+import { OrderResume } from '../components'
 import type { OrderStatus } from '../types/order.d'
 
 export default function OrderScreen() {

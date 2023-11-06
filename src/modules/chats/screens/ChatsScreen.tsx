@@ -1,13 +1,11 @@
 import { HStack, Pressable, Text } from '@gluestack-ui/themed'
 import { useEffect } from 'react'
 
-import AppContainer from '@/modules/shared/components/AppContainer'
-import AppHeader from '@/modules/shared/components/AppHeader'
-import Avatar from '@/modules/shared/components/Avatar'
-import useNavigate from '@/modules/shared/hooks/use-navigate'
+import { AppContainer, AppHeader, Avatar } from '@/modules/shared/components'
+import { useNavigate } from '@/modules/shared/hooks'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
-import { useChats } from '../hooks/use-chats'
+import { useChats } from '../hooks'
 
 export default function ChatsScreen() {
   const theme = useTheme((state) => state)

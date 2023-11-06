@@ -1,4 +1,4 @@
-import type { Image as ImageType } from '@/modules/shared/interfaces/product'
+import type { Image as ImageType } from '@/modules/shared/interfaces'
 import { Image } from '@gluestack-ui/themed'
 import Carousel from 'react-native-reanimated-carousel'
 

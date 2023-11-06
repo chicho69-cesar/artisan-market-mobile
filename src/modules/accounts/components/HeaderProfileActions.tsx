@@ -2,8 +2,8 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { HStack, Pressable } from '@gluestack-ui/themed'
 
 import { useAuth } from '@/modules/auth/store'
-import useNavigate from '@/modules/shared/hooks/use-navigate'
-import { Roles } from '@/modules/shared/interfaces/user'
+import { useNavigate } from '@/modules/shared/hooks'
+import { Roles } from '@/modules/shared/interfaces'
 import { colors } from '@/modules/shared/theme'
 
 export default function HeaderProfileActions() {

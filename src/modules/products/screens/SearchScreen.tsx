@@ -1,13 +1,13 @@
+import { MaterialIcons } from '@expo/vector-icons'
 import { Input, InputField, InputIcon, InputSlot } from '@gluestack-ui/themed'
 import { useEffect, useState } from 'react'
 
-import AppContainer from '@/modules/shared/components/AppContainer'
-import { useDebounce } from '@/modules/shared/hooks/use-debounce'
+import { AppContainer } from '@/modules/shared/components'
+import { useDebounce } from '@/modules/shared/hooks'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
-import { MaterialIcons } from '@expo/vector-icons'
-import Products from '../components/Products'
-import { useProducts } from '../hooks/use-products'
+import { Products } from '../components'
+import { useProducts } from '../hooks'
 
 export default function SearchScreen() {
   const theme = useTheme((state) => state)

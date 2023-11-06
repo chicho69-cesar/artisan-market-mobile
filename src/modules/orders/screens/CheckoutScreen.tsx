@@ -1,14 +1,13 @@
 import { useEffect } from 'react'
 
 import { useAuth } from '@/modules/auth/store'
-import { useCartData } from '@/modules/cart/hooks/use-cart-data'
-import { useCart } from '@/modules/cart/store/cart'
-import Products from '@/modules/products/components/Products'
-import AppContainer from '@/modules/shared/components/AppContainer'
-import AppHeader from '@/modules/shared/components/AppHeader'
+import { useCartData } from '@/modules/cart/hooks'
+import { useCart } from '@/modules/cart/store'
+import { Products } from '@/modules/products/components'
+import { AppContainer, AppHeader } from '@/modules/shared/components'
 import { useTheme } from '@/modules/shared/store'
-import OrderResume from '../components/OrderResume'
-import { useAddress } from '../store/address'
+import { OrderResume } from '../components'
+import { useAddress } from '../store'
 import { OrderStatus } from '../types/order.d'
 
 export default function CheckoutScreen() {

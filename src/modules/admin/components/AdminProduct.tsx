@@ -1,8 +1,8 @@
 import { HStack, Image, Pressable, Text, VStack } from '@gluestack-ui/themed'
 
-import Categories from '@/modules/products/components/Categories'
-import useNavigate from '@/modules/shared/hooks/use-navigate'
-import type { Product } from '@/modules/shared/interfaces/product'
+import { Categories } from '@/modules/products/components'
+import { useNavigate } from '@/modules/shared/hooks'
+import type { Product } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
 import { currencyFormatter } from '@/modules/shared/utils/currency-formatter'

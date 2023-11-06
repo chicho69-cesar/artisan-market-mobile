@@ -1,11 +1,8 @@
 import { Text, View } from '@gluestack-ui/themed'
 import { useEffect } from 'react'
 
-import AppButton from '@/modules/shared/components/AppButton'
-import AppContainer from '@/modules/shared/components/AppContainer'
-import AppHeader from '@/modules/shared/components/AppHeader'
-import AppInput from '@/modules/shared/components/AppInput'
-import useNavigate from '@/modules/shared/hooks/use-navigate'
+import { AppButton, AppContainer, AppHeader, AppInput } from '@/modules/shared/components'
+import { useNavigate } from '@/modules/shared/hooks'
 import { useTheme } from '@/modules/shared/store'
 
 export default function RecoverPasswordScreen() {

@@ -1,12 +1,12 @@
+import { HStack, Heading, Image, Pressable, Text, VStack, View } from '@gluestack-ui/themed'
+
 import { useAuth } from '@/modules/auth/store'
 import type { CartOrderData } from '@/modules/cart/types/cart'
-import AppButton from '@/modules/shared/components/AppButton'
-import type { Address } from '@/modules/shared/interfaces/address'
-import type { User } from '@/modules/shared/interfaces/user'
+import { AppButton } from '@/modules/shared/components'
+import type { Address, User } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
 import { currencyFormatter } from '@/modules/shared/utils/currency-formatter'
-import { HStack, Heading, Image, Pressable, Text, VStack, View } from '@gluestack-ui/themed'
 import { OrderStatus } from '../types/order.d'
 
 const paypalImage = require('../../../../assets/paypal.png')

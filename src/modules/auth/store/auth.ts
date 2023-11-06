@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-import type { User } from '@/modules/shared/interfaces/user'
+import type { User } from '@/modules/shared/interfaces'
 import type { UserLogged } from '../types/auth.d'
 import { getSession } from '../utils/session'
 

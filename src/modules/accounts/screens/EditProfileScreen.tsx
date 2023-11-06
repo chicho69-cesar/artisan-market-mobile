@@ -4,11 +4,7 @@ import * as ImagePicker from 'expo-image-picker'
 import { useEffect, useState } from 'react'
 
 import { useAuth } from '@/modules/auth/store'
-import AppButton from '@/modules/shared/components/AppButton'
-import AppContainer from '@/modules/shared/components/AppContainer'
-import AppHeader from '@/modules/shared/components/AppHeader'
-import AppInput from '@/modules/shared/components/AppInput'
-import AppTextArea from '@/modules/shared/components/AppTextArea'
+import { AppButton, AppContainer, AppHeader, AppInput, AppTextArea } from '@/modules/shared/components'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
 

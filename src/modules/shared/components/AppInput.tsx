@@ -1,6 +1,5 @@
 import { AlertIcon, EyeIcon, EyeOffIcon, FormControl, FormControlError, FormControlErrorIcon, FormControlErrorText, FormControlLabel, FormControlLabelText, Input, InputField, InputIcon, InputSlot } from '@gluestack-ui/themed'
 import { useState } from 'react'
-
 import { colors } from '../theme'
 
 interface Props {

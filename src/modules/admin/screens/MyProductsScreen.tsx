@@ -1,13 +1,12 @@
 import { useEffect } from 'react'
 
-import AppButton from '@/modules/shared/components/AppButton'
-import AppContainer from '@/modules/shared/components/AppContainer'
-import AppHeader from '@/modules/shared/components/AppHeader'
-import useNavigate from '@/modules/shared/hooks/use-navigate'
+import { AppButton, AppContainer, AppHeader } from '@/modules/shared/components'
+
+import { useNavigate } from '@/modules/shared/hooks'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
-import AdminProduct from '../components/AdminProduct'
-import { useAdminProducts } from '../hooks/use-admin-products'
+import { AdminProduct } from '../components'
+import { useAdminProducts } from '../hooks'
 
 export default function MyProductsScreen() {
   const theme = useTheme((state) => state)

@@ -1,8 +1,9 @@
-import useNavigate from '@/modules/shared/hooks/use-navigate'
+import { Pressable, Text } from '@gluestack-ui/themed'
+
+import { useNavigate } from '@/modules/shared/hooks'
 import type { Review as ReviewType } from '@/modules/shared/interfaces/review'
 import { useTheme } from '@/modules/shared/store'
-import { Pressable, Text } from '@gluestack-ui/themed'
-import Review from './Review'
+import { Review } from '.'
 
 interface Props {
   reviews: ReviewType[]

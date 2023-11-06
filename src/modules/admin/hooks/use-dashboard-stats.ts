@@ -1,4 +1,4 @@
-import type { DashboardStats } from '@/modules/shared/interfaces/dashboard'
+import type { DashboardStats } from '@/modules/shared/interfaces'
 import { useEffect, useState } from 'react'
 
 export function useDashboardStats() {

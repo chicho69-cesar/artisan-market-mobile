@@ -2,14 +2,12 @@ import { HStack, Pressable, Text } from '@gluestack-ui/themed'
 import { useRoute } from '@react-navigation/native'
 import { useEffect, useState } from 'react'
 
-import AppContainer from '@/modules/shared/components/AppContainer'
-import AppHeader from '@/modules/shared/components/AppHeader'
-import Avatar from '@/modules/shared/components/Avatar'
-import useNavigate from '@/modules/shared/hooks/use-navigate'
-import type { User } from '@/modules/shared/interfaces/user'
+import { AppContainer, AppHeader, Avatar } from '@/modules/shared/components'
+import { useNavigate } from '@/modules/shared/hooks'
+import type { User } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
-import { useFollow } from '../hooks/use-follow'
+import { useFollow } from '../hooks'
 
 export default function FollowingsScreen() {
   const { params } = useRoute()

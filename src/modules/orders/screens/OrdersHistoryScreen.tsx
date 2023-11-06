@@ -1,11 +1,10 @@
 import { useEffect } from 'react'
 
-import AppContainer from '@/modules/shared/components/AppContainer'
-import AppHeader from '@/modules/shared/components/AppHeader'
-import useNavigate from '@/modules/shared/hooks/use-navigate'
+import { AppContainer, AppHeader } from '@/modules/shared/components'
+import { useNavigate } from '@/modules/shared/hooks'
 import { useTheme } from '@/modules/shared/store'
-import Order from '../components/Order'
-import { useOrdersHistory } from '../hooks/use-orders-history'
+import { Order } from '../components'
+import { useOrdersHistory } from '../hooks'
 
 export default function OrdersHistoryScreen() {
   const theme = useTheme((state) => state)

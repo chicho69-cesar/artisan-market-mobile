@@ -1,5 +1,4 @@
 import { AlertIcon, FormControl, FormControlError, FormControlErrorIcon, FormControlErrorText, FormControlLabel, FormControlLabelText, Textarea, TextareaInput } from '@gluestack-ui/themed'
-
 import { colors } from '../theme'
 
 interface Props {
