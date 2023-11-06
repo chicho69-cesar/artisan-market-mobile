@@ -25,12 +25,12 @@ export default function OrdersScreen() {
 
       {orders.map((order) => (
         <Order
-          key={order.order_id}
+          key={order.id}
           client={order.user}
-          date={order.order_date}
+          date={order.date}
           noOfProducts={order.products.length}
           total={order.total}
-          status={order.order_status}
+          status={order.status}
           isAdminOrder
           navToOrder={() => {
             navigateBetweenRoutes('CartStack', 'Order', { order })

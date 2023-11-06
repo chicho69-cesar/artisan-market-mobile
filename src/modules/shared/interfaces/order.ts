@@ -8,27 +8,13 @@ export interface Order {
   created_at?: string
   date: string
   id: number
-  order_products: OrderProduct[]
+  order_products?: OrderProduct[]
   products: Product[]
   status: string
   subtotal: number
   tax: number
   total: number
   updated_at?: string
-  user_id: number
-  user: User
-}
-
-export interface OrderGrouped {
-  address_id: number
-  address: Address
-  order_date: string
-  order_id: number
-  order_status: string
-  products: ProductElement[]
-  subtotal: number
-  tax: number
-  total: number
   user_id: number
   user: User
 }

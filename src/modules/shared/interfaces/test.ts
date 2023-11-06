@@ -98,7 +98,7 @@
 /* Order */
 
 // get seller orders
-/* OrderGrouped[] */
+/* Order[] */
 
 // get order by id
 /* Order */
