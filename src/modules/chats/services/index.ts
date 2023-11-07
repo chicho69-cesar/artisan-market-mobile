@@ -1,8 +1,9 @@
 import { api } from '@/config/api'
+import type { Conversation, Message, Response, User } from '@/modules/shared/interfaces'
 
 export async function sendMessage(userToSend: number, message: string, token: string) {
   try {
-    const { data } = await api.post(
+    const { data } = await api.post<Response<Message>>(
       '/users/send-message',
       {
         user_to_send_message: userToSend,
@@ -26,7 +27,7 @@ export async function sendMessage(userToSend: number, message: string, token: st
 
 export async function getConversation(userId: number, token: string) {
   try {
-    const { data } = await api.get(
+    const { data } = await api.get<Response<Conversation>>(
       `/users/conversation/${userId}`,
       {
         headers: {
@@ -45,7 +46,7 @@ export async function getConversation(userId: number, token: string) {
 
 export async function getMyConversations(token: string) {
   try {
-    const { data } = await api.get(
+    const { data } = await api.get<Response<User[]>>(
       '/users/my-conversations',
       {
         headers: {

@@ -1,8 +1,9 @@
 import { api } from '@/config/api'
+import type { Product, ProductsPagination, Response, Review } from '@/modules/shared/interfaces'
 
 export async function getProductById(productId: number) {
   try {
-    const { data } = await api.get(`/products/get-product/${productId}`)
+    const { data } = await api.get<Response<Product>>(`/products/get-product/${productId}`)
 
     console.log(data)
     return data
@@ -14,7 +15,7 @@ export async function getProductById(productId: number) {
 
 export async function getProductsPaginated(page: number) {
   try {
-    const { data } = await api.get(`/products/get-products?page=${page}`)
+    const { data } = await api.get<Response<ProductsPagination>>(`/products/get-products?page=${page}`)
 
     console.log(data)
     return data
@@ -26,7 +27,7 @@ export async function getProductsPaginated(page: number) {
 
 export async function searchProductsByQuery(query: string) {
   try {
-    const { data } = await api.get(`/products/search-products?q=${query}`)
+    const { data } = await api.get<Response<ProductsPagination>>(`/products/search-products?q=${query}`)
 
     console.log(data)
     return data
@@ -38,7 +39,7 @@ export async function searchProductsByQuery(query: string) {
 
 export async function addReview(productId: number, rate: number, comment: string, token: string) {
   try {
-    const { data } = await api.post(
+    const { data } = await api.post<Response<Review>>(
       `/reviews/add-review/${productId}`,
       {
         rate,
@@ -62,7 +63,7 @@ export async function addReview(productId: number, rate: number, comment: string
 
 export async function getReview(reviewId: number) {
   try {
-    const { data } = await api.get(`/reviews/get-review/${reviewId}`)
+    const { data } = await api.get<Response<Review>>(`/reviews/get-review/${reviewId}`)
 
     console.log(data)
     return data
@@ -74,7 +75,7 @@ export async function getReview(reviewId: number) {
 
 export async function getReviewsOfProduct(productId: number) {
   try {
-    const { data } = await api.get(`/reviews/get-reviews/${productId}`)
+    const { data } = await api.get<Response<Review[]>>(`/reviews/get-reviews/${productId}`)
 
     console.log(data)
     return data
@@ -86,7 +87,7 @@ export async function getReviewsOfProduct(productId: number) {
 
 export async function updateReview(reviewId: number, rate: number, comment: string, token: string) {
   try {
-    const { data } = await api.put(
+    const { data } = await api.put<Response<Review>>(
       `/reviews/update-review/${reviewId}`,
       {
         rate,
@@ -110,7 +111,7 @@ export async function updateReview(reviewId: number, rate: number, comment: stri
 
 export async function deleteReview(reviewId: number, token: string) {
   try {
-    const { data } = await api.delete(
+    const { data } = await api.delete<Response<string[]>>(
       `/reviews/delete-review/${reviewId}`,
       {
         headers: {

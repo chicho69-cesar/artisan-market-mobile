@@ -58,6 +58,9 @@ export default function CartStack() {
       <Stack.Screen
         name='Order'
         component={OrderScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Información de la orden' />
+        }}
       />
     </Stack.Navigator>
   )

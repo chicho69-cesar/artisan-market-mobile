@@ -1,9 +1,10 @@
 import { api } from '@/config/api'
 import type { ProductParam } from '../types/params.d'
+import type { Address, Order, Response } from '@/modules/shared/interfaces'
 
 export async function addAddress(street: string, noOut: string, noIn: string, zipCode: string, city: string, state: string, country: string, phone: string, token: string) {
   try {
-    const { data } = await api.post(
+    const { data } = await api.post<Response<Address>>(
       '/addresses/add-address',
       {
         street,
@@ -33,7 +34,7 @@ export async function addAddress(street: string, noOut: string, noIn: string, zi
 
 export async function updateAddress(addressId: number, street: string, noOut: string, noIn: string, zipCode: string, city: string, state: string, country: string, phone: string, token: string) {
   try {
-    const { data } = await api.put(
+    const { data } = await api.put<Response<Address>>(
       `/addresses/update-address/${addressId}`,
       {
         street,
@@ -63,7 +64,7 @@ export async function updateAddress(addressId: number, street: string, noOut: st
 
 export async function createOrder(addressId: number, products: ProductParam[], token: string) {
   try {
-    const { data } = await api.post(
+    const { data } = await api.post<Response<Order>>(
       '/orders/create-order',
       {
         address_id: addressId,
@@ -87,7 +88,7 @@ export async function createOrder(addressId: number, products: ProductParam[], t
 
 export async function getOrderById(orderId: number, token: string) {
   try {
-    const { data } = await api.get(
+    const { data } = await api.get<Response<Order>>(
       `/orders/get-order/${orderId}`,
       {
         headers: {
@@ -106,7 +107,7 @@ export async function getOrderById(orderId: number, token: string) {
 
 export async function getUserOrders(token: string) {
   try {
-    const { data } = await api.get(
+    const { data } = await api.get<Response<Order[]>>(
       '/orders/user-orders',
       {
         headers: {
@@ -125,7 +126,7 @@ export async function getUserOrders(token: string) {
 
 export async function payOrder(orderId: number, token: string) {
   try {
-    const { data } = await api.patch(
+    const { data } = await api.patch<Response<Order>>(
       `/orders/pay-order/${orderId}`,
       {},
       {
@@ -145,7 +146,7 @@ export async function payOrder(orderId: number, token: string) {
 
 export async function cancelOrder(orderId: number, token: string) {
   try {
-    const { data } = await api.patch(
+    const { data } = await api.patch<Response<Order>>(
       `/orders/cancel-order/${orderId}`,
       {},
       {

@@ -1,117 +1,120 @@
 // * USERS
-// sign up
+// sign up ✅
 /* Auth */
 
-// sign in
+// sign in ✅
 /* Auth */
 
-// sign out
+// sign out ✅
 /* string[] */
 
-// user info by id
+// user info by id ✅
 /* UserInfo */
 
-// edit profile
+// edit profile ✅
 /* User */
 
-// follow user
+// follow user ✅
 /* Follow */
 
-// unfollow user
+// unfollow user ✅
 /* Follow  */
 
-// followers
+// followers ✅
 /* User[] */
 
-// followings
+// followings ✅
 /* User[] */
 
-// upload profile picture
+// upload profile picture ✅
 /* PictureUpload */
 
-// send message
+// send message ✅
 /* Message */
 
-// conversation with an user
+// conversation with an user ✅
 /* Conversation */
 
-// get my conversations
+// get my conversations ✅
 /* User[] */
 
 // * Socials
-// add socials
+// add socials ✅
+/* Social */
+
+// get socials ✅
 /* Social */
 
 // * Products
-// add product
+// add product ✅
 /* Product */
 
-// upload product image
+// upload product image ✅
 /* ImageUpload */
 
-// delete product image
+// delete product image ✅
 /* string[] */
 
-// get product by id
+// get product by id ✅
 /* Product */
 
-// get products paginated
+// get products paginated ✅
 /* ProductsPagination */
 
-// search products by query
+// search products by query ✅
 /* ProductsPagination */
 
-// get seller products
+// get seller products ✅
 /* ProductsPagination */
 
-// update product
+// update product ✅
 /* Product */
 
-// delete product
+// delete product ✅
 /* string[] */
 
 // * Reviews
-// add review
+// add review ✅
 /* Review */
 
-// get a review
+// get a review ✅
 /* Review */
 
-// get reviews of a product
+// get reviews of a product ✅
 /* Review[] */
 
-// update review
+// update review ✅
 /* Review */
 
-// delete review
+// delete review ✅
 /* string[] */
 
 // * Addresses
-// add address
+// add address ✅
 /* Address */
 
-// update address
+// update address ✅
 /* Address */
 
 // * Orders
-// create an order
+// create an order ✅
 /* Order */
 
-// get seller orders
+// get seller orders ✅
 /* Order[] */
 
-// get order by id
+// get order by id ✅
 /* Order */
 
-// get user orders
+// get user orders ✅
 /* Order[] */
 
-// pay order
+// pay order ✅
 /* Order */
 
-// cancel order
+// cancel order ✅
 /* Order */
 
 // * Dashboard
-// get dashboard stats
+// get dashboard stats ✅
 /* DashboardStats */

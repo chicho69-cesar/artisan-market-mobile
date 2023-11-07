@@ -1,9 +1,9 @@
 import { api } from '@/config/api'
-import type { Role } from '../types/auth.d'
+import type { Auth, Response } from '@/modules/shared/interfaces'
 
-export async function signUp(name: string, lastname: string, email: string, password: string, confirmPassword: string, role: Role) {
+export async function signUp(name: string, lastname: string, email: string, password: string, confirmPassword: string, role: string) {
   try {
-    const { data } = await api.post(
+    const { data } = await api.post<Response<Auth>>(
       '/users/sign-up',
       {
         name,
@@ -30,7 +30,7 @@ export async function signUp(name: string, lastname: string, email: string, pass
 
 export async function signIn(email: string, password: string) {
   try {
-    const { data } = await api.post(
+    const { data } = await api.post<Response<Auth>>(
       '/users/sign-in',
       {
         email,
@@ -53,7 +53,7 @@ export async function signIn(email: string, password: string) {
 
 export async function signOut(token: string) {
   try {
-    const { data } = await api.post(
+    const { data } = await api.post<Response<string[]>>(
       '/users/sign-out',
       {},
       {
