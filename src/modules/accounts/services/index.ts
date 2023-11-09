@@ -3,13 +3,13 @@ import type { Follow, PictureUpload, Response, Social, User, UserInfo } from '@/
 
 export async function getUserById(id: number, token: string) {
   try {
-    const { data } = await api.get<Response<UserInfo>>(`/users/user-info/${id}`, {
+    const { data: response } = await api.get<Response<UserInfo>>(`/users/user-info/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
@@ -19,7 +19,7 @@ export async function getUserById(id: number, token: string) {
 
 export async function editProfile(name: string, lastname: string, biography: string, token: string) {
   try {
-    const { data } = await api.put<Response<User>>(
+    const { data: response } = await api.put<Response<User>>(
       '/users/edit',
       {
         name,
@@ -34,7 +34,7 @@ export async function editProfile(name: string, lastname: string, biography: str
       }
     )
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
@@ -44,7 +44,7 @@ export async function editProfile(name: string, lastname: string, biography: str
 
 export async function followUser(userFollow: number, token: string) {
   try {
-    const { data } = await api.patch<Response<Follow>>(
+    const { data: response } = await api.patch<Response<Follow>>(
       '/users/follow-user',
       {
         user_follow: userFollow
@@ -57,7 +57,7 @@ export async function followUser(userFollow: number, token: string) {
       }
     )
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
@@ -67,7 +67,7 @@ export async function followUser(userFollow: number, token: string) {
 
 export async function unfollowUser(userFollow: number, token: string) {
   try {
-    const { data } = await api.patch<Response<User>>(
+    const { data: response } = await api.patch<Response<User>>(
       '/users/unfollow-user',
       {
         user_follow: userFollow
@@ -80,7 +80,7 @@ export async function unfollowUser(userFollow: number, token: string) {
       }
     )
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
@@ -90,13 +90,13 @@ export async function unfollowUser(userFollow: number, token: string) {
 
 export async function getFollowers(token: string) {
   try {
-    const { data } = await api.get<Response<User[]>>('/users/followers', {
+    const { data: response } = await api.get<Response<User[]>>('/users/followers', {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
@@ -106,13 +106,13 @@ export async function getFollowers(token: string) {
 
 export async function getFollowings(token: string) {
   try {
-    const { data } = await api.get<Response<User[]>>('/users/followings', {
+    const { data: response } = await api.get<Response<User[]>>('/users/followings', {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
@@ -128,7 +128,7 @@ export async function uploadProfilePicture(uri: string, name: string, type: stri
   formData.append('picture', blob, name)
 
   try {
-    const { data } = await api.post<Response<PictureUpload>>(
+    const { data: response } = await api.post<Response<PictureUpload>>(
       '/users/upload-profile-picture',
       formData,
       {
@@ -139,7 +139,7 @@ export async function uploadProfilePicture(uri: string, name: string, type: stri
       }
     )
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
@@ -149,7 +149,7 @@ export async function uploadProfilePicture(uri: string, name: string, type: stri
 
 export async function addUserSocial(token: string, facebook: string | null, twitter: string | null, linkedin: string | null, freeMarket: string | null) {
   try {
-    const { data } = await api.post<Response<Social>>(
+    const { data: response } = await api.post<Response<Social>>(
       '/socials/add-social',
       {
         facebook,
@@ -164,7 +164,7 @@ export async function addUserSocial(token: string, facebook: string | null, twit
       }
     )
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
@@ -174,13 +174,13 @@ export async function addUserSocial(token: string, facebook: string | null, twit
 
 export async function getSocialsForAnUser(userId: number, token: string) {
   try {
-    const { data } = await api.get<Response<Social>>(`/socials/get-socials/${userId}`, {
+    const { data: response } = await api.get<Response<Social>>(`/socials/get-socials/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)

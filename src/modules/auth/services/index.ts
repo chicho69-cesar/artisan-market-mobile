@@ -3,7 +3,7 @@ import type { Auth, Response } from '@/modules/shared/interfaces'
 
 export async function signUp(name: string, lastname: string, email: string, password: string, confirmPassword: string, role: string) {
   try {
-    const { data } = await api.post<Response<Auth>>(
+    const { data: response } = await api.post<Response<Auth>>(
       '/users/sign-up',
       {
         name,
@@ -20,7 +20,7 @@ export async function signUp(name: string, lastname: string, email: string, pass
       }
     )
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
@@ -30,7 +30,7 @@ export async function signUp(name: string, lastname: string, email: string, pass
 
 export async function signIn(email: string, password: string) {
   try {
-    const { data } = await api.post<Response<Auth>>(
+    const { data: response } = await api.post<Response<Auth>>(
       '/users/sign-in',
       {
         email,
@@ -43,7 +43,7 @@ export async function signIn(email: string, password: string) {
       }
     )
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
@@ -53,7 +53,7 @@ export async function signIn(email: string, password: string) {
 
 export async function signOut(token: string) {
   try {
-    const { data } = await api.post<Response<string[]>>(
+    const { data: response } = await api.post<Response<string[]>>(
       '/users/sign-out',
       {},
       {
@@ -63,7 +63,7 @@ export async function signOut(token: string) {
       }
     )
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)

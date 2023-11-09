@@ -3,7 +3,7 @@ import type { DashboardStats, ImageUpload, Order, Product, ProductsPagination, R
 
 export async function addProduct(name: string, description: string, price: number, stock: number, categories: string[], token: string) {
   try {
-    const { data } = await api.post<Response<Product>>(
+    const { data: response } = await api.post<Response<Product>>(
       '/products/add-product',
       {
         name,
@@ -20,7 +20,7 @@ export async function addProduct(name: string, description: string, price: numbe
       }
     )
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
@@ -36,7 +36,7 @@ export async function uploadProductImage(productId: number, uri: string, name: s
   formData.append('image', blob, name)
 
   try {
-    const { data } = await api.post<Response<ImageUpload>>(
+    const { data: response } = await api.post<Response<ImageUpload>>(
       `/products/upload-image/${productId}`,
       formData,
       {
@@ -47,7 +47,7 @@ export async function uploadProductImage(productId: number, uri: string, name: s
       }
     )
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
@@ -57,13 +57,13 @@ export async function uploadProductImage(productId: number, uri: string, name: s
 
 export async function deleteProductImage(productId: number, token: string) {
   try {
-    const { data } = await api.delete<Response<string[]>>(`/products/delete-image/${productId}`, {
+    const { data: response } = await api.delete<Response<string[]>>(`/products/delete-image/${productId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
@@ -73,13 +73,13 @@ export async function deleteProductImage(productId: number, token: string) {
 
 export async function getSellerProducts(token: string) {
   try {
-    const { data } = await api.get<Response<ProductsPagination>>('/products/seller-products', {
+    const { data: response } = await api.get<Response<ProductsPagination>>('/products/seller-products', {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
@@ -89,7 +89,7 @@ export async function getSellerProducts(token: string) {
 
 export async function updateProduct(productId: number, name: string, description: string, price: number, stock: number, categories: string[], token: string) {
   try {
-    const { data } = await api.put<Response<Product>>(
+    const { data: response } = await api.put<Response<Product>>(
       `/products/update-product/${productId}`,
       {
         name,
@@ -106,7 +106,7 @@ export async function updateProduct(productId: number, name: string, description
       }
     )
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
@@ -116,13 +116,13 @@ export async function updateProduct(productId: number, name: string, description
 
 export async function deleteProduct(productId: number, token: string) {
   try {
-    const { data } = await api.delete<Response<string[]>>(`/products/delete-product/${productId}`, {
+    const { data: response } = await api.delete<Response<string[]>>(`/products/delete-product/${productId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
@@ -132,13 +132,13 @@ export async function deleteProduct(productId: number, token: string) {
 
 export async function getSellerOrders(token: string) {
   try {
-    const { data } = await api.get<Response<Order[]>>('/orders/seller-orders', {
+    const { data: response } = await api.get<Response<Order[]>>('/orders/seller-orders', {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
@@ -148,13 +148,13 @@ export async function getSellerOrders(token: string) {
 
 export async function getDashboardStats(token: string) {
   try {
-    const { data } = await api.get<Response<DashboardStats>>('/dashboard/stats', {
+    const { data: response } = await api.get<Response<DashboardStats>>('/dashboard/stats', {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
 
-    console.log(data)
+    const { data } = response
     return data
   } catch (error: any) {
     console.log(`Error en el servicio: ${error}`)
