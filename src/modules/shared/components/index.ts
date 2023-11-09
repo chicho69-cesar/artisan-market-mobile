@@ -1,4 +1,5 @@
 export { default as ActionButton } from './ActionButton'
+export { default as AppAlert } from './AppAlert'
 export { default as AppButton } from './AppButton'
 export { default as AppContainer } from './AppContainer'
 export { default as AppHeader } from './AppHeader'

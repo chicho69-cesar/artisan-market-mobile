@@ -1,24 +1,64 @@
 import { CheckIcon, Checkbox, CheckboxIcon, CheckboxIndicator, CheckboxLabel, HStack, ScrollView, Text } from '@gluestack-ui/themed'
 import { useEffect, useState } from 'react'
 
-import { AppButton, AppInput } from '@/modules/shared/components'
+import { AppAlert, AppButton, AppInput } from '@/modules/shared/components'
 import { useNavigate } from '@/modules/shared/hooks'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
+import { validateEmail, validatePassword } from '@/modules/shared/validations'
 import { AuthContainer, Header, SocialLogin } from '../components'
+import { signIn } from '../services'
+import { useAuth } from '../store'
+import { setSession } from '../utils/session'
 
 const facebook = require('../../../../assets/facebook.png')
 const google = require('../../../../assets/google.png')
 
 export default function SignInScreen() {
+  const auth = useAuth((state) => state)
   const theme = useTheme((state) => state)
   const { navigate } = useNavigate()
 
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
+  const [isAnError, setIsAnError] = useState(false)
+  const [emailError, setEmailError] = useState<string | null>(null)
+  const [passwordError, setPasswordError] = useState<string | null>(null)
 
   useEffect(() => {
     theme.changeMainColor()
   }, [])
+
+  const handleSignIn = async () => {
+    const validatedEmail = await validateEmail(email)
+    const validatedPassword = await validatePassword(password)
+
+    setEmailError(validatedEmail)
+    setPasswordError(validatedPassword)
+
+    if (validatedEmail != null || validatedPassword != null) return
+
+    const response = await signIn(email, password)
+
+    if (response != null) {
+      if (rememberMe) {
+        setSession({
+          isLoggedIn: true,
+          token: response.token,
+          user: response.user
+        })
+      }
+
+      auth.authenticate(response.user, response.token)
+    } else {
+      setIsAnError(true)
+
+      setTimeout(() => {
+        setIsAnError(false)
+      }, 2000)
+    }
+  }
 
   return (
     <ScrollView
@@ -26,27 +66,35 @@ export default function SignInScreen() {
       showsVerticalScrollIndicator={false}
       bg={colors.semiWhite}
     >
+      {isAnError && (
+        <AppAlert
+          action='error'
+          description='Error iniciando sesión en la cuenta'
+          title='Error!'
+        />
+      )}
+
       <Header text='Inicia Sesión' />
 
       <AuthContainer>
         <AppInput
-          isInvalid={false}
+          isInvalid={emailError != null}
           keyboardType='email-address'
           label='Email'
           type='text'
-          onChangeText={(text) => {}}
+          onChangeText={setEmail}
           placeholder='Email'
-          errorMessage='This is not a valid email'
+          errorMessage={emailError ?? ''}
         />
 
         <AppInput
-          isInvalid={false}
+          isInvalid={passwordError != null}
           keyboardType='visible-password'
           label='Password'
           type='password'
-          onChangeText={(text) => {}}
+          onChangeText={setPassword}
           placeholder='Password'
-          errorMessage='This is not a valid password'
+          errorMessage={passwordError ?? ''}
         />
 
         <Text
@@ -82,7 +130,9 @@ export default function SignInScreen() {
           bgColor={theme.mainColor}
           color={colors.white}
           text='Iniciar sesión'
-          onPress={() => {}}
+          onPress={() => {
+            handleSignIn()
+          }}
         />
 
         <Text my='$8' fontSize='$sm' color={colors.lightGray} textAlign='center'>

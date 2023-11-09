@@ -21,8 +21,8 @@ export default function AppInput({ isInvalid, label, type, keyboardType, placeho
 
   return (
     <FormControl isInvalid={isInvalid} mb='$4' w={width}>
-      <FormControlLabel mb='$0'>
-        <FormControlLabelText size='sm' color={colors.gray} fontWeight='$light'>
+      <FormControlLabel mb='$0' aria-label='input'>
+        <FormControlLabelText size='sm' color={colors.gray} fontWeight='$light' aria-label='input'>
           {label}
         </FormControlLabelText>
       </FormControlLabel>

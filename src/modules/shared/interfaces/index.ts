@@ -1,5 +1,6 @@
 export * from './address'
 export * from './dashboard'
+export * from './error'
 export * from './order'
 export * from './product'
 export * from './response'
