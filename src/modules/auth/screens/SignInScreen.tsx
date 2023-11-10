@@ -69,7 +69,7 @@ export default function SignInScreen() {
       {isAnError && (
         <AppAlert
           action='error'
-          description='Error iniciando sesión en la cuenta'
+          description='Error al iniciar sesión. Revisa tu email y tu contraseña'
           title='Error!'
         />
       )}

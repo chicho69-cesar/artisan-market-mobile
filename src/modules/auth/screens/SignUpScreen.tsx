@@ -1,21 +1,60 @@
 import { CircleIcon, HStack, Radio, RadioGroup, RadioIcon, RadioIndicator, RadioLabel, ScrollView, Text } from '@gluestack-ui/themed'
 import { useEffect, useState } from 'react'
 
-import { AppButton, AppInput } from '@/modules/shared/components'
+import { AppAlert, AppButton, AppInput } from '@/modules/shared/components'
 import { useNavigate } from '@/modules/shared/hooks'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
+import { validateEmail, validatePassword } from '@/modules/shared/validations'
 import { AuthContainer, Header } from '../components'
+import { signUp } from '../services'
+import { useAuth } from '../store'
 
 export default function SignUpScreen() {
+  const auth = useAuth((state) => state)
   const theme = useTheme((state) => state)
   const { navigate } = useNavigate()
 
+  const [name, setName] = useState('')
+  const [lastname, setLastname] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [retypePassword, setRetypePassword] = useState('')
   const [role, setRole] = useState('user')
+  const [isAnError, setIsAnError] = useState(false)
+  const [emailError, setEmailError] = useState<string | null>(null)
+  const [passwordError, setPasswordError] = useState<string | null>(null)
+  const [retypePasswordError, setRetypePasswordError] = useState<string | null>(null)
 
   useEffect(() => {
     theme.changeMainColor()
   }, [])
+
+  const handleSignUp = async () => {
+    const validatedEmail = await validateEmail(email)
+    const validatedPassword = await validatePassword(password)
+
+    setEmailError(validatedEmail)
+    setPasswordError(validatedPassword)
+
+    if (validatedEmail != null || validatedPassword != null) return
+
+    setRetypePasswordError(
+      password !== retypePassword ? 'Las contraseñas no coinciden' : null
+    )
+
+    const response = await signUp(name, lastname, email, password, retypePassword, role)
+
+    if (response != null) {
+      auth.authenticate(response.user, response.token)
+    } else {
+      setIsAnError(true)
+
+      setTimeout(() => {
+        setIsAnError(false)
+      }, 2000)
+    }
+  }
 
   return (
     <ScrollView
@@ -23,6 +62,14 @@ export default function SignUpScreen() {
       showsVerticalScrollIndicator={false}
       bg={colors.semiWhite}
     >
+      {isAnError && (
+        <AppAlert
+          action='error'
+          description='Ocurrió un error al intentar registrarte'
+          title='Error!'
+        />
+      )}
+
       <Header text='Regístrate para continuar'/>
 
       <AuthContainer>
@@ -31,7 +78,7 @@ export default function SignUpScreen() {
           keyboardType='default'
           label='Nombre'
           type='text'
-          onChangeText={(text) => {}}
+          onChangeText={setName}
           placeholder='Nombre'
           errorMessage='Error in the name'
         />
@@ -41,39 +88,39 @@ export default function SignUpScreen() {
           keyboardType='default'
           label='Apellidos'
           type='text'
-          onChangeText={(text) => {}}
+          onChangeText={setLastname}
           placeholder='Apellidos'
           errorMessage='Error in the lastname'
         />
 
         <AppInput
-          isInvalid={false}
+          isInvalid={emailError != null}
           keyboardType='email-address'
           label='Email'
           type='text'
-          onChangeText={(text) => {}}
+          onChangeText={setEmail}
           placeholder='Email'
-          errorMessage='This is not a valid email'
+          errorMessage={emailError ?? ''}
         />
 
         <AppInput
-          isInvalid={false}
+          isInvalid={passwordError != null}
           keyboardType='visible-password'
           label='Password'
           type='password'
-          onChangeText={(text) => {}}
+          onChangeText={setPassword}
           placeholder='Password'
-          errorMessage='This is not a valid password'
+          errorMessage={passwordError ?? ''}
         />
 
         <AppInput
-          isInvalid={false}
+          isInvalid={retypePasswordError != null}
           keyboardType='visible-password'
           label='Confirmar'
           type='password'
-          onChangeText={(text) => {}}
+          onChangeText={setRetypePassword}
           placeholder='Confirmar password'
-          errorMessage='Error, this is not the same password'
+          errorMessage={retypePasswordError ?? ''}
         />
 
         <RadioGroup value={role} onChange={setRole} my='$4'>
@@ -100,7 +147,9 @@ export default function SignUpScreen() {
           bgColor={theme.mainColor}
           color={colors.white}
           text='Regístrate'
-          onPress={() => {}}
+          onPress={() => {
+            handleSignUp()
+          }}
         />
 
         <Text w='100%' mt='$8' textAlign='center'>
