@@ -138,7 +138,9 @@ export default function DetailsScreen() {
             <ActionButton
               bgColor={theme.mainColor}
               onPress={() => {
-                cart.addProductToCart(product!)
+                if (product!.stock > 0) {
+                  cart.addProductToCart(product!)
+                }
               }}
             >
               <MaterialIcons

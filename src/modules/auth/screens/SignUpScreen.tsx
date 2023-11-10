@@ -10,6 +10,12 @@ import { AuthContainer, Header } from '../components'
 import { signUp } from '../services'
 import { useAuth } from '../store'
 
+interface Errors {
+  email: string | null
+  password: string | null
+  retypePassword: string | null
+}
+
 export default function SignUpScreen() {
   const auth = useAuth((state) => state)
   const theme = useTheme((state) => state)
@@ -22,9 +28,11 @@ export default function SignUpScreen() {
   const [retypePassword, setRetypePassword] = useState('')
   const [role, setRole] = useState('user')
   const [isAnError, setIsAnError] = useState(false)
-  const [emailError, setEmailError] = useState<string | null>(null)
-  const [passwordError, setPasswordError] = useState<string | null>(null)
-  const [retypePasswordError, setRetypePasswordError] = useState<string | null>(null)
+  const [errors, setErrors] = useState<Errors>({
+    email: null,
+    password: null,
+    retypePassword: null
+  })
 
   useEffect(() => {
     theme.changeMainColor()
@@ -34,14 +42,21 @@ export default function SignUpScreen() {
     const validatedEmail = await validateEmail(email)
     const validatedPassword = await validatePassword(password)
 
-    setEmailError(validatedEmail)
-    setPasswordError(validatedPassword)
+    setErrors({
+      email: validatedEmail,
+      password: validatedPassword,
+      retypePassword: null
+    })
 
     if (validatedEmail != null || validatedPassword != null) return
 
-    setRetypePasswordError(
-      password !== retypePassword ? 'Las contraseñas no coinciden' : null
-    )
+    setErrors({
+      email: null,
+      password: null,
+      retypePassword: password !== retypePassword ? 'Las contraseñas no coinciden' : null
+    })
+
+    if (password !== retypePassword) return
 
     const response = await signUp(name, lastname, email, password, retypePassword, role)
 
@@ -94,33 +109,33 @@ export default function SignUpScreen() {
         />
 
         <AppInput
-          isInvalid={emailError != null}
+          isInvalid={errors.email != null}
           keyboardType='email-address'
           label='Email'
           type='text'
           onChangeText={setEmail}
           placeholder='Email'
-          errorMessage={emailError ?? ''}
+          errorMessage={errors.email ?? ''}
         />
 
         <AppInput
-          isInvalid={passwordError != null}
+          isInvalid={errors.password != null}
           keyboardType='visible-password'
           label='Password'
           type='password'
           onChangeText={setPassword}
           placeholder='Password'
-          errorMessage={passwordError ?? ''}
+          errorMessage={errors.password ?? ''}
         />
 
         <AppInput
-          isInvalid={retypePasswordError != null}
+          isInvalid={errors.retypePassword != null}
           keyboardType='visible-password'
           label='Confirmar'
           type='password'
           onChangeText={setRetypePassword}
           placeholder='Confirmar password'
-          errorMessage={retypePasswordError ?? ''}
+          errorMessage={errors.retypePassword ?? ''}
         />
 
         <RadioGroup value={role} onChange={setRole} my='$4'>

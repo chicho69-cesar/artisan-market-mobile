@@ -14,6 +14,11 @@ import { setSession } from '../utils/session'
 const facebook = require('../../../../assets/facebook.png')
 const google = require('../../../../assets/google.png')
 
+interface Errors {
+  email: string | null
+  password: string | null
+}
+
 export default function SignInScreen() {
   const auth = useAuth((state) => state)
   const theme = useTheme((state) => state)
@@ -23,8 +28,10 @@ export default function SignInScreen() {
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
   const [isAnError, setIsAnError] = useState(false)
-  const [emailError, setEmailError] = useState<string | null>(null)
-  const [passwordError, setPasswordError] = useState<string | null>(null)
+  const [errors, setErrors] = useState<Errors>({
+    email: null,
+    password: null
+  })
 
   useEffect(() => {
     theme.changeMainColor()
@@ -34,8 +41,10 @@ export default function SignInScreen() {
     const validatedEmail = await validateEmail(email)
     const validatedPassword = await validatePassword(password)
 
-    setEmailError(validatedEmail)
-    setPasswordError(validatedPassword)
+    setErrors({
+      email: validatedEmail,
+      password: validatedPassword
+    })
 
     if (validatedEmail != null || validatedPassword != null) return
 
@@ -78,23 +87,23 @@ export default function SignInScreen() {
 
       <AuthContainer>
         <AppInput
-          isInvalid={emailError != null}
+          isInvalid={errors.email != null}
           keyboardType='email-address'
           label='Email'
           type='text'
           onChangeText={setEmail}
           placeholder='Email'
-          errorMessage={emailError ?? ''}
+          errorMessage={errors.email ?? ''}
         />
 
         <AppInput
-          isInvalid={passwordError != null}
+          isInvalid={errors.password != null}
           keyboardType='visible-password'
           label='Password'
           type='password'
           onChangeText={setPassword}
           placeholder='Password'
-          errorMessage={passwordError ?? ''}
+          errorMessage={errors.password ?? ''}
         />
 
         <Text

@@ -47,7 +47,9 @@ export default function CartScreen() {
         tax={orderData.tax}
         total={orderData.total}
         onPress={() => {
-          navigate('Address')
+          if (cart.cart.length > 0) {
+            navigate('Address')
+          }
         }}
       />
     </AppContainer>

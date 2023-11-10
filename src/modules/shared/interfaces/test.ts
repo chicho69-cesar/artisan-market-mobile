@@ -80,7 +80,7 @@
 // get a review
 /* Review */
 
-// get reviews of a product
+// get reviews of a product ✅
 /* Review[] */
 
 // update review
