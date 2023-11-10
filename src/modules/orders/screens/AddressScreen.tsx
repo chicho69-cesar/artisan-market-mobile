@@ -1,4 +1,4 @@
-import { HStack, View } from '@gluestack-ui/themed'
+import { HStack } from '@gluestack-ui/themed'
 import { useEffect, useState } from 'react'
 
 import { useAuth } from '@/modules/auth/store'
@@ -195,8 +195,6 @@ export default function AddressScreen() {
           handleAddAddress()
         }}
       />
-
-      <View mt='$4' />
     </AppContainer>
   )
 }

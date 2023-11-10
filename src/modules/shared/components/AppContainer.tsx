@@ -1,4 +1,4 @@
-import { ScrollView } from '@gluestack-ui/themed'
+import { ScrollView, View } from '@gluestack-ui/themed'
 import { colors } from '../theme'
 
 interface Props {
@@ -15,6 +15,8 @@ export default function AppContainer({ children }: Props) {
       bg={colors.white}
     >
       {children}
+
+      <View mt='$4' />
     </ScrollView>
   )
 }

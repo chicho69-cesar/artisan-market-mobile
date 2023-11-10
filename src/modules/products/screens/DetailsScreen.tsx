@@ -172,8 +172,6 @@ export default function DetailsScreen() {
       ) : (
         <Reviews reviews={reviews ?? []} chunkReviews />
       )}
-
-      <View mt='$4' />
     </AppContainer>
   )
 }
