@@ -4,14 +4,19 @@ import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { GiftedChat, Send, type IMessage } from 'react-native-gifted-chat'
 
+import { useAuth } from '@/modules/auth/store'
 import { blankImage } from '@/modules/shared/constants'
 import type { User } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
+import { useChat } from '../hooks'
+import { sendMessage } from '../services'
 
 export default function ChatScreen() {
   const { params } = useRoute()
   const theme = useTheme((state) => state)
+  const auth = useAuth((state) => state)
   const [userToChat, setUserToChat] = useState<User>()
+  const { conversation } = useChat(userToChat?.id ?? 0)
   const [messages, setMessages] = useState<IMessage[]>([])
 
   useEffect(() => {
@@ -24,23 +29,36 @@ export default function ChatScreen() {
   }, [params])
 
   useLayoutEffect(() => {
-    // TODO: Load messages from api
-    setMessages([
-      {
-        _id: 1,
-        text: 'Hello World!!!',
-        createdAt: new Date(),
-        user: {
-          _id: 2, // 1 for my messages; 2 for the other user messages
-          name: `${userToChat?.name} ${userToChat?.lastname}`,
-          avatar: userToChat?.picture ?? blankImage
-        }
+    const mapMessage = (message: any, user: any, userId: number) => ({
+      _id: message.id,
+      text: message.message,
+      createdAt: new Date(message.date),
+      user: {
+        _id: userId,
+        name: `${user?.name} ${user?.lastname}`,
+        avatar: user?.picture ?? blankImage
       }
-    ])
-  }, [userToChat])
+    })
+
+    const messagesReceived: IMessage[] = conversation.receive.map((received) => mapMessage(received, userToChat, 2))
+    const messagesSent: IMessage[] = conversation.send.map((sent) => mapMessage(sent, auth.user, 1))
+
+    const messagesOfTheConversation = [...messagesReceived, ...messagesSent]
+
+    messagesOfTheConversation.sort((a, b) => {
+      const dateA = a.createdAt instanceof Date ? a.createdAt : new Date(a.createdAt)
+      const dateB = b.createdAt instanceof Date ? b.createdAt : new Date(b.createdAt)
+
+      return dateB.getTime() - dateA.getTime()
+    })
+
+    setMessages(messagesOfTheConversation)
+  }, [userToChat, conversation])
 
   const handleSendMessage = useCallback(async (messages: IMessage[] = []) => {
-    // TODO: send message to the server with messages[0]
+    if (userToChat !== undefined) {
+      await sendMessage(userToChat.id, messages[0].text, auth.token!)
+    }
 
     setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, messages)
