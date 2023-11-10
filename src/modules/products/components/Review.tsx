@@ -2,7 +2,7 @@ import { FontAwesome } from '@expo/vector-icons'
 import { HStack, Pressable, Text, VStack } from '@gluestack-ui/themed'
 
 import { Avatar } from '@/modules/shared/components'
-import { blankImage } from '@/modules/shared/constants'
+import { blankImage, serverUrl } from '@/modules/shared/constants'
 import { useNavigate } from '@/modules/shared/hooks'
 import type { Review as ReviewType } from '@/modules/shared/interfaces'
 import { colors } from '@/modules/shared/theme'
@@ -27,7 +27,10 @@ export default function Review({ review }: Props) {
             }}
           >
             <Avatar
-              source={review.user.picture ?? blankImage}
+              source={
+                review.user.picture == null || review.user.picture === undefined
+                  ? blankImage : `${serverUrl}/storage/${review.user.picture}`
+              }
               alt={review.user.name ?? ''}
             />
           </Pressable>

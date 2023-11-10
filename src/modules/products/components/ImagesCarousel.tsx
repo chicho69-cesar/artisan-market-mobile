@@ -1,3 +1,4 @@
+import { serverUrl } from '@/modules/shared/constants'
 import type { Image as ImageType } from '@/modules/shared/interfaces'
 import { Image } from '@gluestack-ui/themed'
 import Carousel from 'react-native-reanimated-carousel'
@@ -31,7 +32,7 @@ export default function ImagesCarousel({ images = [] }: Props) {
       customConfig={() => ({ type: 'positive', viewCount: 5 })}
       renderItem={({ item }) => (
         <Image
-          source={item.link}
+          source={`${serverUrl}/storage/${item.link}`}
           alt={`Image of product with id ${item.product_id}`}
           w='$48'
           h='100%'

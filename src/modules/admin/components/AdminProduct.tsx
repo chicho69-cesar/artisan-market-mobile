@@ -1,6 +1,7 @@
 import { HStack, Image, Pressable, Text, VStack } from '@gluestack-ui/themed'
 
 import { Categories } from '@/modules/products/components'
+import { blankImage, serverUrl } from '@/modules/shared/constants'
 import { useNavigate } from '@/modules/shared/hooks'
 import type { Product } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
@@ -27,7 +28,10 @@ export default function AdminProduct({ product }: Props) {
       rounded='$md'
     >
       <Image
-        source={product.images[0].link}
+        source={
+          product.images.length === 0
+            ? blankImage : `${serverUrl}/storage/${product.images[0].link}`
+        }
         alt={product.name}
         w='$24'
         aspectRatio='9 / 16'

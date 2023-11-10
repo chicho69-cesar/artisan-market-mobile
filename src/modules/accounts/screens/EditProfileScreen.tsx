@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 
 import { useAuth } from '@/modules/auth/store'
 import { AppButton, AppContainer, AppHeader, AppInput, AppTextArea } from '@/modules/shared/components'
-import { blankImage } from '@/modules/shared/constants'
+import { blankImage, serverUrl } from '@/modules/shared/constants'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
 
@@ -21,7 +21,10 @@ export default function EditProfileScreen() {
   }, [])
 
   useEffect(() => {
-    setImage(auth.user?.picture ?? blankImage)
+    setImage(
+      auth.user?.picture == null || auth.user.picture === undefined
+        ? blankImage : `${serverUrl}/storage/${auth.user.picture}`
+    )
   }, [auth])
 
   const pickImage = async () => {

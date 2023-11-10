@@ -1,6 +1,7 @@
 import { MaterialIcons } from '@expo/vector-icons'
 import { Center, HStack, Image, Pressable, Text, VStack } from '@gluestack-ui/themed'
 
+import { blankImage, serverUrl } from '@/modules/shared/constants'
 import type { Product } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
@@ -29,7 +30,10 @@ export default function ProductCart({ product, quantity, decreaseQuantity, incre
     >
       <Center>
         <Image
-          source={product.images[0].link}
+          source={
+            product.images.length === 0
+              ? blankImage : `${serverUrl}/storage/${product.images[0].link}`
+          }
           alt={product.name}
           w='90%'
           h='$80'

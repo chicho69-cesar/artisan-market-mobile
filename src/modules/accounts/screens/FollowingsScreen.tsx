@@ -3,7 +3,7 @@ import { useRoute } from '@react-navigation/native'
 import { useEffect, useState } from 'react'
 
 import { AppContainer, AppHeader, Avatar } from '@/modules/shared/components'
-import { blankImage } from '@/modules/shared/constants'
+import { blankImage, serverUrl } from '@/modules/shared/constants'
 import { useNavigate } from '@/modules/shared/hooks'
 import type { User } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
@@ -52,7 +52,10 @@ export default function FollowingsScreen() {
         >
           <HStack space='sm' alignItems='center'>
             <Avatar
-              source={follow.picture ?? blankImage}
+              source={
+                follow.picture == null || follow.picture === undefined
+                  ? blankImage : `${serverUrl}/storage/${follow.picture}`
+              }
               alt={follow.name}
             />
 

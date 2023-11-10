@@ -2,7 +2,7 @@ import { HStack, Pressable, Text } from '@gluestack-ui/themed'
 import { useEffect } from 'react'
 
 import { AppContainer, AppHeader, Avatar } from '@/modules/shared/components'
-import { blankImage } from '@/modules/shared/constants'
+import { blankImage, serverUrl } from '@/modules/shared/constants'
 import { useNavigate } from '@/modules/shared/hooks'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
@@ -37,7 +37,10 @@ export default function ChatsScreen() {
         >
           <HStack space='sm' alignItems='center'>
             <Avatar
-              source={chat.picture ?? blankImage}
+              source={
+                chat.picture == null || chat.picture === undefined
+                  ? blankImage : `${serverUrl}/storage/${chat.picture}`
+              }
               alt={chat.name}
             />
 

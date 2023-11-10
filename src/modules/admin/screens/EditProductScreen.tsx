@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 
 import { Categories } from '@/modules/products/components'
 import { AppButton, AppContainer, AppHeader, AppInput, AppTextArea } from '@/modules/shared/components'
+import { serverUrl } from '@/modules/shared/constants'
 import type { Product } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
@@ -31,7 +32,7 @@ export default function EditProductScreen() {
     const textCategories = transformCategories(productFromParams.categories)
     handleChangeCategories(textCategories)
 
-    setImages(productFromParams.images.map((image) => image.link))
+    setImages(productFromParams.images.map((image) => `${serverUrl}/storage/${image.link}`))
     setImageFileNames(productFromParams.images.map((image) => image.link))
   }, [params])
 
