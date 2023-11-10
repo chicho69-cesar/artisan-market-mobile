@@ -25,7 +25,26 @@ export function useOrdersHistory() {
         address_id: 1,
         date: '2021-05-10T00:00:00.000Z',
         order_products: [],
-        products: [],
+        products: [
+          {
+            id: 1,
+            categories: [],
+            description: 'Producto 1',
+            images: [],
+            name: 'Producto 1',
+            price: 100,
+            seller: {
+              id: 1,
+              email: 'XXXXXXXXXXXXX',
+              lastname: 'XXXXXXXXXXXXX',
+              name: 'XXXXXXXXXXXXX',
+              role_id: 2,
+              biography: 'XXXXXXXXXXXXX'
+            },
+            seller_id: 1,
+            stock: 10
+          }
+        ],
         status: 'pending',
         subtotal: 2100,
         tax: 415,

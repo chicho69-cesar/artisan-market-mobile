@@ -26,7 +26,7 @@ export default function OrderScreen() {
     <AppContainer>
       <AppHeader
         title='Estado de la orden'
-        description={`Resumen de (${order?.products.length}) productos`}
+        description={`Resumen de (${order?.products.length ?? 0}) productos`}
       />
 
       {(order != null && order !== undefined) && (
@@ -35,7 +35,7 @@ export default function OrderScreen() {
           status={order.status as OrderStatus}
           user={order.user}
           orderData={{
-            noOfProducts: order.products.length,
+            noOfProducts: order.products.length ?? 0,
             subTotal: order.subtotal,
             tax: order.tax,
             total: order.total
@@ -43,7 +43,14 @@ export default function OrderScreen() {
         />
       )}
 
-      <Products products={order?.products ?? []} />
+      {(order != null && order !== undefined) && (
+        <Products
+          withoutNavigate
+          products={
+            order.products ?? []
+          }
+        />
+      )}
     </AppContainer>
   )
 }

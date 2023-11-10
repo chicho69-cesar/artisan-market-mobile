@@ -25,7 +25,7 @@ export default function Product({ product, onPress }: Props) {
         <Center>
           <Image
             source={
-              product.images.length === 0
+              product.images == null || product.images === undefined || product.images.length === 0
                 ? blankImage : `${serverUrl}/storage/${product.images[0].link}`
             }
             alt={product.name}

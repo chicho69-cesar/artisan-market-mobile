@@ -5,9 +5,10 @@ import { useActiveProduct } from '../store'
 
 interface Props {
   products: ProductType[]
+  withoutNavigate?: boolean
 }
 
-export default function Products({ products }: Props) {
+export default function Products({ products, withoutNavigate = false }: Props) {
   const productState = useActiveProduct((state) => state)
   const { navigate } = useNavigate()
 
@@ -18,8 +19,10 @@ export default function Products({ products }: Props) {
           product={product}
           key={product.id}
           onPress={() => {
-            productState.setActiveProduct(product)
-            navigate('Details')
+            if (!withoutNavigate) {
+              productState.setActiveProduct(product)
+              navigate('Details')
+            }
           }}
         />
       ))}
