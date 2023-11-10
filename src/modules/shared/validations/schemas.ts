@@ -42,3 +42,7 @@ export const phoneSchema = yup
   .string()
   .required('El teléfono es obligatorio')
   .max(20, 'El teléfono no debe exceder los 20 caracteres')
+
+export const reviewSchema = yup
+  .string()
+  .required('La review es obligatoria')
