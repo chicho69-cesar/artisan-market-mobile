@@ -5,7 +5,7 @@ import { AppAlert, AppButton, AppInput } from '@/modules/shared/components'
 import { useNavigate } from '@/modules/shared/hooks'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
-import { validateEmail, validatePassword } from '@/modules/shared/validations'
+import { emailSchema, makeValidation, passwordSchema } from '@/modules/shared/validations'
 import { AuthContainer, Header, SocialLogin } from '../components'
 import { signIn } from '../services'
 import { useAuth } from '../store'
@@ -38,8 +38,8 @@ export default function SignInScreen() {
   }, [])
 
   const handleSignIn = async () => {
-    const validatedEmail = await validateEmail(email)
-    const validatedPassword = await validatePassword(password)
+    const validatedEmail = await makeValidation(emailSchema, email)
+    const validatedPassword = await makeValidation(passwordSchema, password)
 
     setErrors({
       email: validatedEmail,

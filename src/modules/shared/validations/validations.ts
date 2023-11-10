@@ -1,18 +1,9 @@
-import { emailSchema, passwordSchema } from '.'
+import type * as yup from 'yup'
 import type { ValidationError } from '../interfaces'
 
-export const validateEmail = async (email: string) => {
+export const makeValidation = async <T>(schema: yup.Schema, value: T) => {
   try {
-    await emailSchema.validate(email)
-    return null
-  } catch (error: any) {
-    return (error as ValidationError).message
-  }
-}
-
-export const validatePassword = async (password: string) => {
-  try {
-    await passwordSchema.validate(password)
+    await schema.validate(value)
     return null
   } catch (error: any) {
     return (error as ValidationError).message
