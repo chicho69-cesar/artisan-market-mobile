@@ -12,7 +12,7 @@ import { OrderStatus } from '../types/order.d'
 const paypalImage = require('../../../../assets/paypal.png')
 
 interface Props {
-  user: User // TODO: Change for user interface
+  user: User
   address: Address
   orderData: CartOrderData
   status: OrderStatus

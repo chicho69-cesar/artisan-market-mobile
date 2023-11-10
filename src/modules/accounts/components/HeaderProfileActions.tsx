@@ -1,6 +1,7 @@
 import { MaterialIcons } from '@expo/vector-icons'
 import { HStack, Pressable } from '@gluestack-ui/themed'
 
+import { signOut } from '@/modules/auth/services'
 import { useAuth } from '@/modules/auth/store'
 import { useNavigate } from '@/modules/shared/hooks'
 import { Roles } from '@/modules/shared/interfaces'
@@ -9,6 +10,14 @@ import { colors } from '@/modules/shared/theme'
 export default function HeaderProfileActions() {
   const auth = useAuth((state) => state)
   const { navigate } = useNavigate()
+
+  const handleLogout = async () => {
+    const response = await signOut(auth.token ?? '')
+
+    if (response != null) {
+      auth.logout()
+    }
+  }
 
   return (
     <HStack justifyContent='flex-end' alignItems='center' space='xs'>
@@ -29,7 +38,7 @@ export default function HeaderProfileActions() {
 
       <Pressable
         onPress={() => {
-          auth.logout()
+          handleLogout()
         }}
       >
         <MaterialIcons

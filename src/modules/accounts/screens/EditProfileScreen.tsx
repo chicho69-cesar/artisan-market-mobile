@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 
 import { useAuth } from '@/modules/auth/store'
 import { AppButton, AppContainer, AppHeader, AppInput, AppTextArea } from '@/modules/shared/components'
+import { blankImage } from '@/modules/shared/constants'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
 
@@ -20,7 +21,7 @@ export default function EditProfileScreen() {
   }, [])
 
   useEffect(() => {
-    setImage(auth.user?.picture ?? '') // TODO: set a default image
+    setImage(auth.user?.picture ?? blankImage)
   }, [auth])
 
   const pickImage = async () => {
@@ -118,7 +119,7 @@ export default function EditProfileScreen() {
 
         {(image != null) && (
           <Image
-            source={{ uri: image ?? '' }} // TODO: set a default image
+            source={{ uri: image ?? blankImage }}
             alt={auth.user?.name}
             w='$40'
             aspectRatio='9 / 12'

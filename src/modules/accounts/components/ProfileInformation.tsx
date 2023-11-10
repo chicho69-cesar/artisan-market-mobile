@@ -1,8 +1,9 @@
-import { HStack, Heading, Image, Pressable, Text, VStack, View } from '@gluestack-ui/themed'
 import { Ionicons } from '@expo/vector-icons'
+import { HStack, Heading, Image, Pressable, Text, VStack, View } from '@gluestack-ui/themed'
 
+import { blankImage } from '@/modules/shared/constants'
 import { useNavigate } from '@/modules/shared/hooks'
-import { Roles, type User, type Socials } from '@/modules/shared/interfaces'
+import { Roles, type Socials, type User } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
 import SocialNetwork from './SocialNetwork'
@@ -29,7 +30,7 @@ export default function ProfileInformation({ user, socials, isOwner = true, prof
     <>
       <HStack mt='$4' justifyContent='space-between' alignItems='center' space='md'>
         <Image
-          source={user.picture ?? ''} // TODO: use a default image
+          source={user.picture ?? blankImage}
           alt={user.name ?? ''}
           w='$24'
           h='$24'

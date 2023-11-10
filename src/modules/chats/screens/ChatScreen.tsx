@@ -4,6 +4,7 @@ import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { GiftedChat, Send, type IMessage } from 'react-native-gifted-chat'
 
+import { blankImage } from '@/modules/shared/constants'
 import type { User } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
 
@@ -32,7 +33,7 @@ export default function ChatScreen() {
         user: {
           _id: 2, // 1 for my messages; 2 for the other user messages
           name: `${userToChat?.name} ${userToChat?.lastname}`,
-          avatar: userToChat?.picture ?? '' // TODO: use a default picture
+          avatar: userToChat?.picture ?? blankImage
         }
       }
     ])
@@ -55,7 +56,7 @@ export default function ChatScreen() {
       }}
       user={{
         _id: 1,
-        avatar: userToChat?.picture ?? '' /* TODO: set a image default */
+        avatar: userToChat?.picture ?? blankImage
       }}
       renderSend={(props) => (
         <Send

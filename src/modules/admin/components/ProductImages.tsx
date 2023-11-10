@@ -48,7 +48,7 @@ export default function ProductImages({ images, onRemoveImage }: Props) {
           alignItems='center'
         >
           <Image
-            source={{ uri: (item as string) }} // TODO: set a default image
+            source={{ uri: (item as string) }}
             alt={item as string}
             w='$24'
             h='$32'
