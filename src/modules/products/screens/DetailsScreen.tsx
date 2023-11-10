@@ -1,6 +1,6 @@
 import { MaterialIcons } from '@expo/vector-icons'
 import { HStack, Pressable, Text, VStack, View } from '@gluestack-ui/themed'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { useCart } from '@/modules/cart/store'
 import { ActionButton, AppContainer, TabBarItem } from '@/modules/shared/components'
@@ -25,6 +25,15 @@ export default function DetailsScreen() {
   useEffect(() => {
     theme.changeMainColor()
   }, [])
+
+  const rateAvg: number = useMemo(() => {
+    if (reviews != null && reviews !== undefined) {
+      if (reviews.length === 0) return 0
+      return reviews.reduce((acc, review) => acc + review.rate, 0) / reviews.length
+    }
+
+    return 0
+  }, [reviews])
 
   return (
     <AppContainer>
@@ -60,11 +69,11 @@ export default function DetailsScreen() {
             <MaterialIcons name='star' size={32} color='#FACC15' />
 
             <Text fontSize='$md' color={colors.gray}>
-              4.8 {/* TODO: Get a average of the reviews */}
+              {rateAvg}
             </Text>
 
             <Text fontSize='$md' fontWeight='$light' color={colors.gray}>
-              (78) {/* TODO: Get of the number of reviews */}
+              ({reviews?.length ?? 0})
             </Text>
           </HStack>
         </Pressable>
@@ -161,6 +170,8 @@ export default function DetailsScreen() {
       ) : (
         <Reviews reviews={reviews ?? []} chunkReviews />
       )}
+
+      <View mt='$4' />
     </AppContainer>
   )
 }

@@ -58,10 +58,10 @@
 // get product by id
 /* Product */
 
-// get products paginated
+// get products paginated ✅
 /* ProductsPagination */
 
-// search products by query
+// search products by query ✅
 /* ProductsPagination */
 
 // get seller products
