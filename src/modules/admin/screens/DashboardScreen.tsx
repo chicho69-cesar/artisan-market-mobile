@@ -9,7 +9,7 @@ import { useDashboardStats } from '../hooks'
 
 export default function DashboardScreen() {
   const theme = useTheme((state) => state)
-  const { stats, refetchStats } = useDashboardStats()
+  const { stats } = useDashboardStats()
 
   useEffect(() => {
     theme.changeMainColor()
@@ -39,14 +39,14 @@ export default function DashboardScreen() {
 
         <DashboardCard
           quantity={stats?.stats.pending_orders ?? 0}
-          color={colors.red}
+          color={colors.lightGray}
           icon='credit-card-off'
           text='Ordenes Pendientes'
         />
 
         <DashboardCard
           quantity={stats?.stats.cancelled_orders ?? 0}
-          color={colors.black}
+          color={colors.red}
           icon='archive-cancel'
           text='Ordenes Canceladas'
         />
@@ -60,7 +60,7 @@ export default function DashboardScreen() {
 
         <DashboardCard
           quantity={stats?.stats.zero_stock_products ?? 0}
-          color={colors.red}
+          color={colors.black}
           icon='alert-box'
           text='Sin Existencias'
         />
@@ -70,13 +70,6 @@ export default function DashboardScreen() {
           color={colors.blue}
           icon='lead-pencil'
           text='Reviews'
-        />
-
-        <DashboardCard
-          quantity={27} // TODO: make a count down counter
-          color={colors.black}
-          icon='alarm'
-          text='Actualización en:'
         />
       </HStack>
     </AppContainer>

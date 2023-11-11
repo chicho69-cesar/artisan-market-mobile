@@ -1,27 +1,29 @@
+import { useAuth } from '@/modules/auth/store'
 import type { DashboardStats } from '@/modules/shared/interfaces'
 import { useEffect, useState } from 'react'
+import { getDashboardStats } from '../services'
 
 export function useDashboardStats() {
+  const auth = useAuth((state) => state)
+  const [isLoading, setIsLoading] = useState(false)
   const [stats, setStats] = useState<DashboardStats>()
 
   useEffect(() => {
-    /* TODO: get from the api */
-    setStats({
-      stats: {
-        total_orders: 4,
-        paid_orders: 1,
-        pending_orders: 2,
-        cancelled_orders: 1,
-        total_products: 18,
-        zero_stock_products: 0,
-        total_reviews: 26
-      }
-    })
+    setIsLoading(true)
+    refetchStats()
+    setIsLoading(false)
   }, [])
 
-  const refetchStats = async () => { }
+  const refetchStats = async () => {
+    const dashboardStats = await getDashboardStats(auth.token!)
+
+    if (dashboardStats != null) {
+      setStats(dashboardStats)
+    }
+  }
 
   return {
+    isLoading,
     stats,
     refetchStats
   }
