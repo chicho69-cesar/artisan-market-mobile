@@ -1,19 +1,45 @@
-import { HStack, View } from '@gluestack-ui/themed'
+import { HStack, Text, View } from '@gluestack-ui/themed'
+import { StackActions, useNavigation } from '@react-navigation/native'
 import * as ImagePicker from 'expo-image-picker'
 import { useEffect, useState } from 'react'
 
+import { useAuth } from '@/modules/auth/store'
 import { Categories } from '@/modules/products/components'
-import { AppButton, AppContainer, AppHeader, AppInput, AppTextArea } from '@/modules/shared/components'
+import { AppAlert, AppButton, AppContainer, AppHeader, AppInput, AppTextArea } from '@/modules/shared/components'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
+import { descriptionSchema, makeValidation, nameSchema, priceSchema, stockSchema } from '@/modules/shared/validations'
 import { ImagePicker as ImagePickerComponent, ProductImages } from '../components'
+import { addProduct, uploadProductImage } from '../services'
+
+interface Errors {
+  name: string | null
+  description: string | null
+  price: string | null
+  stock: string | null
+  images: string | null
+}
 
 export default function CreateProductScreen() {
   const theme = useTheme((state) => state)
+  const auth = useAuth((state) => state)
+  const navigation = useNavigation()
   const [categories, setCategories] = useState<string[]>([])
 
+  const [isAnError, setIsAnError] = useState(false)
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [price, setPrice] = useState(0)
+  const [stock, setStock] = useState(0)
   const [images, setImages] = useState<string[]>([])
   const [imageFileNames, setImageFileNames] = useState<string[]>([])
+  const [errors, setErrors] = useState<Errors>({
+    name: null,
+    description: null,
+    price: null,
+    stock: null,
+    images: null
+  })
 
   useEffect(() => {
     theme.changeMainColor()
@@ -48,52 +74,111 @@ export default function CreateProductScreen() {
     }
   }
 
+  const handleCreateProduct = async () => {
+    if (images.length === 0) {
+      setErrors({
+        ...errors,
+        images: 'Debes agregar al menos una imagen'
+      })
+
+      return
+    }
+
+    const [validatedName, validatedDescription, validatedPrice, validatedStock] = await Promise.all([
+      makeValidation(nameSchema, name),
+      makeValidation(descriptionSchema, description),
+      makeValidation(priceSchema, price),
+      makeValidation(stockSchema, stock)
+    ])
+
+    setErrors({
+      name: validatedName,
+      description: validatedDescription,
+      price: validatedPrice,
+      stock: validatedStock,
+      images: null
+    })
+
+    if (
+      validatedName != null ||
+      validatedDescription != null ||
+      validatedPrice != null ||
+      validatedStock != null
+    ) return
+
+    const response = await addProduct(name, description, price, stock, categories, auth.token!)
+
+    if (response != null) {
+      images.map(async (image) => {
+        await uploadProductImage(response.id, image, auth.token!)
+      })
+    } else {
+      setIsAnError(true)
+
+      setTimeout(() => {
+        setIsAnError(false)
+      }, 2000)
+    }
+  }
+
   return (
     <AppContainer>
+      {isAnError && (
+        <AppAlert
+          action='error'
+          description='Ocurrió un error al agregar el producto inténtalo de nuevo'
+          title='Error!'
+        />
+      )}
+
       <AppHeader
         title='Crea tu producto'
         description='Agrega un nuevo producto a tu colección'
       />
 
       <AppInput
-        isInvalid={false}
+        isInvalid={errors.name != null}
         keyboardType='default'
         label='Nombre'
         type='text'
-        onChangeText={(text) => {}}
+        onChangeText={setName}
         placeholder='Nombre del producto...'
-        errorMessage='Error in the name'
+        errorMessage={errors.name ?? ''}
       />
 
       <AppTextArea
-        isInvalid={false}
+        isInvalid={errors.description != null}
         label='Descripción'
         placeholder='Descripción del producto...'
-        onChangeText={(text) => {}}
-        errorMessage='Error in the description'
+        onChangeText={setDescription}
+        errorMessage={errors.description ?? ''}
       />
 
       <HStack justifyContent='space-between' alignItems='center' space='sm'>
         <AppInput
-          isInvalid={false}
+          isInvalid={errors.price != null}
           keyboardType='numeric'
           label='Precio'
           type='text'
           isGrouped
-          onChangeText={(text) => {}}
+          onChangeText={(text) => {
+            setPrice(parseFloat(text))
+          }}
           placeholder='$00.00'
-          errorMessage='Error in the price'
+          errorMessage={errors.price ?? ''}
         />
 
         <AppInput
-          isInvalid={false}
+          isInvalid={errors.stock != null}
           keyboardType='numeric'
           label='Stock'
           type='text'
           isGrouped
-          onChangeText={(text) => {}}
+          onChangeText={(text) => {
+            setStock(parseInt(text))
+          }}
           placeholder='00'
-          errorMessage='Error in the stock'
+          errorMessage={errors.stock ?? ''}
         />
       </HStack>
 
@@ -120,6 +205,12 @@ export default function CreateProductScreen() {
         }}
       />
 
+      {errors.images != null && (
+        <Text fontSize='$md' fontWeight='$medium' color={colors.red} textAlign='center'>
+          {errors.images}
+        </Text>
+      )}
+
       <ProductImages
         images={images}
         onRemoveImage={(index: number) => {
@@ -138,7 +229,12 @@ export default function CreateProductScreen() {
         text='Agregar producto'
         bgColor={theme.mainColor}
         color={colors.white}
-        onPress={() => {}}
+        onPress={() => {
+          handleCreateProduct()
+
+          const navAction = StackActions.push('Home')
+          navigation.dispatch(navAction)
+        }}
       />
 
       <View mb='$4' />

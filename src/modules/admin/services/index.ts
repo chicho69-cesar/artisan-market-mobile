@@ -1,5 +1,7 @@
 import { api } from '@/config/api'
+import { serverUrl } from '@/modules/shared/constants'
 import type { AdminOrder, DashboardStats, ImageUpload, Product, ProductsPagination, Response } from '@/modules/shared/interfaces'
+import * as FileSystem from 'expo-file-system'
 
 export async function addProduct(name: string, description: string, price: number, stock: number, categories: string[], token: string) {
   try {
@@ -28,29 +30,23 @@ export async function addProduct(name: string, description: string, price: numbe
   }
 }
 
-export async function uploadProductImage(productId: number, uri: string, name: string, type: string, token: string) {
-  const response = await fetch(uri)
-  const blob = await response.blob()
-
-  const formData = new FormData()
-  formData.append('image', blob, name)
-
+export async function uploadProductImage(productId: number, uri: string, token: string) {
   try {
-    const { data: response } = await api.post<Response<ImageUpload>>(
-      `/products/upload-image/${productId}`,
-      formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`
-        }
-      }
-    )
+    const response = await FileSystem.uploadAsync(`${serverUrl}/api/products/upload-image/${productId}`, uri, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`
+      },
+      fieldName: 'image',
+      httpMethod: 'POST',
+      uploadType: FileSystem.FileSystemUploadType.MULTIPART
+    })
 
-    const { data } = response
+    const jsonResponse = JSON.parse(response.body)
+    const { data } = jsonResponse as Response<ImageUpload>
     return data
   } catch (error: any) {
-    console.log(`Error en el servicio: ${error}`)
+    console.log('Error en uploading file')
     return null
   }
 }

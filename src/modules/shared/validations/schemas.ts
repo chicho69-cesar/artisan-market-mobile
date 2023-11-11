@@ -54,3 +54,18 @@ export const nameSchema = yup
 export const lastnameSchema = yup
   .string()
   .required('Los apellidos son requeridos')
+
+export const descriptionSchema = yup
+  .string()
+  .required('La descripción es requerida')
+
+export const priceSchema = yup
+  .number()
+  .positive('El precio no puede ser negativo')
+  .required('El precio es requerido')
+
+export const stockSchema = yup
+  .number()
+  .integer('El stock debe ser un número entero')
+  .min(0, 'El stock no puede ser negativo')
+  .required('El stock es requerido')

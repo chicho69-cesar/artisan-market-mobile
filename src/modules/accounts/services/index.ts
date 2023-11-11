@@ -122,7 +122,7 @@ export async function getFollowings(userId: number, token: string) {
   }
 }
 
-export async function uploadProfilePicture(uri: string, name: string, type: string, token: string) {
+export async function uploadProfilePicture(uri: string, token: string) {
   try {
     const response = await FileSystem.uploadAsync(`${serverUrl}/api/users/upload-profile-picture`, uri, {
       headers: {

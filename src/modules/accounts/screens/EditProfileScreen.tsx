@@ -31,7 +31,7 @@ export default function EditProfileScreen() {
   const [linkedin, setLinkedin] = useState('')
   const [freeMarket, setFreeMarket] = useState('')
   const [image, setImage] = useState<string | null>(null)
-  const [imageFileName, setImageFileName] = useState<string | null | undefined>('image.jpg')
+  const [, setImageFileName] = useState<string | null | undefined>('image.jpg')
   const [errors, setErrors] = useState<Errors>({
     name: null,
     lastname: null
@@ -77,10 +77,8 @@ export default function EditProfileScreen() {
     if (validatedName != null || validatedLastname != null) return
 
     const uri = image
-    const type = 'image/jpeg'
-    const nameOfImage = imageFileName ?? 'image.jpg'
 
-    await uploadProfilePicture(uri, nameOfImage, type, auth.token!)
+    await uploadProfilePicture(uri, auth.token!)
     await addUserSocial(auth.token!, facebook, twitter, linkedin, freeMarket)
 
     const response = await editProfile(name, lastname, bio, auth.token!)
