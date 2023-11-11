@@ -6,13 +6,13 @@ import { useNavigate } from '@/modules/shared/hooks'
 import type { Social } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
 import { ProfileInformation } from '../components'
+import { getSocialsForAnUser } from '../services'
 
 export default function ProfileScreen() {
   const theme = useTheme((state) => state)
   const auth = useAuth((state) => state)
   const { navigateWithParams, navigate } = useNavigate()
 
-  // TODO: get from the api
   const [socials, setSocials] = useState<Social>({
     socials: {
       facebook: null,
@@ -24,16 +24,16 @@ export default function ProfileScreen() {
 
   useEffect(() => {
     theme.changeMainColor()
-
-    setSocials({
-      socials: {
-        facebook: 'https://www.facebook.com/',
-        twitter: 'https://twitter.com/',
-        linkedin: 'https://www.linkedin.com/',
-        freeMarket: 'https://www.facebook.com/'
-      }
-    })
+    getSocials()
   }, [])
+
+  const getSocials = async () => {
+    const mySocials = await getSocialsForAnUser(auth.user!.id, auth.token!)
+
+    if (mySocials != null) {
+      setSocials(mySocials)
+    }
+  }
 
   return (
     <AppContainer>

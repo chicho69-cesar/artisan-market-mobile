@@ -26,7 +26,8 @@ export default function AppNavigator() {
           height: 60
         },
         tabBarActiveTintColor: theme.mainColor,
-        tabBarInactiveTintColor: colors.white
+        tabBarInactiveTintColor: colors.white,
+        lazy: false
       }}
       initialRouteName='HomeStack'
     >

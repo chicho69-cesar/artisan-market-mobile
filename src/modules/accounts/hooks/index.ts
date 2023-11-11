@@ -1,1 +1,1 @@
-export * from './use-follow'
+export * from './use-follows'

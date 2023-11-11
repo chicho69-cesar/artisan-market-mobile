@@ -1,11 +1,13 @@
 import { Ionicons } from '@expo/vector-icons'
 import { HStack, Heading, Image, Pressable, Text, VStack, View } from '@gluestack-ui/themed'
 
+import { useAdminProducts } from '@/modules/admin/hooks'
 import { blankImage, serverUrl } from '@/modules/shared/constants'
 import { useNavigate } from '@/modules/shared/hooks'
 import { Roles, type Socials, type User } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
+import { useFollows } from '../hooks'
 import SocialNetwork from './SocialNetwork'
 
 const facebook = require('../../../../assets/socials/facebook.png')
@@ -25,6 +27,9 @@ interface Props {
 export default function ProfileInformation({ user, socials, isOwner = true, profileAction, goFollowers, goFollowings }: Props) {
   const theme = useTheme((state) => state)
   const { navigateBetweenRoutes } = useNavigate()
+  const { follows: followers } = useFollows(false, user.id)
+  const { follows: followings } = useFollows(true, user.id)
+  const { products } = useAdminProducts(user.id)
 
   return (
     <>
@@ -85,7 +90,7 @@ export default function ProfileInformation({ user, socials, isOwner = true, prof
                 </Text>
 
                 <Text fontSize='$2xl' fontWeight='$semibold' color={colors.gray}>
-                  90 {/* TODO: get from the api */}
+                  {followers.length}
                 </Text>
               </VStack>
             </Pressable>
@@ -101,7 +106,7 @@ export default function ProfileInformation({ user, socials, isOwner = true, prof
                 </Text>
 
                 <Text fontSize='$2xl' fontWeight='$semibold' color={colors.gray}>
-                  5 {/* TODO: get from the api */}
+                  {followings.length}
                 </Text>
               </VStack>
             </Pressable>
@@ -113,16 +118,18 @@ export default function ProfileInformation({ user, socials, isOwner = true, prof
                 </Text>
 
                 <Text fontSize='$2xl' fontWeight='$semibold' color={colors.gray}>
-                  18 {/* TODO: get from the api */}
+                  {products.length}
                 </Text>
               </VStack>
             )}
           </HStack>
 
           <VStack space='xs'>
-            <Text fontSize='$sm' fontWeight='$semibold' color={colors.gray}>
-              Redes sociales
-            </Text>
+            {!Object.values(socials).every((social) => social == null) && (
+              <Text fontSize='$sm' fontWeight='$semibold' color={colors.gray}>
+                Redes sociales
+              </Text>
+            )}
 
             <HStack space='sm' alignItems='flex-start'>
               {(socials.facebook != null) && (

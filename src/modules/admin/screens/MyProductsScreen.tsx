@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 
 import { AppButton, AppContainer, AppHeader } from '@/modules/shared/components'
 
+import { useAuth } from '@/modules/auth/store'
 import { useNavigate } from '@/modules/shared/hooks'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
@@ -10,7 +11,8 @@ import { useAdminProducts } from '../hooks'
 
 export default function MyProductsScreen() {
   const theme = useTheme((state) => state)
-  const { products } = useAdminProducts()
+  const auth = useAuth((state) => state)
+  const { products } = useAdminProducts(auth.user!.id)
   const { navigate } = useNavigate()
 
   useEffect(() => {

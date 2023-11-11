@@ -71,9 +71,9 @@ export async function deleteProductImage(productId: number, token: string) {
   }
 }
 
-export async function getSellerProducts(token: string) {
+export async function getSellerProducts(sellerId: number, token: string) {
   try {
-    const { data: response } = await api.get<Response<ProductsPagination>>('/products/seller-products', {
+    const { data: response } = await api.get<Response<ProductsPagination>>(`/products/seller-products/${sellerId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

@@ -8,13 +8,13 @@ import { useNavigate } from '@/modules/shared/hooks'
 import type { User } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
-import { useFollow } from '../hooks'
+import { useFollows } from '../hooks'
 
 export default function FollowingsScreen() {
   const { params } = useRoute()
   const theme = useTheme((state) => state)
   const [user, setUser] = useState<User>()
-  const { follows, fetchFollows } = useFollow(true)
+  const { follows, fetchFollows } = useFollows(true)
   const { navigateBetweenRoutes } = useNavigate()
 
   useEffect(() => {
@@ -27,7 +27,9 @@ export default function FollowingsScreen() {
   }, [params])
 
   useEffect(() => {
-    fetchFollows(user!)
+    if (user !== undefined) {
+      fetchFollows(user.id)
+    }
   }, [user])
 
   return (

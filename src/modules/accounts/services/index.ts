@@ -88,9 +88,9 @@ export async function unfollowUser(userFollow: number, token: string) {
   }
 }
 
-export async function getFollowers(token: string) {
+export async function getFollowers(userId: number, token: string) {
   try {
-    const { data: response } = await api.get<Response<User[]>>('/users/followers', {
+    const { data: response } = await api.get<Response<User[]>>(`/users/followers/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -104,9 +104,9 @@ export async function getFollowers(token: string) {
   }
 }
 
-export async function getFollowings(token: string) {
+export async function getFollowings(userId: number, token: string) {
   try {
-    const { data: response } = await api.get<Response<User[]>>('/users/followings', {
+    const { data: response } = await api.get<Response<User[]>>(`/users/followings/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
