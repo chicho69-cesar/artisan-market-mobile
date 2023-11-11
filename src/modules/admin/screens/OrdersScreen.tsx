@@ -15,6 +15,10 @@ export default function OrdersScreen() {
     theme.changeMainColor()
   }, [])
 
+  useEffect(() => {
+    console.log(orders[0]?.products)
+  }, [orders])
+
   return (
     <AppContainer>
       <AppHeader
@@ -32,7 +36,7 @@ export default function OrdersScreen() {
           status={order.status}
           isAdminOrder
           navToOrder={() => {
-            navigateBetweenRoutes('CartStack', 'Order', { order })
+            navigateBetweenRoutes('HomeStack', 'AdminOrder', { order })
           }}
           navToClient={() => {
             navigateBetweenRoutes('ProfileStack', 'UserProfile', { user: order.user })

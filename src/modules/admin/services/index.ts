@@ -1,5 +1,5 @@
 import { api } from '@/config/api'
-import type { DashboardStats, ImageUpload, Order, Product, ProductsPagination, Response } from '@/modules/shared/interfaces'
+import type { AdminOrder, DashboardStats, ImageUpload, Product, ProductsPagination, Response } from '@/modules/shared/interfaces'
 
 export async function addProduct(name: string, description: string, price: number, stock: number, categories: string[], token: string) {
   try {
@@ -132,7 +132,7 @@ export async function deleteProduct(productId: number, token: string) {
 
 export async function getSellerOrders(token: string) {
   try {
-    const { data: response } = await api.get<Response<Order[]>>('/orders/seller-orders', {
+    const { data: response } = await api.get<Response<AdminOrder[]>>('/orders/seller-orders', {
       headers: {
         Authorization: `Bearer ${token}`
       }

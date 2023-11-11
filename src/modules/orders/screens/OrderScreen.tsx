@@ -26,6 +26,10 @@ export default function OrderScreen() {
     setOrder(orderFromParams)
   }, [params])
 
+  useEffect(() => {
+    console.log(order?.products)
+  }, [order])
+
   const handleOrderAction = async (pay: boolean) => {
     if (order == null || order === undefined) return
 

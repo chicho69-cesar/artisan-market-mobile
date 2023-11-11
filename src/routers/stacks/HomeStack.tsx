@@ -1,6 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack'
 
-import { CreateProductScreen, DashboardScreen, EditProductScreen, MyProductsScreen, OrdersScreen } from '@/modules/admin/screens'
+import { AdminOrderScreen, CreateProductScreen, DashboardScreen, EditProductScreen, MyProductsScreen, OrdersScreen } from '@/modules/admin/screens'
 import { OrdersHistoryScreen } from '@/modules/orders/screens'
 import ShareProduct from '@/modules/products/components/ShareProduct'
 import { AddReviewScreen, DetailsScreen, HomeScreen, ReviewsScreen } from '@/modules/products/screens'
@@ -111,6 +111,14 @@ export default function HomeStack() {
         component={OrdersScreen}
         options={{
           headerTitle: (props) => <ScreenHeader title='Pedidos' />
+        }}
+      />
+
+      <Stack.Screen
+        name='AdminOrder'
+        component={AdminOrderScreen}
+        options={{
+          headerTitle: (props) => <ScreenHeader title='Orden del administrador' />
         }}
       />
     </Stack.Navigator>
