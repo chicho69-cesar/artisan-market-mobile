@@ -7,10 +7,11 @@ import { useProducts } from '../hooks'
 
 export default function HomeScreen() {
   const theme = useTheme((state) => state)
-  const { products } = useProducts()
+  const { products, refetchProducts } = useProducts()
 
   useEffect(() => {
     theme.changeMainColor()
+    refetchProducts()
   }, [])
 
   return (

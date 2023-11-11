@@ -1,5 +1,5 @@
 import { HStack, Text, View } from '@gluestack-ui/themed'
-import { StackActions, useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import * as ImagePicker from 'expo-image-picker'
 import { useEffect, useState } from 'react'
 
@@ -24,13 +24,13 @@ export default function CreateProductScreen() {
   const theme = useTheme((state) => state)
   const auth = useAuth((state) => state)
   const navigation = useNavigation()
-  const [categories, setCategories] = useState<string[]>([])
 
   const [isAnError, setIsAnError] = useState(false)
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState(0)
   const [stock, setStock] = useState(0)
+  const [categories, setCategories] = useState<string[]>([])
   const [images, setImages] = useState<string[]>([])
   const [imageFileNames, setImageFileNames] = useState<string[]>([])
   const [errors, setErrors] = useState<Errors>({
@@ -232,8 +232,10 @@ export default function CreateProductScreen() {
         onPress={() => {
           handleCreateProduct()
 
-          const navAction = StackActions.push('Home')
-          navigation.dispatch(navAction)
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'Home' as never }]
+          })
         }}
       />
 

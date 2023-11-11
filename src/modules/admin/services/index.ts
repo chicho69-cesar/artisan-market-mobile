@@ -51,9 +51,11 @@ export async function uploadProductImage(productId: number, uri: string, token: 
   }
 }
 
-export async function deleteProductImage(productId: number, token: string) {
+export async function deleteProductImage(image: string, token: string) {
+  const link = image.replace(`${serverUrl}/storage/product_images/`, '')
+
   try {
-    const { data: response } = await api.delete<Response<string[]>>(`/products/delete-image/${productId}`, {
+    const { data: response } = await api.delete<Response<string[]>>(`/products/delete-image/${link}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

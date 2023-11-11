@@ -5,7 +5,7 @@ import { FlatList, HStack, Image, Pressable, Text, VStack, View } from '@gluesta
 
 interface Props {
   images: string[]
-  onRemoveImage: (index: number) => void
+  onRemoveImage: (index: number, image: string) => void
 }
 
 export default function ProductImages({ images, onRemoveImage }: Props) {
@@ -63,7 +63,7 @@ export default function ProductImages({ images, onRemoveImage }: Props) {
             alignItems='center'
             bg={theme.mainColor}
             onPress={() => {
-              onRemoveImage(index)
+              onRemoveImage(index, item as string)
             }}
           >
             <MaterialIcons

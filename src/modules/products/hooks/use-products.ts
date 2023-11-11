@@ -24,9 +24,16 @@ export function useProducts() {
     setProducts(productsObtained?.data ?? [])
   }
 
+  const refetchProducts = async () => {
+    setIsLoading(true)
+    getProducts()
+    setIsLoading(false)
+  }
+
   return {
     isLoading,
     products,
-    searchProducts
+    searchProducts,
+    refetchProducts
   }
 }
