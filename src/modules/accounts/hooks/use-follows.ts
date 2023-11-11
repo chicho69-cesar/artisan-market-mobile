@@ -18,8 +18,8 @@ export function useFollows(following: boolean, userId?: number) {
     setIsLoading(true)
 
     const follows = following
-      ? await getFollowers(userId, auth.token!)
-      : await getFollowings(userId, auth.token!)
+      ? await getFollowings(userId, auth.token!)
+      : await getFollowers(userId, auth.token!)
 
     setFollows(follows ?? [])
 

@@ -1,13 +1,16 @@
 import { Ionicons } from '@expo/vector-icons'
 import { HStack, Heading, Image, Pressable, Text, VStack, View } from '@gluestack-ui/themed'
+import { useEffect, useState } from 'react'
 
 import { useAdminProducts } from '@/modules/admin/hooks'
+import { useAuth } from '@/modules/auth/store'
 import { blankImage, serverUrl } from '@/modules/shared/constants'
 import { useNavigate } from '@/modules/shared/hooks'
 import { Roles, type Socials, type User } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
 import { useFollows } from '../hooks'
+import { followUser, unfollowUser } from '../services'
 import SocialNetwork from './SocialNetwork'
 
 const facebook = require('../../../../assets/socials/facebook.png')
@@ -27,9 +30,31 @@ interface Props {
 export default function ProfileInformation({ user, socials, isOwner = true, profileAction, goFollowers, goFollowings }: Props) {
   const theme = useTheme((state) => state)
   const { navigateBetweenRoutes } = useNavigate()
+  const auth = useAuth((state) => state)
+  const [isFollowing, setIsFollowing] = useState(false)
   const { follows: followers } = useFollows(false, user.id)
   const { follows: followings } = useFollows(true, user.id)
   const { products } = useAdminProducts(user.id)
+
+  useEffect(() => {
+    setIsFollowing(followers.some((follower) => follower.id === auth.user!.id))
+  }, [followings])
+
+  const handleFollowUser = async () => {
+    const response = await followUser(user.id, auth.token!)
+
+    if (response != null) {
+      setIsFollowing(true)
+    }
+  }
+
+  const handleUnFollowUser = async () => {
+    const response = await unfollowUser(user.id, auth.token!)
+
+    if (response != null) {
+      setIsFollowing(false)
+    }
+  }
 
   return (
     <>
@@ -69,11 +94,22 @@ export default function ProfileInformation({ user, socials, isOwner = true, prof
               rounded='$full'
               bg={theme.mainColor}
               onPress={() => {
-                profileAction()
+                if (isOwner) {
+                  profileAction()
+                } else {
+                  if (isFollowing) handleUnFollowUser()
+                  else handleFollowUser()
+                }
               }}
             >
               <Text fontSize='$md' fontWeight='$semibold' color={colors.white}>
-                {isOwner ? 'Editar perfil' : 'Seguir'}
+                {
+                  isOwner
+                    ? 'Editar perfil'
+                    : isFollowing
+                      ? 'Dejar de seguir'
+                      : 'Seguir'
+                }
               </Text>
             </Pressable>
           </HStack>

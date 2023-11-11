@@ -5,12 +5,14 @@ import { AppAlert, AppButton, AppInput } from '@/modules/shared/components'
 import { useNavigate } from '@/modules/shared/hooks'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
-import { emailSchema, makeValidation, passwordSchema } from '@/modules/shared/validations'
+import { emailSchema, lastnameSchema, makeValidation, nameSchema, passwordSchema } from '@/modules/shared/validations'
 import { AuthContainer, Header } from '../components'
 import { signUp } from '../services'
 import { useAuth } from '../store'
 
 interface Errors {
+  name: string | null
+  lastname: string | null
   email: string | null
   password: string | null
   retypePassword: string | null
@@ -29,6 +31,8 @@ export default function SignUpScreen() {
   const [role, setRole] = useState('user')
   const [isAnError, setIsAnError] = useState(false)
   const [errors, setErrors] = useState<Errors>({
+    name: null,
+    lastname: null,
     email: null,
     password: null,
     retypePassword: null
@@ -39,18 +43,29 @@ export default function SignUpScreen() {
   }, [])
 
   const handleSignUp = async () => {
+    const validatedName = await makeValidation(nameSchema, name)
+    const validatedLastname = await makeValidation(lastnameSchema, lastname)
     const validatedEmail = await makeValidation(emailSchema, email)
     const validatedPassword = await makeValidation(passwordSchema, password)
 
     setErrors({
+      name: validatedName,
+      lastname: validatedLastname,
       email: validatedEmail,
       password: validatedPassword,
       retypePassword: null
     })
 
-    if (validatedEmail != null || validatedPassword != null) return
+    if (
+      validatedName != null ||
+      validatedLastname != null ||
+      validatedEmail != null ||
+      validatedPassword != null
+    ) return
 
     setErrors({
+      name: null,
+      lastname: null,
       email: null,
       password: null,
       retypePassword: password !== retypePassword ? 'Las contraseñas no coinciden' : null
@@ -89,23 +104,23 @@ export default function SignUpScreen() {
 
       <AuthContainer>
         <AppInput
-          isInvalid={false}
+          isInvalid={errors.name != null}
           keyboardType='default'
           label='Nombre'
           type='text'
           onChangeText={setName}
           placeholder='Nombre'
-          errorMessage='Error in the name'
+          errorMessage={errors.name ?? ''}
         />
 
         <AppInput
-          isInvalid={false}
+          isInvalid={errors.lastname != null}
           keyboardType='default'
           label='Apellidos'
           type='text'
           onChangeText={setLastname}
           placeholder='Apellidos'
-          errorMessage='Error in the lastname'
+          errorMessage={errors.lastname ?? ''}
         />
 
         <AppInput

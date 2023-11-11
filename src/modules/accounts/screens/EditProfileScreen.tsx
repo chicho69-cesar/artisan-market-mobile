@@ -4,17 +4,38 @@ import * as ImagePicker from 'expo-image-picker'
 import { useEffect, useState } from 'react'
 
 import { useAuth } from '@/modules/auth/store'
-import { AppButton, AppContainer, AppHeader, AppInput, AppTextArea } from '@/modules/shared/components'
+import { AppAlert, AppButton, AppContainer, AppHeader, AppInput, AppTextArea } from '@/modules/shared/components'
 import { blankImage, serverUrl } from '@/modules/shared/constants'
+import { useNavigate } from '@/modules/shared/hooks'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
+import { makeValidation, nameSchema } from '@/modules/shared/validations'
+import { addUserSocial, editProfile, uploadProfilePicture } from '../services'
+
+interface Errors {
+  name: string | null
+  lastname: string | null
+}
 
 export default function EditProfileScreen() {
   const theme = useTheme((state) => state)
   const auth = useAuth((state) => state)
+  const { navigate } = useNavigate()
 
+  const [isAnError, setIsAnError] = useState(false)
+  const [name, setName] = useState(auth.user?.name ?? '')
+  const [lastname, setLastName] = useState(auth.user?.lastname ?? '')
+  const [bio, setBio] = useState(auth.user?.biography ?? '')
+  const [facebook, setFacebook] = useState('')
+  const [twitter, setTwitter] = useState('')
+  const [linkedin, setLinkedin] = useState('')
+  const [freeMarket, setFreeMarket] = useState('')
   const [image, setImage] = useState<string | null>(null)
   const [imageFileName, setImageFileName] = useState<string | null | undefined>('image.jpg')
+  const [errors, setErrors] = useState<Errors>({
+    name: null,
+    lastname: null
+  })
 
   useEffect(() => {
     theme.changeMainColor()
@@ -45,46 +66,81 @@ export default function EditProfileScreen() {
       return
     }
 
+    const validatedName = await makeValidation(nameSchema, name)
+    const validatedLastname = await makeValidation(nameSchema, lastname)
+
+    setErrors({
+      name: validatedName,
+      lastname: validatedLastname
+    })
+
+    if (validatedName != null || validatedLastname != null) return
+
     const uri = image
     const type = 'image/jpeg'
-    const name = imageFileName ?? 'image.jpg'
+    const nameOfImage = imageFileName ?? 'image.jpg'
 
-    /* TODO: upload the image and update information */
+    await uploadProfilePicture(uri, nameOfImage, type, auth.token!)
+    await addUserSocial(auth.token!, facebook, twitter, linkedin, freeMarket)
+
+    const response = await editProfile(name, lastname, bio, auth.token!)
+
+    if (response != null) {
+      auth.updateAuthInfo(response)
+      navigate('Profile')
+    } else {
+      setIsAnError(true)
+
+      setTimeout(() => {
+        setIsAnError(false)
+      }, 2000)
+    }
   }
 
   return (
     <AppContainer>
+      {isAnError && (
+        <AppAlert
+          action='error'
+          description='Ocurrió un error inesperado inténtalo de nuevo'
+          title='Error!'
+        />
+      )}
+
       <AppHeader
         title='Edita tu información'
         description='Edita la información que aparecerá en tu perfil'
       />
 
       <AppInput
-        isInvalid={false}
+        isInvalid={errors.name != null}
         keyboardType='default'
         label='Nombre'
         type='text'
-        onChangeText={(text) => {}}
+        onChangeText={setName}
         placeholder='Nombre'
-        errorMessage='Error in the name'
+        defaultValue={name}
+        errorMessage={errors.name ?? ''}
       />
 
       <AppInput
-        isInvalid={false}
+        isInvalid={errors.lastname != null}
         keyboardType='default'
         label='Apellidos'
         type='text'
-        onChangeText={(text) => {}}
+        onChangeText={setLastName}
         placeholder='Apellidos'
-        errorMessage='Error in the lastname'
+        defaultValue={lastname}
+        errorMessage={errors.lastname ?? ''}
       />
 
       <AppTextArea
         isInvalid={false}
         label='Biografía'
+        onChangeText={setBio}
         placeholder='Historia del usuario...'
-        onChangeText={(text) => {}}
-        errorMessage='Error in the biography'
+        defaultValue={bio}
+        errorMessage='Error on the biography'
       />
 
       <HStack
@@ -139,7 +195,7 @@ export default function EditProfileScreen() {
           label='Facebook'
           type='text'
           isGrouped
-          onChangeText={(text) => {}}
+          onChangeText={setFacebook}
           placeholder='Facebook'
           errorMessage='Error in the facebook'
         />
@@ -150,7 +206,7 @@ export default function EditProfileScreen() {
           label='Twitter'
           type='text'
           isGrouped
-          onChangeText={(text) => {}}
+          onChangeText={setTwitter}
           placeholder='Twitter'
           errorMessage='Error in the twitter'
         />
@@ -163,7 +219,7 @@ export default function EditProfileScreen() {
           label='LinkedIn'
           type='text'
           isGrouped
-          onChangeText={(text) => {}}
+          onChangeText={setLinkedin}
           placeholder='LinkedIn'
           errorMessage='Error in the linkedin'
         />
@@ -174,7 +230,7 @@ export default function EditProfileScreen() {
           label='Mercado Libre'
           type='text'
           isGrouped
-          onChangeText={(text) => {}}
+          onChangeText={setFreeMarket}
           placeholder='Mercado Libre'
           errorMessage='Error in the free market'
         />

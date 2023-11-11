@@ -12,6 +12,7 @@
     "axios": "1.5.1",
     "expo": "~49.0.13",
     "expo-constants": "~14.4.2",
+    "expo-file-system": "15.6.0",
     "expo-image-picker": "~14.3.2",
     "expo-secure-store": "~12.3.1",
     "expo-status-bar": "~1.6.0",

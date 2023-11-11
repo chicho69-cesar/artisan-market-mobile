@@ -46,3 +46,11 @@ export const phoneSchema = yup
 export const reviewSchema = yup
   .string()
   .required('La review es obligatoria')
+
+export const nameSchema = yup
+  .string()
+  .required('El nombre es requerido')
+
+export const lastnameSchema = yup
+  .string()
+  .required('Los apellidos son requeridos')

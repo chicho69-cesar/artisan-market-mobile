@@ -7,6 +7,7 @@ import { useNavigate } from '@/modules/shared/hooks'
 import type { Social, User } from '@/modules/shared/interfaces'
 import { useTheme } from '@/modules/shared/store'
 import { ProfileInformation } from '../components'
+import { getSocialsForAnUser } from '../services'
 
 export default function UserScreen() {
   const { params } = useRoute()
@@ -14,9 +15,8 @@ export default function UserScreen() {
   const auth = useAuth((state) => state)
   const [isOwner, setIsOwner] = useState(false)
   const [user, setUser] = useState<User>()
-  const { navigateWithParams } = useNavigate()
+  const { navigateWithParams, navigate } = useNavigate()
 
-  // TODO: get from the api
   const [socials, setSocials] = useState<Social>({
     socials: {
       facebook: null,
@@ -28,15 +28,6 @@ export default function UserScreen() {
 
   useEffect(() => {
     theme.changeMainColor()
-
-    setSocials({
-      socials: {
-        facebook: 'https://www.facebook.com/',
-        twitter: 'https://twitter.com/',
-        linkedin: 'https://www.linkedin.com/',
-        freeMarket: 'https://www.facebook.com/'
-      }
-    })
   }, [])
 
   useEffect(() => {
@@ -46,6 +37,20 @@ export default function UserScreen() {
     setIsOwner(user.id === auth.user?.id)
   }, [params])
 
+  useEffect(() => {
+    if (user !== undefined) {
+      getSocials()
+    }
+  }, [user])
+
+  const getSocials = async () => {
+    const userSocials = await getSocialsForAnUser(user!.id, auth.token!)
+
+    if (userSocials != null) {
+      setSocials(userSocials)
+    }
+  }
+
   return (
     <AppContainer>
       {(user != null || user !== undefined) && (
@@ -54,7 +59,7 @@ export default function UserScreen() {
           socials={socials.socials}
           isOwner={isOwner}
           profileAction={() => {
-            // TODO: follow user
+            navigate('EditProfile')
           }}
           goFollowers={() => {
             navigateWithParams('Followers', { user })
