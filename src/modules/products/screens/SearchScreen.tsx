@@ -20,7 +20,6 @@ export default function SearchScreen() {
   }, [])
 
   useEffect(() => {
-    console.log(debouncedSearch)
     searchProducts(debouncedSearch)
   }, [debouncedSearch])
 

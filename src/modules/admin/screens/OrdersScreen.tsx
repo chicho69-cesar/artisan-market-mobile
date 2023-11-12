@@ -15,10 +15,6 @@ export default function OrdersScreen() {
     theme.changeMainColor()
   }, [])
 
-  useEffect(() => {
-    console.log(orders[0]?.products)
-  }, [orders])
-
   return (
     <AppContainer>
       <AppHeader

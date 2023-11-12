@@ -35,8 +35,8 @@ export default function FollowingsScreen() {
   return (
     <AppContainer>
       <AppHeader
-        title='Seguidores'
-        description={`Personas que siguen a ${user?.name} ${user?.lastname}`}
+        title='Siguiendo'
+        description={`Personas a las que sigue ${user?.name} ${user?.lastname}`}
       />
 
       {follows.map((follow) => (
