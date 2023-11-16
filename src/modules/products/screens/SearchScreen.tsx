@@ -11,7 +11,7 @@ import { useProducts } from '../hooks'
 
 export default function SearchScreen() {
   const theme = useTheme((state) => state)
-  const { products, searchProducts } = useProducts()
+  const { searchedProducts, searchProducts } = useProducts()
   const [search, setSearch] = useState('')
   const debouncedSearch = useDebounce(search, 400)
 
@@ -48,7 +48,7 @@ export default function SearchScreen() {
         />
       </Input>
 
-      <Products products={products} />
+      <Products products={searchedProducts} />
     </AppContainer>
   )
 }

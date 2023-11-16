@@ -6,12 +6,14 @@ import { useAuth } from '@/modules/auth/store'
 import { useNavigate } from '@/modules/shared/hooks'
 import { Roles } from '@/modules/shared/interfaces'
 import { colors } from '@/modules/shared/theme'
+import { clearSession } from '@/modules/auth/utils/session'
 
 export default function HeaderProfileActions() {
   const auth = useAuth((state) => state)
   const { navigate } = useNavigate()
 
   const handleLogout = async () => {
+    await clearSession()
     const response = await signOut(auth.token ?? '')
 
     if (response != null) {

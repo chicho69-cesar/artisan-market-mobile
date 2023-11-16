@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react'
 
 import { useAuth } from '@/modules/auth/store'
 import { Categories } from '@/modules/products/components'
+import { useProducts } from '@/modules/products/hooks'
+import { getProductById } from '@/modules/products/services'
 import { AppAlert, AppButton, AppContainer, AppHeader, AppInput, AppTextArea } from '@/modules/shared/components'
 import { serverUrl } from '@/modules/shared/constants'
 import type { Product } from '@/modules/shared/interfaces'
@@ -29,6 +31,7 @@ export default function EditProductScreen() {
   const auth = useAuth((state) => state)
   const navigation = useNavigation()
 
+  const { editProduct } = useProducts()
   const [product, setProduct] = useState<Product>()
   const [isAnError, setIsAnError] = useState(false)
   const [name, setName] = useState('')
@@ -147,11 +150,17 @@ export default function EditProductScreen() {
     const response = await updateProduct(product.id, name, description, price, stock, categories, auth.token!)
 
     if (response != null) {
-      images.map(async (image) => {
+      await Promise.all(images.map(async (image) => {
         if (!image.includes('storage/product_images/')) {
           await uploadProductImage(product.id, image, auth.token!)
         }
-      })
+      }))
+
+      const productUpdated = await getProductById(response.id)
+
+      if (productUpdated != null) {
+        editProduct(productUpdated)
+      }
     } else {
       setIsAnError(true)
 

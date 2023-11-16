@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react'
 
 import { useAuth } from '@/modules/auth/store'
 import { Categories } from '@/modules/products/components'
+import { useProducts } from '@/modules/products/hooks'
+import { getProductById } from '@/modules/products/services'
 import { AppAlert, AppButton, AppContainer, AppHeader, AppInput, AppTextArea } from '@/modules/shared/components'
 import { useTheme } from '@/modules/shared/store'
 import { colors } from '@/modules/shared/theme'
@@ -25,6 +27,7 @@ export default function CreateProductScreen() {
   const auth = useAuth((state) => state)
   const navigation = useNavigation()
 
+  const { addProduct: addProductState } = useProducts()
   const [isAnError, setIsAnError] = useState(false)
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
@@ -109,9 +112,15 @@ export default function CreateProductScreen() {
     const response = await addProduct(name, description, price, stock, categories, auth.token!)
 
     if (response != null) {
-      images.map(async (image) => {
+      await Promise.all(images.map(async (image) => {
         await uploadProductImage(response.id, image, auth.token!)
-      })
+      }))
+
+      const productAdded = await getProductById(response.id)
+
+      if (productAdded != null) {
+        addProductState(productAdded)
+      }
     } else {
       setIsAnError(true)
 

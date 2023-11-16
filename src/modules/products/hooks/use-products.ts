@@ -1,10 +1,12 @@
 import type { Product } from '@/modules/shared/interfaces'
 import { useEffect, useState } from 'react'
 import { getProductsPaginated, searchProductsByQuery } from '../services'
+import { useProductsStore } from '../store'
 
 export function useProducts() {
   const [isLoading, setIsLoading] = useState(false)
-  const [products, setProducts] = useState<Product[]>([])
+  const [searchedProducts, setSearchedProducts] = useState<Product[]>([])
+  const { products, setProducts, addProduct, editProduct } = useProductsStore((state) => state)
 
   useEffect(() => {
     setIsLoading(true)
@@ -15,13 +17,14 @@ export function useProducts() {
   const searchProducts = async (search: string) => {
     setIsLoading(true)
     const productsSearched = await searchProductsByQuery(search)
-    setProducts(productsSearched?.data ?? [])
+    setSearchedProducts(productsSearched?.data ?? [])
     setIsLoading(false)
   }
 
   const getProducts = async (page: number = 1) => {
     const productsObtained = await getProductsPaginated(page)
     setProducts(productsObtained?.data ?? [])
+    setSearchedProducts(productsObtained?.data ?? [])
   }
 
   const refetchProducts = async () => {
@@ -33,6 +36,9 @@ export function useProducts() {
   return {
     isLoading,
     products,
+    searchedProducts,
+    addProduct,
+    editProduct,
     searchProducts,
     refetchProducts
   }
