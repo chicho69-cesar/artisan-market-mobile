@@ -1,6 +1,8 @@
 # Artisan Market
 
-![logo](assets/logo.png)
+<div style="width: 100%; display: flex; justify-content: center; margin-block: 1rem;">
+  <img src="./assets/logo.png" width="100" height="100" />
+</div>
 
 **Artisan Market Mobile App** es un proyecto desarrollado con React Native y Expo, diseñado para impulsar una tienda en línea especializada en la venta de productos artesanales. Este repositorio alberga el código fuente del front-end mobile de la aplicación, proporcionando las capacidades esenciales para gestionar productos, usuarios, órdenes y más en la plataforma, con un diseño increíble basado en un diseño realizado por nosotros mismos en Figma.
 
