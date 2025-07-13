@@ -3,7 +3,7 @@ import { Pressable, Text } from '@gluestack-ui/themed'
 import { useNavigate } from '@/modules/shared/hooks'
 import type { Review as ReviewType } from '@/modules/shared/interfaces/review'
 import { useTheme } from '@/modules/shared/store'
-import { Review } from '.'
+import Review from './Review'
 
 interface Props {
   reviews: ReviewType[]

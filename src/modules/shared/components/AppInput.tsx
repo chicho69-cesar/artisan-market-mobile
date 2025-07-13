@@ -46,16 +46,24 @@ export default function AppInput({ isInvalid, label, type, keyboardType, placeho
               setShowPassword((show) => !show)
             }}
           >
-            <InputIcon
-              as={showPassword ? EyeIcon : EyeOffIcon}
-              color={colors.lightGray}
-            />
+            {showPassword ? (
+              <InputIcon
+                as={EyeIcon}
+                color={colors.lightGray}
+              />
+            ) : (
+              <InputIcon
+                as={EyeOffIcon}
+                color={colors.lightGray}
+              />
+            )}
           </InputSlot>
         )}
       </Input>
 
       <FormControlError>
         <FormControlErrorIcon as={AlertIcon} />
+
         <FormControlErrorText>
           {errorMessage}
         </FormControlErrorText>
